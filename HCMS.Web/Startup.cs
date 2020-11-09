@@ -6,12 +6,12 @@ namespace HCMS.Web
     using Microsoft.Extensions.Hosting;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 
     using HCMS.Data.Models;
     using HCMS.Data.Repository;
-    using Microsoft.AspNetCore.Authorization;
 
     public class Startup
     {

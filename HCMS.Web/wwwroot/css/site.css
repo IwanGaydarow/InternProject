@@ -169,7 +169,7 @@ div.account-input > .icon {
     justify-content: space-between;
 }
 
-div.account-button > button {
+div.account-button > button, button.forgot-password-btn {
     width: 24%;
     height: 80%;
     border-style: none;
@@ -183,4 +183,21 @@ div.account-button > button {
 #forgot-password {
     color: rgb(139,146,160);
     text-decoration: none;
+}
+
+/*Forgot page style------------------*/
+.form-group.account-input-group.reset-password {
+    display: inline-flex;
+}
+
+div.account-input > .form-control.reset-password-input {
+    width: 95%;
+}
+
+button.forgot-password-btn {
+    margin: auto 2px;
+}
+
+button.forgot-password-btn:hover {
+    cursor: pointer;
 }
