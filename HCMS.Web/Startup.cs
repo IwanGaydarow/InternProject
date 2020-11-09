@@ -11,6 +11,7 @@ namespace HCMS.Web
 
     using HCMS.Data.Models;
     using HCMS.Data.Repository;
+    using Microsoft.AspNetCore.Authorization;
 
     public class Startup
     {
@@ -37,6 +38,16 @@ namespace HCMS.Web
                 options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
             });
             services.AddRazorPages();
+
+            services.AddAuthorization(options =>
+            {
+                // This says, that all pages need AUTHORIZATION. But when a controller, 
+                // for example the login controller in Login.cshtml.cs, is tagged with
+                // [AllowAnonymous] then it is not in need of AUTHORIZATION. :)
+                options.FallbackPolicy = new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build();
+            });
 
             //Data repository
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));

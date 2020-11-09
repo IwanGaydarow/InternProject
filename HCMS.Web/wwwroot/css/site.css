@@ -2,70 +2,185 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
 }
 
 /* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+    color: #0366d6;
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
+
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .border-top {
-  border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
 }
+
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
 button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+    font-size: 1rem;
+    line-height: inherit;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
 }
+
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
+}
+
+/* Custom Css-----------------------------------------------*/
+
+/* Login page css---------------------------------------------------------*/
+.account-pages {
+    min-height: 600px;
+    margin-bottom: 8px !important;
+    background-color: rgb(210, 214, 222) !important;
+}
+
+.account-main {
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-end;
+    height: 400px;
+}
+
+main.account-main > h1 {
+    margin: 10px auto;
+}
+
+.login-section {
+    width: 50%;
+    height: 60%;
+    margin: 10px auto;
+    background-color: rgb(255, 255, 255);
+}
+
+#account {
+    height: 100%;
+}
+
+.account-form {
+    height: 90%;
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+    .account-form > h5 {
+        margin-top: 10px !important;
+        margin-bottom: 10px !important;
+        color: rgb(139,146,160);
+        font-size: x-large;
+    }
+
+.input-filds {
+    height: 50%;
+    width: 80%;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+}
+
+.account-input-group {
+    width: 98%;
+    height: 30%;
+    border-style: groove;
+}
+
+.account-input {
+    width: 98%;
+    height: 95%;
+}
+
+div.account-input > .form-control {
+    width: 90%;
+    height: 100%;
+    border-style: none;
+    outline: none;
+    margin-bottom: 2px;
+}
+
+    div.account-input > .form-control:focus {
+        background-color: rgb(232, 240,254);
+    }
+
+div.account-input > .icon {
+    color: rgb(139,146,160);
+}
+
+.account-span-validation {
+    color: rgb(255, 0, 0);
+}
+
+
+.account-button {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+}
+
+div.account-button > button {
+    width: 24%;
+    height: 80%;
+    border-style: none;
+    border-radius: 10px;
+}
+
+    div.account-button > button:hover {
+        cursor: pointer;
+    }
+
+#forgot-password {
+    color: rgb(139,146,160);
+    text-decoration: none;
 }

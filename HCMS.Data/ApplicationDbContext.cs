@@ -288,7 +288,7 @@
                     .HasColumnName("created_on")
                     .HasColumnType("date");
 
-                entity.Property(e => e.DeleteOn)
+                entity.Property(e => e.DeletedOn)
                     .HasColumnName("delete_on")
                     .HasColumnType("date");
 
