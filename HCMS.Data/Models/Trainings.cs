@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
 
-    public partial class Trainings
+    public partial class Trainings : IDeletableEntity
     {
         public Trainings()
         {
@@ -16,7 +16,7 @@
         public DateTime CreatedOn { get; set; }
         public DateTime? ModifiedOn { get; set; }
         public bool IsDeleted { get; set; }
-        public DateTime? DeleteOn { get; set; }
+        public DateTime? DeletedOn { get; set; }
 
         public virtual ICollection<TrainingsUsers> TrainingsUsers { get; set; }
     }

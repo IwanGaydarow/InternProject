@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
 
-    public partial class Departments
+    public partial class Departments : IDeletableEntity
     {
         public Departments()
         {

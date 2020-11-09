@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
 
-    public partial class ProjectTasks
+    public partial class ProjectTasks : IDeletableEntity
     {
         public ProjectTasks()
         {

@@ -2,7 +2,7 @@
 {
     using System;
 
-    public partial class Vacations
+    public partial class Vacations : IDeletableEntity
     {
         public int Id { get; set; }
         public string Tittle { get; set; }

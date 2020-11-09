@@ -5,7 +5,7 @@
 
     using Microsoft.AspNetCore.Identity;
 
-    public partial class AppUser : IdentityUser<string>
+    public partial class AppUser : IdentityUser<string>, IDeletableEntity
     {
         public AppUser()
         {

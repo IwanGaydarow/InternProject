@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29926.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HCMS.Web", "HCMS.Web\HCMS.Web.csproj", "{CFDEC35D-E33D-4D0E-A412-0112F1CCF58D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HCMS.Data", "HCMS.Data\HCMS.Data.csproj", "{DFA0FDF4-B66D-4F52-B6BA-5F169B2024E2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CFDEC35D-E33D-4D0E-A412-0112F1CCF58D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFDEC35D-E33D-4D0E-A412-0112F1CCF58D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFDEC35D-E33D-4D0E-A412-0112F1CCF58D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFDEC35D-E33D-4D0E-A412-0112F1CCF58D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFA0FDF4-B66D-4F52-B6BA-5F169B2024E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFA0FDF4-B66D-4F52-B6BA-5F169B2024E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFA0FDF4-B66D-4F52-B6BA-5F169B2024E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFA0FDF4-B66D-4F52-B6BA-5F169B2024E2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1E8E6A35-99CF-4220-AC4B-FA47E8E235C3}
+	EndGlobalSection
+EndGlobal
