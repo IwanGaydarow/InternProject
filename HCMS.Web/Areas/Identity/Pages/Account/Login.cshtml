@@ -5,38 +5,40 @@
     ViewData["Title"] = "HCMS Login page";
 }
 
-<h1>@ViewData["Title"]</h1>
-<section class="login-section">
-    <form id="account" method="post">
-        <section class="account-form">
-            <h5>Sign in to enter the system</h5>
-            <div class="input-filds">
-                <div class="form-group account-input-group">
-                    <div class="account-input">
-                        <input asp-for="Input.Email" class="form-control" placeholder="Email" />
-                        <i class="fa fa-envelope icon"></i>
-                        <span asp-validation-for="Input.Email" class="account-span-validation"></span>
+<div class="conteiner-main">
+    <h1>@ViewData["Title"]</h1>
+    <section class="login-section">
+        <form id="account" method="post">
+            <section class="account-form">
+                <h5>Sign in to enter the system</h5>
+                <div class="input-filds">
+                    <div class="form-group account-input-group">
+                        <div class="account-input">
+                            <input asp-for="Input.Email" class="form-control" placeholder="Email" />
+                            <i class="fa fa-envelope icon"></i>
+                            <span asp-validation-for="Input.Email" class="account-span-validation"></span>
+                        </div>
+                    </div>
+                    <div class="form-group account-input-group">
+                        <div class="account-input">
+                            <input asp-for="Input.Password" class="form-control" placeholder="Password" />
+                            <i class="fa fa-lock icon"></i>
+                            <span asp-validation-for="Input.Password" class="account-span-validation"></span>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group account-input-group">
-                    <div class="account-input">
-                        <input asp-for="Input.Password" class="form-control" placeholder="Password" />
-                        <i class="fa fa-lock icon"></i>
-                        <span asp-validation-for="Input.Password" class="account-span-validation"></span>
+                <div class="form-group account-button">
+                    <div>
+                        <p>
+                            <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                        </p>
                     </div>
+                    <button type="submit" class="btn btn-primary">Sign in</button>
                 </div>
-            </div>
-            <div class="form-group account-button">
-                <div>
-                    <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
-                    </p>
-                </div>
-                <button type="submit" class="btn btn-primary">Sign in</button>
-            </div>
-        </section>
-    </form>
-</section>
+            </section>
+        </form>
+    </section>
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

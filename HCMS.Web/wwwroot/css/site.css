@@ -86,10 +86,17 @@ body {
     display: flex;
     flex-flow: column;
     justify-content: flex-end;
-    height: 400px;
+    height: 520px;
 }
 
-main.account-main > h1 {
+.conteiner-main {
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-end;
+    height: 520px;
+}
+
+.conteiner-main > h1, .account-main > h1 {
     margin: 10px auto;
 }
 
@@ -141,7 +148,7 @@ main.account-main > h1 {
 }
 
 div.account-input > .form-control {
-    width: 90%;
+    width: 91%;
     height: 100%;
     border-style: none;
     outline: none;
@@ -204,7 +211,7 @@ button.forgot-password-btn {
 
 /*Register page style ---------------------------*/
 section.login-section.register-wraper {
-    height: 80%;
+    height: 85%;
 }
 
 section.account-form.register-form {
@@ -217,7 +224,13 @@ section.account-form.register-form {
 }
 
 .input-filds.register-conteiner {
-    height: 70%;
+    height: 65%;
+}
+
+.account-input-group-register {
+    width: 98%;
+    height: 10%;
+    border-style: groove;
 }
 
 input.form-control.register-filds {
@@ -226,7 +239,7 @@ input.form-control.register-filds {
 
 .register-btn {
     width: 25%;
-    height: 10%;
+    height: 8%;
     border: none;
     border-radius: 15px;
     cursor: pointer;

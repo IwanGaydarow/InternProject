@@ -63,6 +63,7 @@
             [Display(Name = "Password")]
             public string Password { get; set; }
 
+            [Required]
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = GlobalConstant.ConfirmPasswordNotMatch)]
@@ -100,7 +101,7 @@
                     _logger.LogInformation("User created a new account with password.");
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    //TODO: redirect to index page of each role!!!  Test!!!
+                    //TODO: redirect to index page of each role!!!  Test!!! this is only for login page and register o
                     var roles = await this._signInManager.UserManager.GetRolesAsync(user);
 
                     if (roles.Contains(GlobalConstant.SystemAdministratorRole))
