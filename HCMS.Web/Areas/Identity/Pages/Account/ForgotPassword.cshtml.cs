@@ -57,10 +57,9 @@
                     values: new { area = "Identity", code },
                     protocol: Request.Scheme);
 
-                // TODO: Set Constant system mail and name!
                 await _emailSender.SendEmailAsync(
-                    "Test@gmail.com",
-                    "HCMS",
+                    GlobalConstant.SystemEmail,
+                    GlobalConstant.SystemName,
                     Input.Email,
                     "Reset Password",
                     $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");

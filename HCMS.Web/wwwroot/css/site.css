@@ -185,7 +185,7 @@ div.account-button > button, button.forgot-password-btn {
     text-decoration: none;
 }
 
-/*Forgot page style------------------*/
+/*Forgot password page style------------------*/
 .form-group.account-input-group.reset-password {
     display: inline-flex;
 }
@@ -198,6 +198,38 @@ button.forgot-password-btn {
     margin: auto 2px;
 }
 
-button.forgot-password-btn:hover {
+    button.forgot-password-btn:hover {
+        cursor: pointer;
+    }
+
+/*Register page style ---------------------------*/
+section.login-section.register-wraper {
+    height: 80%;
+}
+
+section.account-form.register-form {
+    height: 100%;
+    justify-content: space-evenly;
+}
+
+.account-form > h5 {
+    margin-bottom: 5px !important;
+}
+
+.input-filds.register-conteiner {
+    height: 70%;
+}
+
+input.form-control.register-filds {
+    height: 98%;
+}
+
+.register-btn {
+    width: 25%;
+    height: 10%;
+    border: none;
+    border-radius: 15px;
     cursor: pointer;
+    background-color: green;
+    font-size: large;
 }

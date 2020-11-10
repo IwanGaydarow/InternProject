@@ -47,14 +47,25 @@
             public string Email { get; set; }
 
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Display(Name = "FullName")]
+            public string Name { get; set; }
+
+            [Required]
+            public string Adress { get; set; }
+
+            [Required]
+            [StringLength(10, ErrorMessage = GlobalConstant.StringLenghtValidation, MinimumLength = 4)]
+            public string Gender { get; set; }
+
+            [Required]
+            [StringLength(100, ErrorMessage = GlobalConstant.StringLenghtValidation, MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Compare("Password", ErrorMessage = GlobalConstant.ConfirmPasswordNotMatch)]
             public string ConfirmPassword { get; set; }
         }
 
@@ -67,26 +78,43 @@
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
+
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                // TODO : change creating of user
-                var user = new AppUser { UserName = Input.Email, Email = Input.Email, Name = "Test", Address = "test", Gender = "male", CreatedOn = DateTime.UtcNow, IsDeleted = false };
+                var user = new AppUser
+                {
+                    UserName = Input.Email,
+                    Email = Input.Email,
+                    Name = Input.Name,
+                    Address = Input.Adress,
+                    Gender = Input.Gender,
+                    CreatedOn = DateTime.UtcNow,
+                    IsDeleted = false
+                };
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
+
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    //TODO: redirect to index page of each role!!!  Test!!!
+                    var roles = await this._signInManager.UserManager.GetRolesAsync(user);
+
+                    if (roles.Contains(GlobalConstant.SystemAdministratorRole))
                     {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                        returnUrl = "~/Administrator/Home/Index";
                     }
-                    else
+                    else if(roles.Contains(GlobalConstant.SystemManagerRole))
                     {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
+                        returnUrl = "~/Manager/Home/Index";
                     }
+                    
+                    return LocalRedirect(returnUrl);
                 }
+
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
