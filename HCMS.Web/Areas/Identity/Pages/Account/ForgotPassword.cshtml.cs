@@ -10,10 +10,9 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using Microsoft.AspNetCore.WebUtilities;
-    using Microsoft.AspNetCore.Identity.UI.Services;
 
     using HCMS.Data.Models;
-    //TODO: Implment mail sender
+    using HCMS.Service.Messaging;
 
     [AllowAnonymous]
     public class ForgotPasswordModel : PageModel
@@ -42,7 +41,7 @@
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByEmailAsync(Input.Email);
-                if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
+                if (user == null /*|| !(await _userManager.IsEmailConfirmedAsync(user))*/)
                 {
                     // Don't reveal that the user does not exist or is not confirmed
                     return RedirectToPage("./ForgotPasswordConfirmation");
@@ -58,7 +57,10 @@
                     values: new { area = "Identity", code },
                     protocol: Request.Scheme);
 
+                // TODO: Set Constant system mail and name!
                 await _emailSender.SendEmailAsync(
+                    "Test@gmail.com",
+                    "HCMS",
                     Input.Email,
                     "Reset Password",
                     $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");

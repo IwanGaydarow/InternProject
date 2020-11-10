@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29926.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HCMS.Web", "HCMS.Web\HCMS.Web.csproj", "{CFDEC35D-E33D-4D0E-A412-0112F1CCF58D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HCMS.Web", "HCMS.Web\HCMS.Web.csproj", "{CFDEC35D-E33D-4D0E-A412-0112F1CCF58D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HCMS.Data", "HCMS.Data\HCMS.Data.csproj", "{DFA0FDF4-B66D-4F52-B6BA-5F169B2024E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HCMS.Data", "HCMS.Data\HCMS.Data.csproj", "{DFA0FDF4-B66D-4F52-B6BA-5F169B2024E2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{D7D1DE0F-B834-4583-A33B-B8BE7C40F82C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HCMS.Service.Messaging", "HCMS.Service.Messaging\HCMS.Service.Messaging.csproj", "{31E12723-D568-4B26-BF8E-10C14439AC6F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +25,16 @@ Global
 		{DFA0FDF4-B66D-4F52-B6BA-5F169B2024E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFA0FDF4-B66D-4F52-B6BA-5F169B2024E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DFA0FDF4-B66D-4F52-B6BA-5F169B2024E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31E12723-D568-4B26-BF8E-10C14439AC6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31E12723-D568-4B26-BF8E-10C14439AC6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31E12723-D568-4B26-BF8E-10C14439AC6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31E12723-D568-4B26-BF8E-10C14439AC6F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{31E12723-D568-4B26-BF8E-10C14439AC6F} = {D7D1DE0F-B834-4583-A33B-B8BE7C40F82C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1E8E6A35-99CF-4220-AC4B-FA47E8E235C3}

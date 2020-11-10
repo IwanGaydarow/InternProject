@@ -12,6 +12,7 @@ namespace HCMS.Web
 
     using HCMS.Data.Models;
     using HCMS.Data.Repository;
+    using HCMS.Service.Messaging;
 
     public class Startup
     {
@@ -51,6 +52,9 @@ namespace HCMS.Web
 
             //Data repository
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+            services.AddTransient<IEmailSender>(
+                serviceProvider => new SendGridEmailSender(this.Configuration["SendGrid:ApiKey"]));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

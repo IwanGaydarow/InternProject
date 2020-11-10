@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HCMS.Data\HCMS.Data.csproj" />
+    <ProjectReference Include="..\HCMS.Service.Messaging\HCMS.Service.Messaging.csproj" />
   </ItemGroup>
 
   <ItemGroup>
