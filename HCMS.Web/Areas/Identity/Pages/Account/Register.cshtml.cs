@@ -14,6 +14,7 @@
     using Microsoft.AspNetCore.Mvc.RazorPages;
 
     using HCMS.Data.Models;
+    using HCMS.GlobalConstants;
 
     [AllowAnonymous]
     public class RegisterModel : PageModel
@@ -58,7 +59,7 @@
             public string Gender { get; set; }
 
             [Required]
-            [StringLength(100, ErrorMessage = GlobalConstant.StringLenghtValidation, MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = GlobalConstant.StringLenghtValidation, MinimumLength = GlobalConstant.MinPasswordLenght)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
@@ -76,10 +77,8 @@
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
-        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+        public async Task<IActionResult> OnPostAsync()
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
-
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
@@ -100,20 +99,7 @@
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    //TODO: redirect to index page of each role!!!  Test!!! this is only for login page and register o
-                    var roles = await this._signInManager.UserManager.GetRolesAsync(user);
-
-                    if (roles.Contains(GlobalConstant.SystemAdministratorRole))
-                    {
-                        returnUrl = "~/Administrator/Home/Index";
-                    }
-                    else if(roles.Contains(GlobalConstant.SystemManagerRole))
-                    {
-                        returnUrl = "~/Manager/Home/Index";
-                    }
-                    
-                    return LocalRedirect(returnUrl);
+                    return RedirectToPage("Login");
                 }
 
                 foreach (var error in result.Errors)
@@ -121,8 +107,9 @@
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
-
             // If we got this far, something failed, redisplay form
+
+            //TODO: Fix asp-validation-summary to show server side errors!!
             return Page();
 
         }

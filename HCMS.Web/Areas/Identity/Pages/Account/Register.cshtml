@@ -6,10 +6,9 @@
 
 <h1>@ViewData["Title"]</h1>
 
-@*TODO: validation appearance*@
-
 <section class="login-section register-wraper">
     <form id="account" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+        <div asp-validation-summary="All"></div>
         <section class="account-form register-form">
             <h5>Create a new account.</h5>
             <div class="input-filds register-conteiner">

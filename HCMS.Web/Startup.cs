@@ -13,6 +13,7 @@ namespace HCMS.Web
     using HCMS.Data.Models;
     using HCMS.Data.Repository;
     using HCMS.Service.Messaging;
+    using HCMS.Data;
 
     public class Startup
     {
@@ -29,7 +30,7 @@ namespace HCMS.Web
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<AppUser>()
+            services.AddDefaultIdentity<AppUser>(IdentityOptionsProvider.GetIdentityOptions)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 

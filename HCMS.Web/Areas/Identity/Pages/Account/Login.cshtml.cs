@@ -13,6 +13,7 @@
     using Microsoft.AspNetCore.Mvc.RazorPages;
 
     using HCMS.Data.Models;
+    using HCMS.GlobalConstants;
 
     [AllowAnonymous]
     public class LoginModel : PageModel
@@ -43,15 +44,12 @@
         public class InputModel
         {
             [Required]
-            [EmailAddress(ErrorMessage = "This is not a valid Email adress.")]
+            [EmailAddress(ErrorMessage = GlobalConstant.NotValidEmail)]
             public string Email { get; set; }
 
             [Required]
             [DataType(DataType.Password)]
             public string Password { get; set; }
-
-            [Display(Name = "Remember me?")]
-            public bool RememberMe { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -79,16 +77,29 @@
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, false, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+
+                    var user = await this._userManager.FindByEmailAsync(Input.Email);
+                    var roles = await this._signInManager.UserManager.GetRolesAsync(user);
+
+                    if (roles.Contains(GlobalConstant.SystemAdministratorRole))
+                    {
+                        returnUrl = "~/Administrator/Home/Index";
+                    }
+                    else if (roles.Contains(GlobalConstant.SystemManagerRole))
+                    {
+                        returnUrl = "~/Manager/Home/Index";
+                    }
+
                     return LocalRedirect(returnUrl);
                 }
-                if (result.RequiresTwoFactor)
-                {
-                    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
-                }
+                //if (result.RequiresTwoFactor)
+                //{
+                //    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
+                //}
                 if (result.IsLockedOut)
                 {
                     _logger.LogWarning("User account locked out.");

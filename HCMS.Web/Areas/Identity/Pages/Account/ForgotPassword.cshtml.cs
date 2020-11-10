@@ -13,6 +13,7 @@
 
     using HCMS.Data.Models;
     using HCMS.Service.Messaging;
+    using HCMS.GlobalConstants;
 
     [AllowAnonymous]
     public class ForgotPasswordModel : PageModel

@@ -10,10 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="GlobalConstant\GlobalConstant.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.9" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.9" />
@@ -31,6 +27,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HCMS.Data\HCMS.Data.csproj" />
+    <ProjectReference Include="..\HCMS.GlobalConstants\HCMS.GlobalConstants.csproj" />
     <ProjectReference Include="..\HCMS.Service.Messaging\HCMS.Service.Messaging.csproj" />
   </ItemGroup>
 
