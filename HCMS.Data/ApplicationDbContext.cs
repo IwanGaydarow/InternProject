@@ -35,8 +35,10 @@
 
         public virtual DbSet<Vacations> Vacations { get; set; }
 
+        public virtual DbSet<Company> Companies { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {   
+        {
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
@@ -434,6 +436,37 @@
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_112");
+            });
+
+            modelBuilder.Entity<Company>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Name)
+                    .HasColumnName("name");
+
+                entity.Property(e => e.Email)
+                    .HasColumnName("email");
+
+                entity.Property(e => e.PhoneNumber)
+                .HasColumnName("phonenumber");
+
+                entity.Property(e => e.FullAddres)
+                .HasColumnName("full_addres");
+
+                entity.Property(e => e.CreatedOn)
+                    .HasColumnName("created_on")
+                    .HasColumnType("date");
+
+                entity.Property(e => e.DeletedOn)
+                    .HasColumnName("deleted_on")
+                    .HasColumnType("date");
+
+                entity.Property(e => e.IsDeleted).HasColumnName("is_deleted");
+
+                entity.Property(e => e.ModifiedOn)
+                    .HasColumnName("modified_on")
+                    .HasColumnType("date");
             });
 
             OnModelCreatingPartial(modelBuilder);
