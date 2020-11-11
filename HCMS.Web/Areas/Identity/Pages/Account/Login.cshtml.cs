@@ -87,7 +87,7 @@
 
                     if (roles.Contains(GlobalConstant.SystemAdministratorRole))
                     {
-                        returnUrl = "~/Administrator/Home/Index";
+                        returnUrl = "~/Administration/Home/Index";
                     }
                     else if (roles.Contains(GlobalConstant.SystemManagerRole))
                     {

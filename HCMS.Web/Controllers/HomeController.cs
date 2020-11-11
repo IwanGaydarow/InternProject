@@ -6,7 +6,10 @@
     using Microsoft.Extensions.Logging;
 
     using HCMS.Web.Models;
+    using HCMS.GlobalConstants;
+    using Microsoft.AspNetCore.Authorization;
 
+    [Authorize(Roles = GlobalConstant.SystemEmployeeRole)]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -18,7 +21,6 @@
 
         public IActionResult Index()
         {
-            
             return View();
         }
 

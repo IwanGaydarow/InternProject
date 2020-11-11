@@ -39,7 +39,7 @@ namespace HCMS.Web
             {
                 // XSRF prevent
                 options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
-            });
+            }).AddRazorPagesOptions(opt => opt.Conventions.AddAreaPageRoute("Identity", "/Account/Login", ""));
             services.AddRazorPages();
 
             services.AddAuthorization(options =>
