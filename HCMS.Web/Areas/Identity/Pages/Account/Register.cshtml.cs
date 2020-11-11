@@ -108,8 +108,6 @@
                 }
             }
             // If we got this far, something failed, redisplay form
-
-            //TODO: Fix asp-validation-summary to show server side errors!!
             return Page();
 
         }

@@ -8,7 +8,6 @@
 
 <section class="login-section register-wraper">
     <form id="account" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-        <div asp-validation-summary="All"></div>
         <section class="account-form register-form">
             <h5>Create a new account.</h5>
             <div class="input-filds register-conteiner">
@@ -57,6 +56,7 @@
             </div>
             <button type="submit" class="btn btn-primary register-btn">Register</button>
         </section>
+        <div asp-validation-summary="All"></div>
     </form>
 </section>
 

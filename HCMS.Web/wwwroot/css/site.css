@@ -246,3 +246,11 @@ input.form-control.register-filds {
     background-color: green;
     font-size: large;
 }
+
+div.validation-summary-errors ul {
+    margin-top: 2px;
+}
+
+div.validation-summary-errors li {
+    color: red;
+}
