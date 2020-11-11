@@ -173,8 +173,8 @@
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.CreadedOn)
-                    .HasColumnName("creaded_on")
+                entity.Property(e => e.CreatedOn)
+                    .HasColumnName("created_on")
                     .HasColumnType("date");
 
                 entity.Property(e => e.DeletedOn)

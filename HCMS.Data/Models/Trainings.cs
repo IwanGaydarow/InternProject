@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
 
-    public partial class Trainings : IDeletableEntity
+    public partial class Trainings : IDeletableEntity, IAuditInfo
     {
         public Trainings()
         {

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HCMS.Data.Models
 {
-    public class Company : IDeletableEntity
+    public class Company : IDeletableEntity, IAuditInfo
     {
         public Company()
         {

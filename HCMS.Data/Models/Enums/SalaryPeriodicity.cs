@@ -4,6 +4,7 @@
     {
         year = 1,
         month = 2,
-        week = 3
+        week = 3,
+        day = 4
     }
 }

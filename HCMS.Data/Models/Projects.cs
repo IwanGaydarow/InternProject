@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
 
-    public partial class Projects : IDeletableEntity
+    public partial class Projects : IDeletableEntity, IAuditInfo
     {
         public Projects()
         {

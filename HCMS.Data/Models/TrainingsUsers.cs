@@ -2,7 +2,7 @@
 {
     using System;
 
-    public partial class TrainingsUsers : IDeletableEntity
+    public partial class TrainingsUsers : IDeletableEntity, IAuditInfo
     {
         public string UserId { get; set; }
         public int TrainingId { get; set; }

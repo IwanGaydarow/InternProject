@@ -2,7 +2,7 @@
 {
     using System;
 
-    public partial class Evaluations : IDeletableEntity
+    public partial class Evaluations : IDeletableEntity, IAuditInfo
     {
         public int Id { get; set; }
         public int Value { get; set; }

@@ -3,7 +3,7 @@
     using HCMS.Data.Models.Enums;
     using System;
 
-    public partial class Salary : IDeletableEntity
+    public partial class Salary : IDeletableEntity, IAuditInfo
     {
         public int Id { get; set; }
 

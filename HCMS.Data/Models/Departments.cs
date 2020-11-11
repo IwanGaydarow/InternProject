@@ -2,8 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-
-    public partial class Departments : IDeletableEntity
+    public partial class Departments : IDeletableEntity, IAuditInfo
     {
         public Departments()
         {

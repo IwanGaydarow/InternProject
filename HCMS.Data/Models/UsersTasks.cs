@@ -2,7 +2,7 @@
 {
     using System;
 
-    public partial class UsersTasks : IDeletableEntity
+    public partial class UsersTasks : IDeletableEntity, IAuditInfo
     {
         public int ProjectTaskId { get; set; }
         public string UserId { get; set; }

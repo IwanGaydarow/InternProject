@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
 
-    public partial class ProjectTasks : IDeletableEntity
+    public partial class ProjectTasks : IDeletableEntity, IAuditInfo
     {
         public ProjectTasks()
         {
@@ -15,7 +15,7 @@
         public string Description { get; set; }
         public int EstimatedWorkHours { get; set; }
         public bool Status { get; set; }
-        public DateTime CreadedOn { get; set; }
+        public DateTime CreatedOn { get; set; }
         public DateTime? ModifiedOn { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime? DeletedOn { get; set; }
