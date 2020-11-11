@@ -271,6 +271,18 @@
                     .HasColumnName("salary")
                     .HasColumnType("money");
 
+                entity.Property(e => e.Periodicity)
+                .HasColumnName("periodicity");
+
+                entity.Property(e => e.EffectiveTo)
+                .HasColumnName("effective_to");
+
+                entity.Property(e => e.IsDeleted)
+                .HasColumnName("is_deleted");
+
+                entity.Property(e => e.DeletedOn)
+                .HasColumnName("deleted_on");
+
                 entity.Property(e => e.UserId)
                     .IsRequired()
                     .HasColumnName("user_id");
