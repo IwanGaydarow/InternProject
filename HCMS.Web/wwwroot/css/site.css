@@ -96,9 +96,9 @@ body {
     height: 520px;
 }
 
-.conteiner-main > h1, .account-main > h1 {
-    margin: 10px auto;
-}
+    .conteiner-main > h1, .account-main > h1 {
+        margin: 10px auto;
+    }
 
 .login-section {
     width: 50%;
@@ -249,8 +249,24 @@ input.form-control.register-filds {
 
 div.validation-summary-errors ul {
     margin-top: 2px;
+    list-style: none;
 }
 
 div.validation-summary-errors li {
     color: red;
+    font-size: large;
 }
+
+.logout {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+    .logout header {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        align-self: flex-start;
+    }
+
