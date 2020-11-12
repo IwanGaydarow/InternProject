@@ -8,6 +8,8 @@ namespace HCMS.GlobalConstants
 
         public const string SystemName = "Human Capital Management System";
 
+        public const string SystemShortName = "HCMS";
+
         public const string SystemAdministratorRole = "Administrator";
 
         public const string SystemManagerRole = "Manager";
