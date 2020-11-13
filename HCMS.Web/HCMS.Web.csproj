@@ -1829,6 +1829,8 @@
     <ProjectReference Include="..\HCMS.Data\HCMS.Data.csproj" />
     <ProjectReference Include="..\HCMS.GlobalConstants\HCMS.GlobalConstants.csproj" />
     <ProjectReference Include="..\HCMS.Service.Messaging\HCMS.Service.Messaging.csproj" />
+    <ProjectReference Include="..\HCMS.Services.Data\HCMS.Services.Data.csproj" />
+    <ProjectReference Include="..\HCMS.Services.Mapping\HCMS.Services.Mapping.csproj" />
   </ItemGroup>
 
   <ItemGroup>

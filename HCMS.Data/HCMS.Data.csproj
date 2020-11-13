@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HCMS.GlobalConstants\HCMS.GlobalConstants.csproj" />
+    <ProjectReference Include="..\HCMS.Models\HCMS.Data.Models.csproj" />
   </ItemGroup>
 
 </Project>
