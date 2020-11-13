@@ -18,23 +18,6 @@ a {
 
 /* Custom Css-----------------------------------------------*/
 
-/*Main Layout styles -----------------------------------*/
-
-.navbar-nav {
-    flex-direction: row !important;
-}
-
-.nav-link.text-dark {
-    color: white !important;
-}
-
-.nav-link.text-dark:hover{
-    color: blue !important;
-}
-
-.navbar-nav .nav-link{
-    padding-right: 10px !important;
-}
 /* Login page css---------------------------------------------------------*/
 .account-pages {
     min-height: 600px;
