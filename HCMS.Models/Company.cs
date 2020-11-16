@@ -8,7 +8,7 @@ namespace HCMS.Data.Models
     {
         public Company()
         {
-            this.Departments = new HashSet<Departments>();
+            this.Departments = new HashSet<Department>();
         }
         public int Id { get; set; }
 
@@ -22,7 +22,7 @@ namespace HCMS.Data.Models
         public string PhoneNumber { get; set; }
 
         [Required]
-        public int FullAddres { get; set; }
+        public string FullAddres { get; set; }
 
         public DateTime CreatedOn { get; set; }
         public DateTime? ModifiedOn { get; set; }
@@ -30,6 +30,6 @@ namespace HCMS.Data.Models
         public bool IsDeleted { get; set; }
         public DateTime? DeletedOn { get; set; }
 
-        public virtual ICollection<Departments> Departments { get; set; }
+        public virtual ICollection<Department> Departments { get; set; }
     }
 }

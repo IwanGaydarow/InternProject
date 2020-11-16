@@ -4,21 +4,37 @@
     using Microsoft.AspNetCore.Authorization;
 
     using HCMS.GlobalConstants;
-
+    using HCMS.Web.Models.Department;
+    using HCMS.Services.Data.Departments;
+    using Microsoft.AspNetCore.Identity;
+    using HCMS.Data.Models;
+    using System.Threading.Tasks;
+    using HCMS.Web.Models.Departments;
 
     [Authorize(Roles = GlobalConstant.SystemAdministratorRole)]
     [Area("Administration")]
     public class DepartmentsController : Controller
     {
-        public DepartmentsController()
-        {
+        private readonly UserManager<AppUser> userManager;
+        private readonly IDepartmentService departmentService;
 
+        public DepartmentsController(UserManager<AppUser> userManager ,IDepartmentService departmentService)
+        {
+            this.userManager = userManager;
+            this.departmentService = departmentService;
         }
 
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            var companyId = this.departmentService.GetCompanyIdByDepartmentId(user.DepartmentId);
+            var departments = this.departmentService.GetAllDepartments<DepartmentViewModel>(companyId);
+
+            var model = new DepartmentsViewModel { Departments = departments };
+
+            return View(model);
         }
 
         public IActionResult Create()
@@ -27,25 +43,55 @@
         }
 
         [HttpPost]
-        public IActionResult Create(int model)
+        public async Task<IActionResult> Create(CreateDepartmentViewModel model)
         {
-            return View();
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+            if (this.departmentService.CheckIfDepartmentExist(model.Tittle))
+            {
+                this.ModelState.AddModelError(string.Empty, GlobalConstant.DepartmentExistErrorMsg);
+
+                return this.View(model);
+            }
+
+            var user = await this.userManager.GetUserAsync(this.User);
+            var companyId = this.departmentService.GetCompanyIdByDepartmentId(user.DepartmentId);
+
+            await this.departmentService.CreateAsync(model.Tittle, companyId);
+
+            return this.RedirectToAction("Index");
         }
 
-        public IActionResult Edit()
+        public IActionResult Edit(int departmentId)
         {
-            return View();
+            var model = this.departmentService.GetDepartmentById<EditViewModel>(departmentId);
+
+            return this.PartialView("_EditPartial", model);
         }
 
         [HttpPost]
-        public IActionResult Edit(int model)
+        public async Task<IActionResult> Edit(EditViewModel model)
         {
-            return View();
+            if (!this.ModelState.IsValid)
+            {
+                return this.PartialView("_EditPartial", model);
+            }
+
+            //TODO: check if manager exist if no error when implement Employees
+
+            await this.departmentService.Update(model.Id, model.Tittle);
+
+            return this.RedirectToAction("Index");
         }
 
-        public IActionResult Delete()
+        public IActionResult Delete(int departmentId)
         {
-            return View();
+            this.departmentService.Delete(departmentId);
+
+           return this.RedirectToAction("Index");
         }
     }
 }

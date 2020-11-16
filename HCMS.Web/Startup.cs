@@ -15,6 +15,11 @@ namespace HCMS.Web
     using HCMS.Service.Messaging;
     using HCMS.Data;
     using HCMS.Data.Seeding;
+    using HCMS.Data.Common.Repositories;
+    using HCMS.Services.Data.Departments;
+    using HCMS.Services.Mapping;
+    using HCMS.Web.Models;
+    using System.Reflection;
 
     public class Startup
     {
@@ -29,7 +34,7 @@ namespace HCMS.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+                options/*.UseLazyLoadingProxies()*/.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDefaultIdentity<AppUser>(IdentityOptionsProvider.GetIdentityOptions)
                 .AddRoles<IdentityRole>()
@@ -57,11 +62,16 @@ namespace HCMS.Web
 
             services.AddTransient<IEmailSender>(
                 serviceProvider => new SendGridEmailSender(this.Configuration["SendGrid:ApiKey"]));
+
+
+            services.AddTransient<IDepartmentService, DepartmentService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+
             // Seed data on application startup
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {

@@ -1,4 +1,5 @@
-﻿using HCMS.Data.Models;
+﻿using HCMS.Data.Common.Repositories;
+using HCMS.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HCMS.Data.Repository
 {
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, IDeletableEntity
+    public class Repository<TEntity> :  IRepository<TEntity> where TEntity : class, IDeletableEntity
     {
         public Repository(ApplicationDbContext context)
         {
@@ -20,7 +21,7 @@ namespace HCMS.Data.Repository
 
         public void Add(TEntity entity) => this.DbSet.Add(entity);
 
-        public Task AddAsync(TEntity entity) => this.DbSet.AddAsync(entity).AsTask();
+        public async Task AddAsync(TEntity entity) => await this.DbSet.AddAsync(entity).AsTask();
 
         public IQueryable<TEntity> All() => this.DbSet.Where(x => !x.IsDeleted);
 
@@ -39,10 +40,10 @@ namespace HCMS.Data.Repository
             return this.All().FirstOrDefault(getByIdExpresion);
         }
 
-        public Task<TEntity> GetByIdAsync(params object[] id)
+        public async Task<TEntity> GetByIdAsync(params object[] id)
         {
             var getByIdPredicate = EfExpressionHelper.BuildByIdPredicate<TEntity>(this.Context, id);
-            return this.All().FirstOrDefaultAsync(getByIdPredicate);
+            return await this.All().FirstOrDefaultAsync(getByIdPredicate);
         }
 
         public TEntity GetByIdWithDeleted(params object[] id)
@@ -51,15 +52,17 @@ namespace HCMS.Data.Repository
             return this.AllWithDeleted().FirstOrDefault(getByIdPredicate);
         }
 
-        public Task<TEntity> GetByIdWithDeletedAsync(params object[] id)
+        public async Task<TEntity> GetByIdWithDeletedAsync(params object[] id)
         {
             var getByIdPredicate = EfExpressionHelper.BuildByIdPredicate<TEntity>(this.Context, id);
-            return this.AllWithDeleted().FirstOrDefaultAsync(getByIdPredicate);
+            return  await this.AllWithDeleted().FirstOrDefaultAsync(getByIdPredicate);
         }
 
         public void HardDelete(TEntity entity) => this.DbSet.Remove(entity);
 
-        public Task<int> SaveChangesAsnyc() => this.Context.SaveChangesAsync();
+        public async Task<int> SaveChangesAsnyc() => await this.Context.SaveChangesAsync();
+
+        public int SaveChanges() => this.Context.SaveChanges();
 
         public void Undalete(TEntity entity)
         {
@@ -71,7 +74,7 @@ namespace HCMS.Data.Repository
         public void Update(TEntity entity)
         {
             var entry = this.Context.Entry(entity);
-            if (entry.State == EntityState.Deleted)
+            if (entry.State == EntityState.Detached)
             {
                 this.DbSet.Attach(entity);
             }

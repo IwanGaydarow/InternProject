@@ -1,0 +1,34 @@
+﻿@model HCMS.Web.Models.Departments.EditViewModel
+
+@{
+    if (Model.DepartmentManager == null)
+    {
+        Model.DepartmentManager = "No Manager";
+    }
+}
+
+<form class="form-inline edit-form" asp-area="Administration" asp-controller="Departments" asp-action="Edit">
+    <div class="form-group mb-2">
+        <span>Name of Department:</span>
+    </div>
+    <div class="form-group mx-sm-3 mb-2">
+        <label class="sr-only" asp-for="Tittle"></label>
+        <input asp-for="Tittle" class="form-control" />
+        <span asp-validation-for="Tittle" class="text-danger"></span>
+    </div>
+    <input type="hidden" asp-for="Id" value="@Model.Id" />
+    <div class="form-group mx-sm-3 mb-2">
+        <input asp-for="DepartmentManager" class="form-control" disabled>
+    </div>
+    <button type="submit" class="btn btn-primary mb-2" asp-area="Administration" asp-controller="Departments" asp-action="Edit">Submit</button>
+    <button type="button" class="btn btn-danger mb-2 back-btn ml-1">Back</button>
+    <div class="text-danger" asp-validation-summary="All"></div>
+</form>
+
+<partial name="_ValidationScriptsPartial" />
+
+<script>
+    $('.back-btn').on("click", function () {
+        $('.edit-form')[0].remove();
+    });
+</script>

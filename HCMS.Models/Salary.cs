@@ -3,7 +3,7 @@
     using HCMS.Data.Models.Enums;
     using System;
 
-    public partial class Salary : IDeletableEntity, IAuditInfo
+    public class Salary : IDeletableEntity, IAuditInfo
     {
         public int Id { get; set; }
 
@@ -12,6 +12,8 @@
         public SalaryPeriodicity Periodicity { get; set; }
 
         public DateTime EffectiveTo { get; set; }
+
+        public SalaryCurrency Currency { get; set; }
 
         public DateTime CreatedOn { get; set; }
 

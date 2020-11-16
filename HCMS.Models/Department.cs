@@ -2,11 +2,11 @@
 {
     using System;
     using System.Collections.Generic;
-    public partial class Departments : IDeletableEntity, IAuditInfo
+    public class Department : IDeletableEntity, IAuditInfo
     {
-        public Departments()
+        public Department()
         {
-            this.AppUser = new HashSet<AppUser>();
+            this.Employess = new HashSet<AppUser>();
             this.Projects = new HashSet<Projects>();
         }
 
@@ -26,9 +26,9 @@
         public virtual Company Company { get; set; }
 
         public string DepartmentManager { get; set; }
-        public virtual AppUser DepartmentManagerNavigation { get; set; }
+        public virtual AppUser DepartmentManagerNavigation{ get; set; }
 
-        public virtual ICollection<AppUser> AppUser { get; set; }
+        public virtual ICollection<AppUser> Employess { get; set; }
         public virtual ICollection<Projects> Projects { get; set; }
     }
 }

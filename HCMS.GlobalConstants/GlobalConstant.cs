@@ -23,5 +23,7 @@ namespace HCMS.GlobalConstants
         public const string NotValidEmail = "This is not a valid Email adress.";
 
         public const int MinPasswordLenght = 6;
+
+        public const string DepartmentExistErrorMsg = "Department with that name alredy exist.";
     }
 }

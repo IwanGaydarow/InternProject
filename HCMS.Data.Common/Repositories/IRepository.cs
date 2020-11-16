@@ -1,11 +1,11 @@
-﻿namespace HCMS.Data.Repository
+﻿namespace HCMS.Data.Common.Repositories
 {
     using System;
     using System.Linq;
     using System.Threading.Tasks;
 
     public interface IRepository<TEntity> : IDisposable
-        where TEntity : class
+       where TEntity : class
     {
         IQueryable<TEntity> All();
         IQueryable<TEntity> AllWithDeleted();
@@ -27,5 +27,7 @@
         void Undalete(TEntity entity);
 
         Task<int> SaveChangesAsnyc();
+
+        int SaveChanges();
     }
 }

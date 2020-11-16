@@ -3,6 +3,7 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using System.Security.Cryptography.X509Certificates;
 
     public partial class ApplicationDbContext : IdentityDbContext<AppUser, IdentityRole, string>
     {
@@ -17,7 +18,7 @@
 
         public virtual DbSet<AppUser> AppUser { get; set; }
 
-        public virtual DbSet<Departments> Departments { get; set; }
+        public virtual DbSet<Department> Departments { get; set; }
 
         public virtual DbSet<Evaluations> Evaluations { get; set; }
 
@@ -89,12 +90,12 @@
                     .HasMaxLength(100);
 
                 entity.HasOne(d => d.Department)
-                    .WithMany(p => p.AppUser)
+                    .WithMany(p => p.Employess)
                     .HasForeignKey(d => d.DepartmentId)
                     .HasConstraintName("fk_105");
             });
 
-            modelBuilder.Entity<Departments>(entity =>
+            modelBuilder.Entity<Department>(entity =>
             {
                 entity.HasIndex(e => e.DepartmentManager)
                     .HasName("fkIdx_29");

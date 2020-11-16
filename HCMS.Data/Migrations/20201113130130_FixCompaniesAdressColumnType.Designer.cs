@@ -3,15 +3,17 @@ using System;
 using HCMS.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace HCMS.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201113130130_FixCompaniesAdressColumnType")]
+    partial class FixCompaniesAdressColumnType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -174,7 +176,7 @@ namespace HCMS.Data.Migrations
                     b.ToTable("Companies");
                 });
 
-            modelBuilder.Entity("HCMS.Data.Models.Department", b =>
+            modelBuilder.Entity("HCMS.Data.Models.Departments", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -388,9 +390,6 @@ namespace HCMS.Data.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnName("created_on")
                         .HasColumnType("date");
-
-                    b.Property<int>("Currency")
-                        .HasColumnType("integer");
 
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnName("deleted_on")
@@ -731,13 +730,13 @@ namespace HCMS.Data.Migrations
 
             modelBuilder.Entity("HCMS.Data.Models.AppUser", b =>
                 {
-                    b.HasOne("HCMS.Data.Models.Department", "Department")
-                        .WithMany("Employess")
+                    b.HasOne("HCMS.Data.Models.Departments", "Department")
+                        .WithMany("AppUser")
                         .HasForeignKey("DepartmentId")
                         .HasConstraintName("fk_105");
                 });
 
-            modelBuilder.Entity("HCMS.Data.Models.Department", b =>
+            modelBuilder.Entity("HCMS.Data.Models.Departments", b =>
                 {
                     b.HasOne("HCMS.Data.Models.Company", "Company")
                         .WithMany("Departments")
@@ -771,7 +770,7 @@ namespace HCMS.Data.Migrations
 
             modelBuilder.Entity("HCMS.Data.Models.Projects", b =>
                 {
-                    b.HasOne("HCMS.Data.Models.Department", "Department")
+                    b.HasOne("HCMS.Data.Models.Departments", "Department")
                         .WithMany("Projects")
                         .HasForeignKey("DepartmentId")
                         .HasConstraintName("FK_56")

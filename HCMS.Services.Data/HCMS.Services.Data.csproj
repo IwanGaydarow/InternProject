@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HCMS.Data.Common\HCMS.Data.Common.csproj" />
     <ProjectReference Include="..\HCMS.Models\HCMS.Data.Models.csproj" />
     <ProjectReference Include="..\HCMS.Services.Mapping\HCMS.Services.Mapping.csproj" />
   </ItemGroup>

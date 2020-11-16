@@ -2,16 +2,16 @@
 {
     using System;
     using System.Collections.Generic;
-
+    using System.ComponentModel.DataAnnotations.Schema;
     using Microsoft.AspNetCore.Identity;
 
-    public partial class AppUser : IdentityUser<string>, IDeletableEntity, IAuditInfo
+    public class AppUser : IdentityUser<string>, IDeletableEntity, IAuditInfo
     {
         public AppUser()
         {
             this.Id = Guid.NewGuid().ToString();
 
-            this.Departments = new HashSet<Departments>();
+            this.Departments = new HashSet<Department>();
             this.Evaluations = new HashSet<Evaluations>();
             this.Salary = new HashSet<Salary>();
             this.TrainingsUsers = new HashSet<TrainingsUsers>();
@@ -34,9 +34,11 @@
         public DateTime? DeletedOn { get; set; }
 
         public int? DepartmentId { get; set; }
-        public virtual Departments Department { get; set; }
 
-        public virtual ICollection<Departments> Departments { get; set; }
+        public virtual Department Department { get; set; }
+
+
+        public virtual ICollection<Department> Departments { get; set; }
         public virtual ICollection<Evaluations> Evaluations { get; set; }
         public virtual ICollection<Salary> Salary { get; set; }
         public virtual ICollection<TrainingsUsers> TrainingsUsers { get; set; }
