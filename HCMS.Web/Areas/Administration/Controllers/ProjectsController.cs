@@ -1,15 +1,16 @@
 ﻿namespace HCMS.Web.Areas.Administration.Controllers
 {
+    using System.Threading.Tasks;
+    
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Authorization;
 
-    using HCMS.GlobalConstants;
-    using HCMS.Services.Data.Projects;
     using HCMS.Data.Models;
-    using Microsoft.AspNetCore.Identity;
-    using HCMS.Services.Data.Departments;
+    using HCMS.GlobalConstants;
     using HCMS.Web.Models.Projects;
-    using System.Threading.Tasks;
+    using HCMS.Services.Data.Projects;
+    using HCMS.Services.Data.Departments;
 
     [Authorize(Roles = GlobalConstant.SystemAdministratorRole)]
     [Area("Administration")]
@@ -28,15 +29,21 @@
             this.departmentService = departmentService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var user = await this.userManager.GetUserAsync(this.User);
+            var companyId = this.GetCompanyId(user.DepartmentId);
+
+            var projects = this.projectsService.GetAllProjects<ProjectViewModel>(companyId);
+
+            var model = new AllProjectsViewModel { Projects = projects };
+            return View(model);
         }
 
         public async Task<IActionResult> Create()
         {
             var user = await this.userManager.GetUserAsync(this.User);
-            var companyId = this.departmentService.GetCompanyIdByDepartmentId(user.DepartmentId);
+            var companyId = GetCompanyId(user.DepartmentId);
             var departments = this.departmentService.GetAllDepartments<AllDepartmentsViewModel>(companyId);
 
             var model = new CreateViewModel { Departments = departments };
@@ -72,6 +79,13 @@
         public IActionResult Delete()
         {
             return View();
+        }
+
+        private int GetCompanyId(int? id)
+        {
+            var companyId = this.departmentService.GetCompanyIdByDepartmentId(id);
+
+            return companyId;
         }
     }
 }

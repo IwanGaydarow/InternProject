@@ -1,10 +1,11 @@
-﻿using System.Threading.Tasks;
-
-namespace HCMS.Services.Data.Projects
+﻿namespace HCMS.Services.Data.Projects
 {
+    using System.Threading.Tasks;
+    using System.Collections.Generic;
+
     public interface IProjectService
     {
-        T GetAllProjects<T>();
+        IEnumerable<T> GetAllProjects<T>(int companyId);
 
         Task CreateAsync(string tittle, string description, int estWorkH, int departmentId);
     }

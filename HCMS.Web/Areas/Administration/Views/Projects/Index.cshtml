@@ -1,6 +1,78 @@
-﻿@{
+﻿@model HCMS.Web.Models.Projects.AllProjectsViewModel
+@{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<div class="container-fluid">
 
+    <div class="action-conteiner"></div>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Departments list</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Project Tittle</th>
+                            <th>Estimated Working Hours</th>
+                            <th>Department Name</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Project Tittle</th>
+                            <th>Estimated Working Hours</th>
+                            <th>Department Name</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @if (this.Model.Projects.Any())
+                        {
+                            foreach (var project in this.Model.Projects)
+                            {
+                                <tr>
+                                    <td>@project.Tittle</td>
+                                    <td>@project.EstimatedWorkHours</td>
+                                    <td>@project.Department</td>
+                                    <td>@(project.Status == true ? "Finished" : "Processing")</td>
+                                    <td class="btns">
+                                        <button class="btn btn-outline-white btn-rounded btn-sm px-2" onclick="LoadEditForm()">
+                                            <i class="fas fa-edit mt-0"></i>
+                                        </button>
+                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" asp-area="Administration" asp-controller="Projects" asp-action="Delete" asp-route-projectId=3>
+                                            <i class="fas fa-trash-alt mt-0"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr><td>No Existing Projects</td></tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+
+@section Scripts{
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });
+    </script>
+}
