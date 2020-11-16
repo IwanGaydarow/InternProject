@@ -24,7 +24,7 @@
 
         public virtual DbSet<ProjectTasks> ProjectTasks { get; set; }
 
-        public virtual DbSet<Projects> Projects { get; set; }
+        public virtual DbSet<Project> Projects { get; set; }
 
         public virtual DbSet<Salary> Salary { get; set; }
 
@@ -210,7 +210,7 @@
                     .HasConstraintName("FK_93");
             });
 
-            modelBuilder.Entity<Projects>(entity =>
+            modelBuilder.Entity<Project>(entity =>
             {
                 entity.HasIndex(e => e.DepartmentId)
                     .HasName("fkIdx_56");

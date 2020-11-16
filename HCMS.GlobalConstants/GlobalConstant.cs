@@ -25,5 +25,9 @@ namespace HCMS.GlobalConstants
         public const int MinPasswordLenght = 6;
 
         public const string DepartmentExistErrorMsg = "Department with that name alredy exist.";
+
+        public const string MinStringValidation = "The {0} must be at least {1} characters long.";
+
+        public const string NumberValidation = "The number must be positive value.";
     }
 }

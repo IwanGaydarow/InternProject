@@ -1,0 +1,58 @@
+﻿@model HCMS.Web.Models.Projects.CreateViewModel
+@{
+    var departments = Model.Departments.Select(x => new SelectListItem(x.Tittle, x.Id.ToString()));
+    ViewData["Title"] = "Create Project";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+            <h2>@ViewData["Title"]</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-3 mx-auto">
+            <form class="form" asp-area="Administration" asp-controller="Projects" asp-action="Create">
+                <div class="form-group">
+                    <label class="form-label" asp-for="Tittle"></label>
+                    <input class="form-control" asp-for="Tittle" tabindex="1" placeholder="...">
+                    <span asp-validation-for="Tittle" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" asp-for="Description"></label>
+                    <textarea class="form-control" tabindex="2" asp-for="Description" placeholder="Some description..."></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" asp-for="EstimateWorkHour"></label>
+                    <input class="form-control" tabindex="3" asp-for="EstimateWorkHour">
+                    <span asp-validation-for="EstimateWorkHour" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" asp-for="DepartmentId"></label>
+                    <select asp-for="DepartmentId" asp-items="departments" class="form-control">
+                        <option>
+                            Select department
+                        </option>
+                    </select>
+                    <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary mb-2">Create</button>
+                    <button type="button" class="btn btn-danger mb-2 back-btn ml-1">Back</button>
+                </div>
+                <span asp-validation-for="DepartmentId" class="text-danger"></span>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        $('.back-btn').on("click", function () {
+            window.history.back();
+        });
+    </script>
+}
+

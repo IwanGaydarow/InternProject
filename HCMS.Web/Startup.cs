@@ -20,6 +20,7 @@ namespace HCMS.Web
     using HCMS.Services.Mapping;
     using HCMS.Web.Models;
     using System.Reflection;
+    using HCMS.Services.Data.Projects;
 
     public class Startup
     {
@@ -65,6 +66,7 @@ namespace HCMS.Web
 
 
             services.AddTransient<IDepartmentService, DepartmentService>();
+            services.AddTransient<IProjectService, ProjectService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

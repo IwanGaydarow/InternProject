@@ -7,7 +7,7 @@
         public Department()
         {
             this.Employess = new HashSet<AppUser>();
-            this.Projects = new HashSet<Projects>();
+            this.Projects = new HashSet<Project>();
         }
 
         public int Id { get; set; }
@@ -29,6 +29,6 @@
         public virtual AppUser DepartmentManagerNavigation{ get; set; }
 
         public virtual ICollection<AppUser> Employess { get; set; }
-        public virtual ICollection<Projects> Projects { get; set; }
+        public virtual ICollection<Project> Projects { get; set; }
     }
 }

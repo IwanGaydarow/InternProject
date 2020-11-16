@@ -21,7 +21,7 @@
         public DateTime? DeletedOn { get; set; }
         public int ProjectId { get; set; }
 
-        public virtual Projects Project { get; set; }
+        public virtual Project Project { get; set; }
         public virtual ICollection<UsersTasks> UsersTasks { get; set; }
     }
 }
