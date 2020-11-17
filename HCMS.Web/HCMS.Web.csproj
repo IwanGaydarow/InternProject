@@ -1833,6 +1833,7 @@
     <ProjectReference Include="..\HCMS.Service.Messaging\HCMS.Service.Messaging.csproj" />
     <ProjectReference Include="..\HCMS.Services.Data\HCMS.Services.Data.csproj" />
     <ProjectReference Include="..\HCMS.Services.Mapping\HCMS.Services.Mapping.csproj" />
+    <ProjectReference Include="..\HCMS.Web.ViewModels\HCMS.Web.ViewModels.csproj" />
   </ItemGroup>
 
   <ItemGroup>

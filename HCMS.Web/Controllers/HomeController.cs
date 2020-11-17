@@ -5,9 +5,9 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
 
-    using HCMS.Web.Models;
     using HCMS.GlobalConstants;
     using Microsoft.AspNetCore.Authorization;
+    using HCMS.Web.ViewModels;
 
     [Authorize(Roles = GlobalConstant.SystemEmployeeRole)]
     public class HomeController : Controller

@@ -1,4 +1,4 @@
-﻿namespace HCMS.Web.Models.Projects
+﻿namespace HCMS.Web.ViewModels.Administration.Projects
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;

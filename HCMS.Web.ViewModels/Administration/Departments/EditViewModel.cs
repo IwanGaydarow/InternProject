@@ -1,11 +1,11 @@
-﻿namespace HCMS.Web.Models.Departments
+﻿namespace HCMS.Web.ViewModels.Administration.Departments
 {
+    using System.ComponentModel.DataAnnotations;
+    
+    using AutoMapper;
+    using HCMS.Data.Models;
     using HCMS.GlobalConstants;
     using HCMS.Services.Mapping;
-    using HCMS.Data.Models;
-    using System.ComponentModel.DataAnnotations;
-    using AutoMapper;
-    using System.Runtime.CompilerServices;
 
     public class EditViewModel : IMapFrom<Department>, IHaveCustomMappings
     {

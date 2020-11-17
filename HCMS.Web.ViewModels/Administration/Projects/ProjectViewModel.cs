@@ -1,11 +1,14 @@
-﻿using AutoMapper;
-using HCMS.Data.Models;
-using HCMS.Services.Mapping;
-
-namespace HCMS.Web.Models.Projects
+﻿namespace HCMS.Web.ViewModels.Administration.Projects
 {
+    using HCMS.Data.Models;
+    using HCMS.Services.Mapping;
+    
+    using AutoMapper;
+
     public class ProjectViewModel : IMapFrom<Project>, IHaveCustomMappings
     {
+        public int Id { get; set; }
+
         public string Tittle { get; set; }
 
         public int EstimatedWorkHours { get; set; }

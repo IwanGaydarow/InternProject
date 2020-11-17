@@ -1,5 +1,7 @@
 namespace HCMS.Web
 {
+    using System.Reflection;
+    
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -10,17 +12,16 @@ namespace HCMS.Web
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 
-    using HCMS.Data.Models;
-    using HCMS.Data.Repository;
-    using HCMS.Service.Messaging;
     using HCMS.Data;
+    using HCMS.Data.Models;
     using HCMS.Data.Seeding;
+    using HCMS.Web.ViewModels;
+    using HCMS.Data.Repository;
+    using HCMS.Services.Mapping;
+    using HCMS.Service.Messaging;
+    using HCMS.Services.Data.Projects;
     using HCMS.Data.Common.Repositories;
     using HCMS.Services.Data.Departments;
-    using HCMS.Services.Mapping;
-    using HCMS.Web.Models;
-    using System.Reflection;
-    using HCMS.Services.Data.Projects;
 
     public class Startup
     {
@@ -35,7 +36,7 @@ namespace HCMS.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options/*.UseLazyLoadingProxies()*/.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDefaultIdentity<AppUser>(IdentityOptionsProvider.GetIdentityOptions)
                 .AddRoles<IdentityRole>()

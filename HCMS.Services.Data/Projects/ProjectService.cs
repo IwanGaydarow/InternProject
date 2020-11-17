@@ -9,6 +9,7 @@
     using HCMS.Data.Models;
     using HCMS.Services.Mapping;
     using HCMS.Data.Common.Repositories;
+    using HCMS.Web.ViewModels.Administration.Projects;
 
     public class ProjectService : IProjectService
     {
@@ -17,6 +18,27 @@
         public ProjectService(IRepository<Project> projectRepository)
         {
             this.projectRepository = projectRepository;
+        }
+
+        public async Task<int> ChangeStatus(int projectId)
+        {
+            var project = await this.projectRepository.GetByIdAsync(projectId);
+
+            if (project == null)
+            {
+                throw new NullReferenceException(nameof(project));
+            }
+
+            if (project.Status)
+            {
+                return 0;
+            }
+
+            project.Status = true;
+
+            this.projectRepository.Update(project);
+            var result = this.projectRepository.SaveChangesAsnyc().Result;
+            return result;
         }
 
         public async Task CreateAsync(string tittle, string description, int estWorkH, int departmentId)
@@ -42,6 +64,36 @@
                 .Include(x => x.Department)
                 .Where(x => x.Department.CompanyId == companyId)
                 .To<T>().ToList();
+        }
+
+        public Project GetProjectById(int projectId)
+        {
+            return this.projectRepository.GetById(projectId);
+        }
+
+        public async Task UpdateAsync(UpdateViewModel model)
+        {
+            var projectToEdit = await this.projectRepository.GetByIdAsync(model.ProjectId);
+            if (projectToEdit == null)
+            {
+                throw new NullReferenceException(nameof(projectToEdit));
+            }
+
+            projectToEdit.Tittle = model.Tittle;
+            projectToEdit.Description = model.Description;
+            projectToEdit.EstimatedWorkHours = model.EstimatedWorkHours;
+            projectToEdit.ModifiedOn = DateTime.UtcNow;
+            projectToEdit.DepartmentId = model.DepartmentId;
+
+            this.projectRepository.Update(projectToEdit);
+            await this.projectRepository.SaveChangesAsnyc();
+        }
+
+        public int GetProjectDepartmentId(int projectId)
+        {
+            var project = this.projectRepository.GetById(projectId);
+
+            return project.DepartmentId;
         }
     }
 }

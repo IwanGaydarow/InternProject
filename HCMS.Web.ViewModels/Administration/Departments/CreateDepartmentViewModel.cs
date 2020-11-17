@@ -1,9 +1,8 @@
-﻿namespace HCMS.Web.Models.Department
+﻿namespace HCMS.Web.ViewModels.Administration.Departments
 {
     using System.ComponentModel.DataAnnotations;
-    using HCMS.Data.Models;
+    
     using HCMS.GlobalConstants;
-    using HCMS.Services.Mapping;
 
     public class CreateDepartmentViewModel
     {

@@ -1,4 +1,4 @@
-﻿namespace HCMS.Web.Models.Departments
+﻿namespace HCMS.Web.ViewModels.Administration.Departments
 {
     using AutoMapper;
     using HCMS.Data.Models;

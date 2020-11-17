@@ -1,14 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HCMS.Data.Common\HCMS.Data.Common.csproj" />
+    <ProjectReference Include="..\HCMS.GlobalConstants\HCMS.GlobalConstants.csproj" />
     <ProjectReference Include="..\HCMS.Models\HCMS.Data.Models.csproj" />
     <ProjectReference Include="..\HCMS.Services.Mapping\HCMS.Services.Mapping.csproj" />
-    <ProjectReference Include="..\HCMS.Web.ViewModels\HCMS.Web.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,8 +1,10 @@
-﻿@model HCMS.Web.ViewModels.Administration.Projects.CreateViewModel
+﻿@model HCMS.Web.ViewModels.Administration.Projects.UpdateViewModel
 @{
-    var departments = Model.Departments.Select(x => new SelectListItem(x.Tittle, x.Id.ToString()));
-    ViewData["Title"] = "Create Project";
+    var departments = Model.Departments.Select(x => new SelectListItem(x.Tittle, x.Id.ToString(), x.Id == Model.DepartmentId));
+
+    ViewData["Title"] = "Edit";
 }
+
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
@@ -11,7 +13,7 @@
     </div>
     <div class="row">
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-3 mx-auto">
-            <form class="form" asp-area="Administration" asp-controller="Projects" asp-action="Create">
+            <form class="form" asp-area="Administration" asp-controller="Projects" asp-action="Edit">
                 <div class="form-group">
                     <label class="form-label" asp-for="Tittle"></label>
                     <input class="form-control" asp-for="Tittle" tabindex="1" placeholder="...">
@@ -23,16 +25,13 @@
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label class="form-label" asp-for="EstimateWorkHour"></label>
-                    <input class="form-control" tabindex="3" asp-for="EstimateWorkHour">
-                    <span asp-validation-for="EstimateWorkHour" class="text-danger"></span>
+                    <label class="form-label" asp-for="EstimatedWorkHours"></label>
+                    <input class="form-control" tabindex="3" asp-for="EstimatedWorkHours">
+                    <span asp-validation-for="EstimatedWorkHours" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label class="form-label" asp-for="DepartmentId"></label>
                     <select asp-for="DepartmentId" asp-items="departments" class="form-control">
-                        <option>
-                            Select department
-                        </option>
                     </select>
                     <span asp-validation-for="DepartmentId" class="text-danger"></span>
                 </div>
@@ -40,19 +39,17 @@
                     <button type="submit" class="btn btn-primary mb-2">Create</button>
                     <button type="button" class="btn btn-danger mb-2 back-btn ml-1">Back</button>
                 </div>
-                <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                <input type="hidden" asp-for="ProjectId" />
+                <div asp-validation-summary="All" class="text-danger"></div>
             </form>
         </div>
     </div>
 </div>
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+<partial name="_ValidationScriptsPartial" />
 
-    <script>
+<script>
         $('.back-btn').on("click", function () {
             window.history.back();
         });
-    </script>
-}
-
+</script>

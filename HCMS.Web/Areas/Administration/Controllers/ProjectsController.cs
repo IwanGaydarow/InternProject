@@ -1,16 +1,18 @@
 ﻿namespace HCMS.Web.Areas.Administration.Controllers
 {
     using System.Threading.Tasks;
-    
+
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Authorization;
 
     using HCMS.Data.Models;
     using HCMS.GlobalConstants;
-    using HCMS.Web.Models.Projects;
     using HCMS.Services.Data.Projects;
     using HCMS.Services.Data.Departments;
+    using System.Collections.Generic;
+    using System.Security.Claims;
+    using HCMS.Web.ViewModels.Administration.Projects;
 
     [Authorize(Roles = GlobalConstant.SystemAdministratorRole)]
     [Area("Administration")]
@@ -42,11 +44,9 @@
 
         public async Task<IActionResult> Create()
         {
-            var user = await this.userManager.GetUserAsync(this.User);
-            var companyId = GetCompanyId(user.DepartmentId);
-            var departments = this.departmentService.GetAllDepartments<AllDepartmentsViewModel>(companyId);
+            var departments = await this.GetDepartments<AllDepartmentsViewModel>(this.User);
 
-            var model = new CreateViewModel { Departments = departments };
+            var model = new CreateViewModel { Departments = departments as IEnumerable<AllDepartmentsViewModel> };
 
             return this.View(model);
         }
@@ -65,20 +65,56 @@
             return this.RedirectToAction("Index");
         }
 
-        public IActionResult Edit()
+        public async Task<IActionResult> Edit(int projectId)
         {
-            return View();
+            var departments = await this.GetDepartments<AllDepartmentsViewModel>(this.User);
+            var curentDepartment = this.projectsService.GetProjectById(projectId);
+
+            var model = new UpdateViewModel 
+            {
+                ProjectId = curentDepartment.Id,
+                Tittle = curentDepartment.Tittle,
+                Description = curentDepartment.Description,
+                EstimatedWorkHours = curentDepartment.EstimatedWorkHours,
+                DepartmentId = curentDepartment.DepartmentId,
+                Departments = departments 
+            };
+
+            return View(model);
         }
 
         [HttpPost]
-        public IActionResult Edit(int model)
+        public async Task<IActionResult> Edit(UpdateViewModel model)
         {
-            return View();
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+            await this.projectsService.UpdateAsync(model);
+
+            return this.RedirectToAction("Index");
         }
 
         public IActionResult Delete()
         {
             return View();
+        }
+
+        public Task<int> Status(int projectId)
+        {
+            var result = this.projectsService.ChangeStatus(projectId);
+
+            return result;
+        }
+
+        private async Task<IEnumerable<T>> GetDepartments<T>(ClaimsPrincipal User)
+        {
+            var user = await this.userManager.GetUserAsync(User);
+            var companyId = GetCompanyId(user.DepartmentId);
+            var departments = this.departmentService.GetAllDepartments<T>(companyId);
+
+            return departments;
         }
 
         private int GetCompanyId(int? id)

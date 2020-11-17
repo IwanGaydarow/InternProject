@@ -99,6 +99,7 @@ namespace HCMS.Services.Data.Departments
             }
 
             departmentToEdit.Tittle = tittle;
+            departmentToEdit.ModifiedOn = DateTime.UtcNow;
 
             this.departmentRepository.Update(departmentToEdit);
             await this.departmentRepository.SaveChangesAsnyc();

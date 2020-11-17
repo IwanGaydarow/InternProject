@@ -3,7 +3,6 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-    using System.Security.Cryptography.X509Certificates;
 
     public partial class ApplicationDbContext : IdentityDbContext<AppUser, IdentityRole, string>
     {
