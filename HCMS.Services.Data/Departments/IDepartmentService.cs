@@ -10,7 +10,7 @@ namespace HCMS.Services.Data.Departments
 
         Task CreateAsync(string tittle, int companyId, string menager = null);
 
-        void Delete(int departmentId);
+        Task Delete(int departmentId);
 
         T GetDepartmentById<T>(int departmentId);
 

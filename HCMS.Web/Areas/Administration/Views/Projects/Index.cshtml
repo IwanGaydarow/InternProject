@@ -38,21 +38,24 @@
                         {
                             foreach (var project in this.Model.Projects)
                             {
-                                <tr>
+                                <tr class="@project.Id">
                                     <td>@project.Tittle</td>
                                     <td>@project.EstimatedWorkHours</td>
                                     <td>@project.Department</td>
-                                    <td id="@project.Id">@(project.Status == true ? "Finished" : "Processing")</td>
+                                    @{ 
+                                        string output = project.Status == true ? "Finished" : "Processing";
+                                        string color = output == "Finished" ? "green" : "red";
+                                    }
+                                    <td id="@project.Id" style="color: @color">@output</td>
                                     <td class="btns">
-                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Edit"
-                                                asp-area="Administration" asp-controller="Projects" asp-action="Edit" asp-route-projectId="@project.Id">
+                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Edit Project"
+                                           asp-area="Administration" asp-controller="Projects" asp-action="Edit" asp-route-projectId="@project.Id">
                                             <i class="fas fa-edit mt-0"></i>
                                         </a>
-                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Change status" onclick="ChangeStatus(@project.Id)">
+                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Change status of Project" onclick="ChangeStatus(@project.Id)">
                                             <i class="fas fa-thermometer-empty" mt-0"></i>
                                         </a>
-                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Delete"
-                                           asp-area="Administration" asp-controller="Projects" asp-action="Delete" asp-route-projectId=@project.Id>
+                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Delete project" onclick="DeleteProject(@project.Id)">
                                             <i class="fas fa-trash-alt mt-0"></i>
                                         </a>
                                     </td>
@@ -83,23 +86,44 @@
 
     <!-- tooltip function-->
     <script>
+        //init tooltip
         $(function () {
             $('[data-toggle="tooltip"]').tooltip();
         });
+
+        // remove tooltip from clicked button
+        $('[data-toggle="tooltip"]').click(function () {
+            $('.tooltip').fadeOut('fast', function () {
+                $('.tooltip').remove();
+            });
+        });
     </script>
 
+    <!-- Change project status-->
     <script>
         function ChangeStatus(data) {
             let tdToChange = data.toString();
             $.get("/Administration/Projects/Status?projectId=" + data,
-                function (data) {
-                    if (data > 0) {
+                function (response) {
+                    if (response > 0) {
                         $('#' + tdToChange).text("Finished");
+                        $('#' + tdToChange).css('color', 'green');
                     }
                     else {
                         alert("You can`t change an alrady done project.");
                     }
                 });
+        }
+    </script>
+
+    <script>
+        function DeleteProject(data) {
+            let trToDelete = data.toString();
+            $.get("/Administration/Projects/Delete?projectId=" + data, function (response, status) {
+                if (status === 'success') {
+                    $('.' + trToDelete).remove();
+                }
+            });
         }
     </script>
 }

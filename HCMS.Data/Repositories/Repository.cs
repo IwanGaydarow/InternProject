@@ -60,7 +60,7 @@ namespace HCMS.Data.Repository
 
         public void HardDelete(TEntity entity) => this.DbSet.Remove(entity);
 
-        public async Task<int> SaveChangesAsnyc() => await this.Context.SaveChangesAsync();
+        public async Task<int> SaveChangesAsync() => await this.Context.SaveChangesAsync();
 
         public int SaveChanges() => this.Context.SaveChanges();
 

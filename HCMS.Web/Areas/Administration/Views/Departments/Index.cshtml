@@ -38,16 +38,16 @@
                         {
                             foreach (var department in this.Model.Departments)
                             {
-                                <tr>
+                                <tr class="@department.Id">
                                     <td>@department.Tittle</td>
                                     <td>@(department.DepartmentMenager ?? "No Manager")</td>
                                     <td>@department.Employees</td>
                                     <td>@department.CompanyName</td>
-                                    <td class="btns">
-                                        <button class="btn btn-outline-white btn-rounded btn-sm px-2" onclick="LoadEditForm(@department.Id)">
+                                    <td id="@department.Id">
+                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Edit Department" onclick="LoadEditForm(@department.Id)">
                                             <i class="fas fa-edit mt-0"></i>
-                                        </button>
-                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" asp-area="Administration" asp-controller="Departments" asp-action="Delete" asp-route-departmentId=@department.Id>
+                                        </a>
+                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Delete Department" onclick=DeleteDepartment(@department.Id)>
                                             <i class="fas fa-trash-alt mt-0"></i>
                                         </a>
                                     </td>
@@ -72,12 +72,39 @@
         });
     </script>
 
+    <!-- tooltip function-->
+    <script>
+        // init tooltip
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+
+        // remove tooltip from clicked button
+        $('[data-toggle="tooltip"]').click(function () {
+            $('.tooltip').fadeOut('fast', function () {
+                $('.tooltip').remove();
+            });
+        });
+    </script>
+
     <script>
         function LoadEditForm(data) {
             $.get("/Administration/Departments/Edit?departmentId=" + data,
                 function (data) {
                     $('.action-conteiner').html(data);
                 });
+        }
+    </script>
+
+    <script>
+        function DeleteDepartment(data) {
+            let trToDelete = data.toString();
+
+            $.get("/Administration/Departments/Delete?departmentId=" + data, function (response, status) {
+                if (status === 'success') {
+                    $('.' + trToDelete).remove();
+                }
+            });
         }
     </script>
 }

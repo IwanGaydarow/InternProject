@@ -17,7 +17,7 @@
 
 
 <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" asp-route="">
@@ -82,9 +82,7 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Actions:</h6>
                     <a class="collapse-item" asp-area="Administration" asp-controller="Projects" asp-action="Index">View All</a>
-                    <a class="collapse-item" asp-area="Administration" asp-controller="Projects" asp-action="Create">Create</a>
-                    <a class="collapse-item" asp-area="Administration" asp-controller="Projects" asp-action="Edit">Edit</a>
-                    <a class="collapse-item" asp-area="Administration" asp-controller="Projects" asp-action="Delete">Delete</a>
+                    <a class="collapse-item" asp-area="Administration" asp-controller="Projects" asp-action="Create">Add Project</a>
                 </div>
             </div>
         </li>
@@ -102,8 +100,6 @@
                     <h6 class="collapse-header">Actions:</h6>
                     <a class="collapse-item" asp-area="Administration" asp-controller="Trainings" asp-action="Index">View All</a>
                     <a class="collapse-item" asp-area="Administration" asp-controller="Trainings" asp-action="Create">Create</a>
-                    <a class="collapse-item" asp-area="Administration" asp-controller="Trainings" asp-action="Edit">Edit</a>
-                    <a class="collapse-item" asp-area="Administration" asp-controller="Trainings" asp-action="Delete">Delete</a>
                 </div>
             </div>
         </li>
@@ -128,7 +124,6 @@
                     <h6 class="collapse-header">Employees Actions:</h6>
                     <a class="collapse-item" asp-area="Administration" asp-controller="Employees" asp-action="Index">View All</a>
                     <a class="collapse-item" asp-area="Administration" asp-controller="Employees" asp-action="Create">Create</a>
-                    <a class="collapse-item" asp-area="Administration" asp-controller="Employees" asp-action="Delete">Delete</a>
                     <div class="collapse-divider"></div>
                     <h6 class="collapse-header">Others:</h6>
                     <a class="collapse-item" asp-area="Administration" asp-controller="Vacations" asp-action="Index">Vacations</a>

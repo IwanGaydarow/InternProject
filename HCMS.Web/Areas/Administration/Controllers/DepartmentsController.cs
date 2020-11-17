@@ -87,11 +87,11 @@
             return this.RedirectToAction("Index");
         }
 
-        public IActionResult Delete(int departmentId)
+        public async Task<IActionResult> Delete(int departmentId)
         {
-            this.departmentService.Delete(departmentId);
+            await this.departmentService.Delete(departmentId);
 
-           return this.RedirectToAction("Index");
+           return this.Ok();
         }
     }
 }

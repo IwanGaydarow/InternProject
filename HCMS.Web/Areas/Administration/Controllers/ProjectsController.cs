@@ -37,9 +37,9 @@
             var companyId = this.GetCompanyId(user.DepartmentId);
 
             var projects = this.projectsService.GetAllProjects<ProjectViewModel>(companyId);
-
             var model = new AllProjectsViewModel { Projects = projects };
-            return View(model);
+
+            return this.View(model);
         }
 
         public async Task<IActionResult> Create()
@@ -80,7 +80,7 @@
                 Departments = departments 
             };
 
-            return View(model);
+            return this.View(model);
         }
 
         [HttpPost]
@@ -96,14 +96,16 @@
             return this.RedirectToAction("Index");
         }
 
-        public IActionResult Delete()
+        public async Task<IActionResult> Delete(int projectId)
         {
-            return View();
+            await this.projectsService.DeleteAsync(projectId);
+           
+            return this.Ok();
         }
 
-        public Task<int> Status(int projectId)
+        public async Task<int> Status(int projectId)
         {
-            var result = this.projectsService.ChangeStatus(projectId);
+            var result = await this.projectsService.ChangeStatus(projectId);
 
             return result;
         }

@@ -26,7 +26,7 @@
         void Delete(TEntity entity);
         void Undalete(TEntity entity);
 
-        Task<int> SaveChangesAsnyc();
+        Task<int> SaveChangesAsync();
 
         int SaveChanges();
     }

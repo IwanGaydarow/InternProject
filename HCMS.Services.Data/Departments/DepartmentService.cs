@@ -32,12 +32,12 @@ namespace HCMS.Services.Data.Departments
             };
 
             await this.departmentRepository.AddAsync(department);
-            await this.departmentRepository.SaveChangesAsnyc();
+            await this.departmentRepository.SaveChangesAsync();
         }
 
-        public void Delete(int departmentId)
+        public async Task Delete(int departmentId)
         {
-            var department = this.departmentRepository.GetById(departmentId);
+            var department = await this.departmentRepository.GetByIdAsync(departmentId);
 
             if(department == null)
             {
@@ -45,7 +45,7 @@ namespace HCMS.Services.Data.Departments
             }
 
             this.departmentRepository.Delete(department);
-            this.departmentRepository.SaveChanges();
+            await this.departmentRepository.SaveChangesAsync();
         }
 
         public IEnumerable<T> GetAllDepartments<T>(int companyId)
@@ -91,7 +91,7 @@ namespace HCMS.Services.Data.Departments
 
         public async Task Update(int departmentId, string tittle)
         {
-            var departmentToEdit = this.departmentRepository.GetById(departmentId);
+            var departmentToEdit = await this.departmentRepository.GetByIdAsync(departmentId);
 
             if (departmentToEdit == null)
             {
@@ -102,7 +102,7 @@ namespace HCMS.Services.Data.Departments
             departmentToEdit.ModifiedOn = DateTime.UtcNow;
 
             this.departmentRepository.Update(departmentToEdit);
-            await this.departmentRepository.SaveChangesAsnyc();
+            await this.departmentRepository.SaveChangesAsync();
         }
     }
 }

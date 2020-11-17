@@ -18,5 +18,7 @@
         Task<int> ChangeStatus(int projectId);
 
         int GetProjectDepartmentId(int projectId);
+
+        Task DeleteAsync(int projectId);
     }
 }

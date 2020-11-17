@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Collections.Generic;
+
     using Microsoft.EntityFrameworkCore;
 
     using HCMS.Data.Models;
@@ -37,7 +38,7 @@
             project.Status = true;
 
             this.projectRepository.Update(project);
-            var result = this.projectRepository.SaveChangesAsnyc().Result;
+            var result = this.projectRepository.SaveChangesAsync().Result;
             return result;
         }
 
@@ -55,7 +56,7 @@
             };
 
             await this.projectRepository.AddAsync(project);
-            await this.projectRepository.SaveChangesAsnyc();
+            await this.projectRepository.SaveChangesAsync();
         }
 
         public IEnumerable<T> GetAllProjects<T>(int companyId)
@@ -86,7 +87,7 @@
             projectToEdit.DepartmentId = model.DepartmentId;
 
             this.projectRepository.Update(projectToEdit);
-            await this.projectRepository.SaveChangesAsnyc();
+            await this.projectRepository.SaveChangesAsync();
         }
 
         public int GetProjectDepartmentId(int projectId)
@@ -94,6 +95,22 @@
             var project = this.projectRepository.GetById(projectId);
 
             return project.DepartmentId;
+        }
+
+        public async Task DeleteAsync(int projectId)
+        {
+            var projectToDelete = await this.projectRepository.GetByIdAsync(projectId);
+
+            if (projectToDelete == null)
+            {
+                throw new NullReferenceException(nameof(projectToDelete));
+            }
+
+            projectToDelete.IsDeleted = true;
+            projectToDelete.DeletedOn = DateTime.UtcNow;
+
+            this.projectRepository.Update(projectToDelete);
+            await this.projectRepository.SaveChangesAsync();
         }
     }
 }
