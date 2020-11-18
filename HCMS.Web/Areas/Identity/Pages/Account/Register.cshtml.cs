@@ -48,7 +48,7 @@
             public string Email { get; set; }
 
             [Required]
-            [Display(Name = "FullName")]
+            [Display(Name = "Full Name")]
             public string Name { get; set; }
 
             [Required]
