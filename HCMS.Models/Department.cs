@@ -22,6 +22,10 @@
 
         public DateTime? DeletedOn { get; set; }
 
+        public int CityId { get; set; }
+
+        public virtual City City { get; set; }
+
         public int CompanyId { get; set; }
         public virtual Company Company { get; set; }
 

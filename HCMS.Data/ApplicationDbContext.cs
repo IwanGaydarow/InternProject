@@ -3,6 +3,7 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using System.Security.Cryptography.X509Certificates;
 
     public partial class ApplicationDbContext : IdentityDbContext<AppUser, IdentityRole, string>
     {
@@ -36,6 +37,10 @@
         public virtual DbSet<Vacations> Vacations { get; set; }
 
         public virtual DbSet<Company> Companies { get; set; }
+
+        public virtual DbSet<City> Cities { get; set; }
+
+        public virtual DbSet<Country> Countries { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -88,10 +93,75 @@
                     .HasColumnName("name")
                     .HasMaxLength(100);
 
+                entity.Property(e => e.JobTittle)
+                .IsRequired()
+                .HasColumnName("job_tittle")
+                .HasMaxLength(25);
+
                 entity.HasOne(d => d.Department)
                     .WithMany(p => p.Employess)
                     .HasForeignKey(d => d.DepartmentId)
                     .HasConstraintName("fk_105");
+            });
+
+            modelBuilder.Entity<City>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.Name)
+                .HasColumnName("name")
+                .HasMaxLength(50);
+
+                entity.Property(e => e.PostCode)
+                .HasColumnName("post_code");
+
+                entity.Property(e => e.CreatedOn)
+                .IsRequired()
+                   .HasColumnName("created_on")
+                   .HasColumnType("date");
+
+                entity.Property(e => e.ModifiedOn)
+                    .HasColumnName("modified_on")
+                    .HasColumnType("date");
+
+                entity.Property(e => e.DeletedOn)
+                    .HasColumnName("deleted_on")
+                    .HasColumnType("date");
+
+                entity.Property(e => e.IsDeleted)
+                .HasColumnName("is_deleted")
+                .IsRequired();
+
+                entity.HasOne(c => c.Country)
+                .WithMany(co => co.Cities)
+                .HasForeignKey(c => c.CountryId);
+            });
+
+            modelBuilder.Entity<Country>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.Name)
+                .IsRequired()
+                .HasColumnName("name")
+                .HasMaxLength(50);
+
+                entity.Property(e => e.CreatedOn)
+                .IsRequired()
+                   .HasColumnName("created_on")
+                   .HasColumnType("date");
+
+                entity.Property(e => e.ModifiedOn)
+                    .HasColumnName("modified_on")
+                    .HasColumnType("date");
+
+                entity.Property(e => e.DeletedOn)
+                    .HasColumnName("deleted_on")
+                    .HasColumnType("date");
+
+                entity.Property(e => e.IsDeleted)
+                .HasColumnName("is_deleted")
+                .IsRequired();
             });
 
             modelBuilder.Entity<Department>(entity =>

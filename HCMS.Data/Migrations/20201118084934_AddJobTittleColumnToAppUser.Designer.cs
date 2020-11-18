@@ -3,15 +3,17 @@ using System;
 using HCMS.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace HCMS.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201118084934_AddJobTittleColumnToAppUser")]
+    partial class AddJobTittleColumnToAppUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,9 +35,6 @@ namespace HCMS.Data.Migrations
                         .HasColumnName("address")
                         .HasColumnType("character varying(150)")
                         .HasMaxLength(150);
-
-                    b.Property<int>("CityId")
-                        .HasColumnType("integer");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -121,8 +120,6 @@ namespace HCMS.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CityId");
-
                     b.HasIndex("DepartmentId")
                         .HasName("fkIdx_105");
 
@@ -134,48 +131,6 @@ namespace HCMS.Data.Migrations
                         .HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("HCMS.Data.Models.City", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<int>("CountryId")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnName("created_on")
-                        .HasColumnType("date");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnName("deleted_on")
-                        .HasColumnType("date");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnName("is_deleted")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnName("modified_on")
-                        .HasColumnType("date");
-
-                    b.Property<string>("Name")
-                        .HasColumnName("name")
-                        .HasColumnType("character varying(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<int?>("PostCode")
-                        .HasColumnName("post_code")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CountryId");
-
-                    b.ToTable("Cities");
                 });
 
             modelBuilder.Entity("HCMS.Data.Models.Company", b =>
@@ -227,40 +182,6 @@ namespace HCMS.Data.Migrations
                     b.ToTable("Companies");
                 });
 
-            modelBuilder.Entity("HCMS.Data.Models.Country", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnName("created_on")
-                        .HasColumnType("date");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnName("deleted_on")
-                        .HasColumnType("date");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnName("is_deleted")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnName("modified_on")
-                        .HasColumnType("date");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnName("name")
-                        .HasColumnType("character varying(50)")
-                        .HasMaxLength(50);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Countries");
-                });
-
             modelBuilder.Entity("HCMS.Data.Models.Department", b =>
                 {
                     b.Property<int>("Id")
@@ -268,9 +189,6 @@ namespace HCMS.Data.Migrations
                         .HasColumnName("id")
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<int>("CityId")
-                        .HasColumnType("integer");
 
                     b.Property<int>("CompanyId")
                         .HasColumnType("integer");
@@ -302,8 +220,6 @@ namespace HCMS.Data.Migrations
                         .HasMaxLength(80);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CityId");
 
                     b.HasIndex("CompanyId");
 
@@ -823,35 +739,14 @@ namespace HCMS.Data.Migrations
 
             modelBuilder.Entity("HCMS.Data.Models.AppUser", b =>
                 {
-                    b.HasOne("HCMS.Data.Models.City", "City")
-                        .WithMany("Employees")
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("HCMS.Data.Models.Department", "Department")
                         .WithMany("Employess")
                         .HasForeignKey("DepartmentId")
                         .HasConstraintName("fk_105");
                 });
 
-            modelBuilder.Entity("HCMS.Data.Models.City", b =>
-                {
-                    b.HasOne("HCMS.Data.Models.Country", "Country")
-                        .WithMany("Cities")
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("HCMS.Data.Models.Department", b =>
                 {
-                    b.HasOne("HCMS.Data.Models.City", "City")
-                        .WithMany("Departments")
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("HCMS.Data.Models.Company", "Company")
                         .WithMany("Departments")
                         .HasForeignKey("CompanyId")

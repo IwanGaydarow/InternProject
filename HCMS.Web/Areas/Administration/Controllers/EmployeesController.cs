@@ -12,6 +12,23 @@
         public IActionResult Index()
         {
             return View();
+
+        }
+
+        public IActionResult Create()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(int model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+            return this.RedirectToAction("Index");
         }
     }
 }

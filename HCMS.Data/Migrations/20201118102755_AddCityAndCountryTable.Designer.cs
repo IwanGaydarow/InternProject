@@ -3,15 +3,17 @@ using System;
 using HCMS.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace HCMS.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201118102755_AddCityAndCountryTable")]
+    partial class AddCityAndCountryTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,9 +35,6 @@ namespace HCMS.Data.Migrations
                         .HasColumnName("address")
                         .HasColumnType("character varying(150)")
                         .HasMaxLength(150);
-
-                    b.Property<int>("CityId")
-                        .HasColumnType("integer");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -120,8 +119,6 @@ namespace HCMS.Data.Migrations
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CityId");
 
                     b.HasIndex("DepartmentId")
                         .HasName("fkIdx_105");
@@ -269,9 +266,6 @@ namespace HCMS.Data.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int>("CityId")
-                        .HasColumnType("integer");
-
                     b.Property<int>("CompanyId")
                         .HasColumnType("integer");
 
@@ -302,8 +296,6 @@ namespace HCMS.Data.Migrations
                         .HasMaxLength(80);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CityId");
 
                     b.HasIndex("CompanyId");
 
@@ -823,12 +815,6 @@ namespace HCMS.Data.Migrations
 
             modelBuilder.Entity("HCMS.Data.Models.AppUser", b =>
                 {
-                    b.HasOne("HCMS.Data.Models.City", "City")
-                        .WithMany("Employees")
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("HCMS.Data.Models.Department", "Department")
                         .WithMany("Employess")
                         .HasForeignKey("DepartmentId")
@@ -846,12 +832,6 @@ namespace HCMS.Data.Migrations
 
             modelBuilder.Entity("HCMS.Data.Models.Department", b =>
                 {
-                    b.HasOne("HCMS.Data.Models.City", "City")
-                        .WithMany("Departments")
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("HCMS.Data.Models.Company", "Company")
                         .WithMany("Departments")
                         .HasForeignKey("CompanyId")

@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations.Schema;
+    
     using Microsoft.AspNetCore.Identity;
 
     public class AppUser : IdentityUser<string>, IDeletableEntity, IAuditInfo
@@ -32,6 +32,12 @@
         public bool IsDeleted { get; set; }
 
         public DateTime? DeletedOn { get; set; }
+
+        public string JobTittle { get; set; }
+
+        public int CityId { get; set; }
+
+        public virtual City City { get; set; }
 
         public int? DepartmentId { get; set; }
 
