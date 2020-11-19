@@ -47,11 +47,18 @@
                                     <td>@employee.Role</td>
                                     <td>@employee.Department</td>
                                     <td class="btns">
+                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="View employee information"
+                                           asp-area="Administration" asp-controller="Employees" asp-action="Details" asp-route-projectId="@employee.Id">
+                                            <i class="fas fa-user-alt mt-0"></i>
+                                        </a>
                                         <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Edit employee"
                                            asp-area="Administration" asp-controller="Employees" asp-action="Edit" asp-route-projectId="@employee.Id">
-                                            <i class="fas fa-edit mt-0"></i>
+                                            <i class="fas fa-user-edit mt-0"></i>
                                         </a>
-                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Delete employee" onclick="DeleteEmployee(@employee.Id)">
+                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Add role to employee" onclick="AddEmployeeRole('@employee.Id')">
+                                            <i class="fas fa-plus mt-0"></i>
+                                        </a>
+                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Delete employee" onclick="DeleteEmployee('@employee.Id')">
                                             <i class="fas fa-trash-alt mt-0"></i>
                                         </a>
                                     </td>
@@ -95,12 +102,21 @@
 
     <script>
         function DeleteEmployee(data) {
-            let trToDelete = data.toString();
+            let trToDelete = data;
             $.get("/Administration/Employees/Delete?employeeId=" + data, function (response, status) {
                 if (status === 'success') {
                     $('.' + trToDelete).remove();
                 }
             });
+        }
+    </script>
+
+    <script>
+        function AddEmployeeRole(data) {
+            $.get("/Administration/Employees/AddRole?employeeId=" + data,
+                function (data) {
+                    $('.action-conteiner').html(data);
+                });
         }
     </script>
 }

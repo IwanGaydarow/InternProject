@@ -46,9 +46,9 @@
             {
                 var curEmployee = await this.userManager.FindByIdAsync(employee.Id);
                 var role = await this.userManager.GetRolesAsync(curEmployee);
-                employee.Role = String.Join(Environment.NewLine, role);
+                employee.Role = String.Join(", ", role);
             }
-            
+
             var model = new AllEmployeesViewModel { Employees = employees };
             return View(model);
 
@@ -98,6 +98,47 @@
             }
 
             return this.View(model);
+        }
+
+        public async Task<IActionResult> Delete(string employeeId)
+        {
+            await this.employeService.DeleteAsync(employeeId);
+
+            return this.Ok();
+        }
+
+        public IActionResult AddRole(string employeeId)
+        {
+            var rols = new string[] {GlobalConstant.SystemAdministratorRole,
+                       GlobalConstant.SystemManagerRole, GlobalConstant.SystemEmployeeRole};
+
+            var model = new AddRoleDropdownViewModel { EmployeeId = employeeId, Rols = rols };
+
+            return this.PartialView("_AddRolePartial", model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddRole(AddRoleDropdownViewModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.PartialView(model);
+            }
+
+            var user = await this.userManager.FindByIdAsync(model.EmployeeId);
+            var curRole = await this.userManager.GetRolesAsync(user);
+
+            await this.userManager.RemoveFromRolesAsync(user, curRole);
+            await this.userManager.AddToRoleAsync(user, model.Role);
+
+            return this.RedirectToAction("Index");
+        }
+
+        public IActionResult Details(string employeeId)
+        {
+
+            var model = new DetailViewModel
+            return this.PartialView("", model);
         }
 
         /// <summary>

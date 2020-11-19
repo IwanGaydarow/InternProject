@@ -8,5 +8,7 @@
     public interface IEmployeService
     {
         IEnumerable<T> GetAllEmployees<T>(int companyId);
+
+        Task DeleteAsync(string employeeId);
     }
 }
