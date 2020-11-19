@@ -1,13 +1,14 @@
-﻿using HCMS.Data.Models;
-using HCMS.GlobalConstants;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace HCMS.Data.Seeding
+﻿namespace HCMS.Data.Seeding
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+    
+    using HCMS.Data.Models;
+    using HCMS.GlobalConstants;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.Extensions.DependencyInjection;
+    
     public class RolesSeeder : ISeeder
     {
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)

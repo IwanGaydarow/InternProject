@@ -21,5 +21,7 @@ namespace HCMS.Services.Data.Departments
         bool CheckIfDepartmentExist(string tittle);
 
         Task Update(int departmentId, string tittle);
+
+        IEnumerable<T> GetDepartmentsForSelectList<T>(int? departmentId);
     }
 }

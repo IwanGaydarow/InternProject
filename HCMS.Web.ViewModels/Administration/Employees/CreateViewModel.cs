@@ -1,6 +1,7 @@
 ﻿namespace HCMS.Web.ViewModels.Administration.Employees
 {
     using HCMS.GlobalConstants;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     public class CreateViewModel
@@ -12,13 +13,13 @@
 
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "Employee Email adress")]
         public string Email { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = GlobalConstant.StringLenghtValidation, MinimumLength = GlobalConstant.MinPasswordLenght)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Initial Employee Password")]
         public string Password { get; set; }
 
         [Required]
@@ -28,6 +29,7 @@
         public string ConfirmPassword { get; set; }
 
         [Required]
+        [Display(Name = "Address of employee")]
         [StringLength(150, ErrorMessage = GlobalConstant.StringLenghtValidation, MinimumLength = 5)]
         public string Address { get; set; }
 
@@ -46,5 +48,11 @@
         [Required]
         [StringLength(25, ErrorMessage = GlobalConstant.StringLenghtValidation, MinimumLength = 5)]
         public string JobTittle { get; set; }
+
+        [Required]
+        [Display(Name = "Department")]
+        public int DepartmentId { get; set; }
+
+        public IEnumerable<AllDepartmentsViewModel> Departments { get; set; }
     }
 }

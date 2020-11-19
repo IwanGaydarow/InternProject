@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using AutoMapper;
 using HCMS.Data.Common.Repositories;
 using HCMS.Data.Models;
 using HCMS.Services.Mapping;
@@ -103,6 +101,15 @@ namespace HCMS.Services.Data.Departments
 
             this.departmentRepository.Update(departmentToEdit);
             await this.departmentRepository.SaveChangesAsync();
+        }
+
+        public IEnumerable<T> GetDepartmentsForSelectList<T>(int? departmentId)
+        {
+            var companyId = this.GetCompanyIdByDepartmentId(departmentId);
+            var departments = this.departmentRepository.All()
+                .Where(x => x.CompanyId == companyId);
+
+            return departments.To<T>().ToList();
         }
     }
 }

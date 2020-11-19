@@ -59,6 +59,10 @@
             public string Gender { get; set; }
 
             [Required]
+            [StringLength(25, ErrorMessage = GlobalConstant.StringLenghtValidation, MinimumLength = 5)]
+            public string JobTittle { get; set; }
+
+            [Required]
             [StringLength(100, ErrorMessage = GlobalConstant.StringLenghtValidation, MinimumLength = GlobalConstant.MinPasswordLenght)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
@@ -89,11 +93,12 @@
                     Name = Input.Name,
                     Address = Input.Adress,
                     Gender = Input.Gender,
+                    JobTittle = Input.JobTittle,
                     CreatedOn = DateTime.UtcNow,
                     IsDeleted = false
                 };
 
-                var result = await _userManager.CreateAsync(user, Input.Password);
+                var result = await this._userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
                 {

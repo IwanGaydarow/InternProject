@@ -13,6 +13,7 @@
     using System.Collections.Generic;
     using System.Security.Claims;
     using HCMS.Web.ViewModels.Administration.Projects;
+    using HCMS.Web.ViewModels.Administration;
 
     [Authorize(Roles = GlobalConstant.SystemAdministratorRole)]
     [Area("Administration")]
@@ -44,9 +45,11 @@
 
         public async Task<IActionResult> Create()
         {
-            var departments = await this.GetDepartments<AllDepartmentsViewModel>(this.User);
+            var user = await userManager.GetUserAsync(this.User);
+            var departments = this.departmentService
+                                    .GetDepartmentsForSelectList<AllDepartmentsViewModel>(user.DepartmentId);
 
-            var model = new CreateViewModel { Departments = departments as IEnumerable<AllDepartmentsViewModel> };
+            var model = new CreateViewModel { Departments = departments };
 
             return this.View(model);
         }
@@ -67,7 +70,7 @@
 
         public async Task<IActionResult> Edit(int projectId)
         {
-            var departments = await this.GetDepartments<AllDepartmentsViewModel>(this.User);
+            var departments = await this.GetDepartmentsAsync<AllDepartmentsViewModel>(this.User);
             var curentDepartment = this.projectsService.GetProjectById(projectId);
 
             var model = new UpdateViewModel 
@@ -110,7 +113,8 @@
             return result;
         }
 
-        private async Task<IEnumerable<T>> GetDepartments<T>(ClaimsPrincipal User)
+        //TODO: this should be in service !!! Usage in Project controler and Employee controler.
+        private async Task<IEnumerable<T>> GetDepartmentsAsync<T>(ClaimsPrincipal User)
         {
             var user = await this.userManager.GetUserAsync(User);
             var companyId = GetCompanyId(user.DepartmentId);

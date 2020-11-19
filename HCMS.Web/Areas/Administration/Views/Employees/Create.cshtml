@@ -1,7 +1,108 @@
-﻿
+﻿@model HCMS.Web.ViewModels.Administration.Employees.CreateViewModel
 @{
+    var departments = Model.Departments.Select(x => new SelectListItem(x.Tittle, x.Id.ToString()));
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<div class="container">
+
+    <div class="card o-hidden border-0 shadow-lg my-3 col-lg-10 mx-auto">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">Create an Employee!</h1>
+                        </div>
+                        <form class="user" asp-area="Administration" asp-controller="Employees" asp-action="Create">
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <label asp-for="FullName"></label>
+                                    <input asp-for="FullName" class="form-control form-control-user" />
+                                    <span asp-validation-for="FullName" class="text-danger"></span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label asp-for="JobTittle"></label>
+                                    <input asp-for="JobTittle" class="form-control form-control-user" />
+                                    <span asp-validation-for="JobTittle" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Email"></label>
+                                <input asp-for="Email" class="form-control form-control-user" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Address"></label>
+                                <input asp-for="Address" class="form-control form-control-user" placeholder="Street, number, floor, other ..." />
+                                <span asp-validation-for="Address" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="DepartmentId"></label>
+                                <select asp-for="DepartmentId" asp-items="departments" class="form-control">
+                                    <option>
+                                        Select department
+                                    </option>
+                                </select>
+                                <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <label asp-for="Gender"></label>
+                                    <input asp-for="Gender" class="form-control form-control-user" />
+                                    <span asp-validation-for="Gender" class="text-danger"></span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label asp-for="CountryName"></label>
+                                    <input asp-for="CountryName" class="form-control form-control-user" />
+                                    <span asp-validation-for="CountryName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <label asp-for="City.CityName"></label>
+                                    <input asp-for="City.CityName" class="form-control form-control-user" />
+                                    <span asp-validation-for="City.CityName" class="text-danger"></span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label asp-for="City.PostCode"></label>
+                                    <input asp-for="City.PostCode" class="form-control form-control-user" placeholder="optional..." />
+                                    <span asp-validation-for="City.PostCode" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <label asp-for="Password"></label>
+                                    <input asp-for="Password" class="form-control form-control-user" />
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label asp-for="ConfirmPassword"></label>
+                                    <input asp-for="ConfirmPassword" class="form-control form-control-user" />
+                                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            <div class="form-group row">
+                                <button type="submit" class="btn btn-primary btn-user btn-block"> Register Employee </button>
+                                <a class="btn btn-danger btn-user btn-block back-btn">Back</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        $('.back-btn').on("click", function () {
+            window.history.back();
+        });
+    </script>
+}
 

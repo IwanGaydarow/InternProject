@@ -1,4 +1,4 @@
-﻿namespace HCMS.Web.ViewModels.Administration.Projects
+﻿namespace HCMS.Web.ViewModels.Administration
 {
     using HCMS.Data.Models;
     using HCMS.Services.Mapping;
