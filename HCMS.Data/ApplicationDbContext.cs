@@ -1,9 +1,9 @@
-﻿namespace HCMS.Data.Models
+﻿namespace HCMS.Data
 {
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-    using System.Security.Cryptography.X509Certificates;
+    using HCMS.Data.Models;
 
     public partial class ApplicationDbContext : IdentityDbContext<AppUser, IdentityRole, string>
     {
@@ -75,7 +75,9 @@
                     .HasColumnName("deleted_on")
                     .HasColumnType("date");
 
-                entity.Property(e => e.DepartmentId).HasColumnName("department_id");
+                entity.Property(e => e.DepartmentId)
+                .HasColumnName("department_id")
+                .IsRequired();
 
                 entity.Property(e => e.Gender)
                     .IsRequired()

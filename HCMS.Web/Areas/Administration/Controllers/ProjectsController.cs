@@ -10,8 +10,6 @@
     using HCMS.GlobalConstants;
     using HCMS.Services.Data.Projects;
     using HCMS.Services.Data.Departments;
-    using System.Collections.Generic;
-    using System.Security.Claims;
     using HCMS.Web.ViewModels.Administration.Projects;
     using HCMS.Web.ViewModels.Administration;
 
@@ -35,7 +33,7 @@
         public async Task<IActionResult> Index()
         {
             var user = await this.userManager.GetUserAsync(this.User);
-            var companyId = this.GetCompanyId(user.DepartmentId);
+            var companyId = this.departmentService.GetCompanyIdByDepartmentId(user.DepartmentId);
 
             var projects = this.projectsService.GetAllProjects<ProjectViewModel>(companyId);
             var model = new AllProjectsViewModel { Projects = projects };
@@ -70,7 +68,9 @@
 
         public async Task<IActionResult> Edit(int projectId)
         {
-            var departments = await this.GetDepartmentsAsync<AllDepartmentsViewModel>(this.User);
+            var user = await userManager.GetUserAsync(this.User);
+            var departments = this.departmentService
+                                    .GetDepartmentsForSelectList<AllDepartmentsViewModel>(user.DepartmentId);
             var curentDepartment = this.projectsService.GetProjectById(projectId);
 
             var model = new UpdateViewModel 
@@ -111,23 +111,6 @@
             var result = await this.projectsService.ChangeStatus(projectId);
 
             return result;
-        }
-
-        //TODO: this should be in service !!! Usage in Project controler and Employee controler.
-        private async Task<IEnumerable<T>> GetDepartmentsAsync<T>(ClaimsPrincipal User)
-        {
-            var user = await this.userManager.GetUserAsync(User);
-            var companyId = GetCompanyId(user.DepartmentId);
-            var departments = this.departmentService.GetAllDepartments<T>(companyId);
-
-            return departments;
-        }
-
-        private int GetCompanyId(int? id)
-        {
-            var companyId = this.departmentService.GetCompanyIdByDepartmentId(id);
-
-            return companyId;
         }
     }
 }

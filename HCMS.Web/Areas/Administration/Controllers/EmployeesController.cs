@@ -1,21 +1,19 @@
 ﻿namespace HCMS.Web.Areas.Administration.Controllers
 {
+    using System;
     using System.Threading.Tasks;
-    
+
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Authorization;
 
+    using HCMS.Data.Models;
     using HCMS.Services.Data;
     using HCMS.GlobalConstants;
+    using HCMS.Services.Data.Employees;
+    using HCMS.Services.Data.Departments;
     using HCMS.Web.ViewModels.Administration;
     using HCMS.Web.ViewModels.Administration.Employees;
-    using HCMS.Data.Models;
-    using Microsoft.AspNetCore.Identity;
-    using HCMS.Services.Data.Employees;
-    using System;
-    using System.Collections.Generic;
-    using System.Security.Claims;
-    using HCMS.Services.Data.Departments;
 
     [Authorize(Roles = GlobalConstant.SystemAdministratorRole)]
     [Area("Administration")]
@@ -27,8 +25,8 @@
         private readonly ICountryService countryService;
         private readonly IDepartmentService departmentService;
 
-        public EmployeesController(UserManager<AppUser> userManager, 
-            IEmployeService employeService, ICityService cityService, 
+        public EmployeesController(UserManager<AppUser> userManager,
+            IEmployeService employeService, ICityService cityService,
             ICountryService countryService, IDepartmentService departmentService)
         {
             this.userManager = userManager;
@@ -38,9 +36,21 @@
             this.departmentService = departmentService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var user = await this.userManager.GetUserAsync(this.User);
+            var companyId = this.departmentService.GetCompanyIdByDepartmentId(user.DepartmentId);
+
+            var employees = this.employeService.GetAllEmployees<EmployeesViewModel>(companyId);
+            foreach (var employee in employees)
+            {
+                var curEmployee = await this.userManager.FindByIdAsync(employee.Id);
+                var role = await this.userManager.GetRolesAsync(curEmployee);
+                employee.Role = String.Join(Environment.NewLine, role);
+            }
+            
+            var model = new AllEmployeesViewModel { Employees = employees };
+            return View(model);
 
         }
 
@@ -51,12 +61,11 @@
                                     .GetDepartmentsForSelectList<AllDepartmentsViewModel>(user.DepartmentId);
             var model = new CreateViewModel { Departments = departments };
             return this.View(model);
-        } 
+        }
 
         [HttpPost]
         public async Task<IActionResult> Create(CreateViewModel model)
         {
-            ;
             if (!this.ModelState.IsValid)
             {
                 var cityId = await this.PrepareCityAndCountry(model.City, model.CountryName);
@@ -105,7 +114,7 @@
             var countryId = this.countryService.CheckCountryExist(countryName);
             if (countryId == 0)
             {
-               countryId = await this.countryService.CreateCountryAsync(countryName);
+                countryId = await this.countryService.CreateCountryAsync(countryName);
             }
 
             var cityId = this.cityService.CheckIfCityExist(cityModel.CityName, countryId);

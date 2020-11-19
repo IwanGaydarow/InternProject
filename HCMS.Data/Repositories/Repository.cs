@@ -1,9 +1,10 @@
 ﻿using HCMS.Data.Common.Repositories;
-using HCMS.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using HCMS.Data.Models;
+using System.Collections.Generic;
 
 namespace HCMS.Data.Repository
 {

@@ -24,6 +24,7 @@ namespace HCMS.Web
     using HCMS.Services.Data.Departments;
     using HCMS.Services.Data.Employees;
     using HCMS.Services.Data;
+    using HCMS.Data.Common;
 
     public class Startup
     {
@@ -63,6 +64,7 @@ namespace HCMS.Web
 
             //Data repository
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 
             services.AddTransient<IEmailSender>(
                 serviceProvider => new SendGridEmailSender(this.Configuration["SendGrid:ApiKey"]));
