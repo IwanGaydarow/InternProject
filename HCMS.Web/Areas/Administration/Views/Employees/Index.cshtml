@@ -47,12 +47,12 @@
                                     <td>@employee.Role</td>
                                     <td>@employee.Department</td>
                                     <td class="btns">
-                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="View employee information"
-                                           asp-area="Administration" asp-controller="Employees" asp-action="Details" asp-route-projectId="@employee.Id">
+                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Employee details"
+                                           asp-area="Administration" asp-controller="Employees" asp-action="Details" asp-route-employeeId="@employee.Id" asp-route-role="@employee.Role">
                                             <i class="fas fa-user-alt mt-0"></i>
                                         </a>
                                         <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Edit employee"
-                                           asp-area="Administration" asp-controller="Employees" asp-action="Edit" asp-route-projectId="@employee.Id">
+                                           asp-area="Administration" asp-controller="Employees" asp-action="Details" asp-route-employeeId="@employee.Id" asp-route-role="@employee.Role">
                                             <i class="fas fa-user-edit mt-0"></i>
                                         </a>
                                         <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Add role to employee" onclick="AddEmployeeRole('@employee.Id')">

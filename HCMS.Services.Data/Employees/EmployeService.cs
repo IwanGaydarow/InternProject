@@ -1,18 +1,17 @@
-﻿using HCMS.Data.Common.Repositories;
-using HCMS.Data.Models;
-using HCMS.Services.Mapping;
-using HCMS.Web.ViewModels.Administration.Employees;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
-
-namespace HCMS.Services.Data.Employees
+﻿namespace HCMS.Services.Data.Employees
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Collections.Generic;
+   
+    using Microsoft.EntityFrameworkCore;
+    
+    using HCMS.Data.Models;
+    using HCMS.Services.Mapping;
+    using HCMS.Data.Common.Repositories;
+    using HCMS.Web.ViewModels.Administration.Employees;
+
     public class EmployeService : IEmployeService
     {
         private readonly IRepository<AppUser> employeeRepository;
@@ -37,12 +36,40 @@ namespace HCMS.Services.Data.Employees
             await this.employeeRepository.SaveChangesAsync();
         }
 
+        public T Employeedetails<T>(string id)
+        {
+            return this.employeeRepository.All()
+                .Where(x => x.Id == id)
+                .Include(x => x.City)
+                .Include(x => x.Department).To<T>().First();
+        }
+
         public IEnumerable<T> GetAllEmployees<T>(int companyId)
         {
             return this.employeeRepository.All()
                 .Include(x => x.Department)
                 .Where(x => x.Department.CompanyId == companyId)
                 .To<T>().ToList();
+        }
+
+        public async Task UpdateAsync(DetailViewModel model)
+        {
+            var employee = await this.employeeRepository.GetByIdAsync(model.Id);
+
+            if (employee == null)
+            {
+                throw new NullReferenceException("Emploee for update, is not found.");
+            }
+
+            employee.Name = model.EmployeeName;
+            employee.JobTittle = model.JobTittle;
+            employee.Email = model.Email;
+            employee.PhoneNumber = model.Phone;
+            employee.Gender = model.Gender;
+            employee.ModifiedOn = DateTime.UtcNow;
+
+            this.employeeRepository.Update(employee);
+            await this.employeeRepository.SaveChangesAsync();
         }
     }
 }

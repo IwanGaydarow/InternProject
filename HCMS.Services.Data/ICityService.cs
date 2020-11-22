@@ -1,8 +1,9 @@
-﻿using HCMS.Web.ViewModels.Administration;
-using System.Threading.Tasks;
-
-namespace HCMS.Services.Data
+﻿namespace HCMS.Services.Data
 {
+    using System.Threading.Tasks;
+    
+    using HCMS.Web.ViewModels.Administration;
+
     public interface ICityService
     {
         int CheckIfCityExist(string cityName, int countryId);

@@ -2,10 +2,10 @@
 {
     using System;
     using System.Linq;
-    using System.Security.Cryptography.X509Certificates;
     using System.Threading.Tasks;
-    using HCMS.Data.Common.Repositories;
+    
     using HCMS.Data.Models;
+    using HCMS.Data.Common.Repositories;
     using HCMS.Web.ViewModels.Administration;
 
     public class CityService : ICityService

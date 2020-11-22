@@ -1,11 +1,12 @@
-﻿using HCMS.Data.Common.Repositories;
-using HCMS.Data.Models;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace HCMS.Services.Data
+﻿namespace HCMS.Services.Data
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+    
+    using HCMS.Data.Models;
+    using HCMS.Data.Common.Repositories;
+
     public class CountryService : ICountryService
     {
         private readonly IRepository<Country> countryRepository;

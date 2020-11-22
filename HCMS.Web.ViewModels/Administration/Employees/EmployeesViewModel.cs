@@ -1,10 +1,10 @@
-﻿using AutoMapper;
-using HCMS.Data.Models;
-using HCMS.Services.Mapping;
-using System.Linq;
-
-namespace HCMS.Web.ViewModels.Administration.Employees
+﻿namespace HCMS.Web.ViewModels.Administration.Employees
 {
+    using AutoMapper;
+    
+    using HCMS.Data.Models;
+    using HCMS.Services.Mapping;
+
     public class EmployeesViewModel : IMapFrom<AppUser>, IHaveCustomMappings
     {
         public string Id { get; set; }

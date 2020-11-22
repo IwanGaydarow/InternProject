@@ -9,6 +9,7 @@
 
     using HCMS.Data.Models;
     using HCMS.Services.Data;
+    using HCMS.Web.ViewModels;
     using HCMS.GlobalConstants;
     using HCMS.Services.Data.Employees;
     using HCMS.Services.Data.Departments;
@@ -134,11 +135,28 @@
             return this.RedirectToAction("Index");
         }
 
-        public IActionResult Details(string employeeId)
+        public IActionResult Details(string employeeId, string role)
         {
+            var model = this.employeService.Employeedetails<DetailViewModel>(employeeId);
+            model.Role = role;
+            model.Id = employeeId;
+            model.EmailForm = new EmailFormViewModel();
+            model.EmailForm.ReturnUrl = "/Administration/Employees/Index";
 
-            var model = new DetailViewModel
-            return this.PartialView("", model);
+            return this.View("DetailEditView", model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(DetailViewModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View("DetailEditView", model);
+            }
+
+            await this.employeService.UpdateAsync(model);
+
+            return this.RedirectToAction("Index");
         }
 
         /// <summary>

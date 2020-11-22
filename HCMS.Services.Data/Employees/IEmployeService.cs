@@ -10,5 +10,9 @@
         IEnumerable<T> GetAllEmployees<T>(int companyId);
 
         Task DeleteAsync(string employeeId);
+
+        T Employeedetails<T>(string id);
+
+        Task UpdateAsync(DetailViewModel model);
     }
 }
