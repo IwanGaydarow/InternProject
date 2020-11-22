@@ -3,15 +3,17 @@ using System;
 using HCMS.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace HCMS.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201122224419_AddEvalYearToEvaluations")]
+    partial class AddEvalYearToEvaluations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -331,8 +333,7 @@ namespace HCMS.Data.Migrations
                         .HasColumnType("date");
 
                     b.Property<int>("EvaluationYear")
-                        .HasColumnType("integer")
-                        .HasColumnName("Evaluation_Year");
+                        .HasColumnType("integer");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnName("is_deleted")

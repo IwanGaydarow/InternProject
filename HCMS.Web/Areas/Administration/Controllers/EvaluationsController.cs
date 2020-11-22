@@ -1,17 +1,18 @@
 ﻿namespace HCMS.Web.Areas.Administration.Controllers
 {
+    using System;
+    using System.Threading.Tasks;
+    using System.Collections.Generic;
+    
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Authorization;
 
-    using HCMS.GlobalConstants;
-    using System.Threading.Tasks;
     using HCMS.Data.Models;
-    using Microsoft.AspNetCore.Identity;
+    using HCMS.GlobalConstants;
+    using HCMS.Services.Data;
     using HCMS.Services.Data.Employees;
     using HCMS.Services.Data.Departments;
-    using System;
-    using System.Collections.Generic;
-    using HCMS.Services.Data;
     using HCMS.Web.ViewModels.Administration.Evaluation;
 
     [Authorize(Roles = GlobalConstant.SystemAdministratorRole)]
@@ -114,6 +115,13 @@
             await this.evaluationService.CreateAsync(model);
 
             return this.RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> Delete(int evaluationId)
+        {
+            await this.evaluationService.DeleteAsync(evaluationId);
+
+            return this.Ok();
         }
     }
 }

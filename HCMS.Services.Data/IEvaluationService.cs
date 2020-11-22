@@ -12,5 +12,7 @@
         Task CreateAsync(CreateEvaluationViewModel model);
 
         IEnumerable<EvalsViewModel> GetAll(int companyId);
+
+        Task DeleteAsync(int id);
     }
 }

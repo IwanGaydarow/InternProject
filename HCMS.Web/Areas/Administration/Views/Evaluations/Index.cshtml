@@ -43,7 +43,7 @@
                         {
                             foreach (var evaluation in this.Model.Evaluations)
                             {
-                                <tr class="@evaluation.EmployeeId">
+                                <tr class="@evaluation.Id">
                                     <td>@evaluation.EmployeeName</td>
                                     <td>@evaluation.Percentage %</td>
                                     <td>@evaluation.Notes</td>
@@ -51,11 +51,11 @@
                                     <td>@evaluation.EmployeeEmail</td>
                                     <td>@evaluation.JobTittle</td>
                                     <td>@evaluation.EmployeeDepartment</td>
-                                    <td id="@evaluation.EmployeeId">
+                                    <td id="@evaluation.Id">
                                         <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Edit Evaluation">
                                             <i class="fas fa-edit mt-0"></i>
                                         </a>
-                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Delete Evaluation" onclick=DeleteDepartment(@evaluation.EmployeeId)>
+                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Delete Evaluation" onclick=DeleteDepartment(@evaluation.Id)>
                                             <i class="fas fa-trash-alt mt-0"></i>
                                         </a>
                                     </td>

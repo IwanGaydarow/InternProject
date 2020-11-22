@@ -7,7 +7,7 @@
 
     public class EvalsViewModel : IMapFrom<Evaluations>, IMapFrom<AppUser>, IHaveCustomMappings
     {
-        public string EmployeeId { get; set; }
+        public int Id { get; set; }
 
         public string EmployeeName { get; set; }
 
