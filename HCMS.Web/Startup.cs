@@ -75,6 +75,7 @@ namespace HCMS.Web
             services.AddTransient<IEmployeService, EmployeService>();
             services.AddTransient<ICityService, CityService>();
             services.AddTransient<ICountryService, CountryService>();
+            services.AddTransient<IEvaluationService, EvaluationService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

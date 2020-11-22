@@ -61,6 +61,10 @@
                                         <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Delete employee" onclick="DeleteEmployee('@employee.Id')">
                                             <i class="fas fa-trash-alt mt-0"></i>
                                         </a>
+                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Evaluate employee"
+                                           asp-area="Administration" asp-controller="Evaluations" asp-action="Create" asp-route-employeeId="@employee.Id">
+                                            <i class="fas fa-percent mt-0"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             }

@@ -1,0 +1,115 @@
+﻿@model HCMS.Web.ViewModels.Administration.Evaluation.AllEvalsViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="container-fluid">
+
+    <div class="action-conteiner"></div>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Evaluations list</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Employee Name</th>
+                            <th>Employee evaluation percentage</th>
+                            <th>Employee evaluation note</th>
+                            <th>Employees evaluation year</th>
+                            <th>Employee Email</th>
+                            <th>Employee Job Tittle</th>
+                            <th>Employee Department</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Employee Name</th>
+                            <th>Employee evaluation percentage</th>
+                            <th>Employee evaluation note</th>
+                            <th>Employees evaluation year</th>
+                            <th>Employee Email</th>
+                            <th>Employee Job Tittle</th>
+                            <th>Employee Department</th>
+                            <th>Actions</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @if (this.Model.Evaluations.Any())
+                        {
+                            foreach (var evaluation in this.Model.Evaluations)
+                            {
+                                <tr class="@evaluation.EmployeeId">
+                                    <td>@evaluation.EmployeeName</td>
+                                    <td>@evaluation.Percentage %</td>
+                                    <td>@evaluation.Notes</td>
+                                    <td>@evaluation.EvalYear</td>
+                                    <td>@evaluation.EmployeeEmail</td>
+                                    <td>@evaluation.JobTittle</td>
+                                    <td>@evaluation.EmployeeDepartment</td>
+                                    <td id="@evaluation.EmployeeId">
+                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Edit Evaluation">
+                                            <i class="fas fa-edit mt-0"></i>
+                                        </a>
+                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Delete Evaluation" onclick=DeleteDepartment(@evaluation.EmployeeId)>
+                                            <i class="fas fa-trash-alt mt-0"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr><td>No Employee</td></tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+
+@section Scripts{
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });
+    </script>
+
+    <!-- tooltip function-->
+    <script>
+        // init tooltip
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+
+        // remove tooltip from clicked button
+        $('[data-toggle="tooltip"]').click(function () {
+            $('.tooltip').fadeOut('fast', function () {
+                $('.tooltip').remove();
+            });
+        });
+    </script>
+
+    <script>
+        function DeleteDepartment(data) {
+            let trToDelete = data.toString();
+
+            $.get("/Administration/Evaluations/Delete?evaluationId=" + data, function (response, status) {
+                if (status === 'success') {
+                    $('.' + trToDelete).remove();
+                }
+            });
+        }
+    </script>
+}
+
+

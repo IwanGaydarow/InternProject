@@ -52,6 +52,13 @@
                 .To<T>().ToList();
         }
 
+        public T GetById<T>(string id)
+        {
+            return this.employeeRepository.All()
+                .Where(x => x.Id == id)
+                .To<T>().FirstOrDefault();
+        }
+
         public async Task UpdateAsync(DetailViewModel model)
         {
             var employee = await this.employeeRepository.GetByIdAsync(model.Id);
