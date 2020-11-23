@@ -10,5 +10,7 @@
         Task CreateAsync(CreateTrainingViewModel model);
 
         IEnumerable<T> GetAll<T>(int companyId);
+
+        Task DeleteAsync(int id);
     }
 }

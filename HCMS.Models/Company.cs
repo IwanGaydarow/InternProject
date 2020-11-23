@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
-namespace HCMS.Data.Models
+﻿namespace HCMS.Data.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
     public class Company : IDeletableEntity, IAuditInfo
     {
         public Company()
         {
             this.Departments = new HashSet<Department>();
+            this.Trainings = new HashSet<Trainings>();
         }
         public int Id { get; set; }
 
@@ -31,5 +32,6 @@ namespace HCMS.Data.Models
         public DateTime? DeletedOn { get; set; }
 
         public virtual ICollection<Department> Departments { get; set; }
+        public virtual ICollection<Trainings> Trainings { get; set; }
     }
 }

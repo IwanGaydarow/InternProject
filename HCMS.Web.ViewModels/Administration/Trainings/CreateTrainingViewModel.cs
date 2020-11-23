@@ -4,7 +4,6 @@
     using System.ComponentModel.DataAnnotations;
     
     using HCMS.GlobalConstants;
-    using HCMS.Services.Mapping;
 
     public class CreateTrainingViewModel
     {
@@ -27,5 +26,7 @@
         [Required]
         [Range(1, 200, ErrorMessage = GlobalConstant.NumberRangeErrorMessage)]
         public int TrainingHours { get; set; }
+
+        public int CompanyId { get; set; }
     }
 }

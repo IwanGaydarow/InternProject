@@ -29,17 +29,33 @@
                 IsDeleted = false,
                 Start = model.Start,
                 End = model.End,
-                TrainingHours = model.TrainingHours
+                TrainingHours = model.TrainingHours,
+                CompanyId = model.CompanyId
             };
 
             await this.trainingsRepository.AddAsync(training);
             await this.trainingsRepository.SaveChangesAsync();
         }
 
+        public async Task DeleteAsync(int id)
+        {
+            var training = await this.trainingsRepository.GetByIdAsync(id);
+            if (training == null)
+            {
+                throw new NullReferenceException($"Training for delete, with id = {id} is not found.");
+            }
+
+            training.IsDeleted = true;
+            training.DeletedOn = DateTime.UtcNow;
+
+            this.trainingsRepository.Update(training);
+            await this.trainingsRepository.SaveChangesAsync();
+        }
+
         public IEnumerable<T> GetAll<T>(int companyId)
         {
             return this.trainingsRepository.All()
-                .Where(x => x.TrainingsUsers.Any(y => y.User.Department.CompanyId == companyId))
+                .Where(x => x.CompanyId == companyId)
                 .To<T>().ToList();
         }
     }

@@ -7,6 +7,8 @@
 
     public class TrainingViewModel : IMapFrom<Trainings>
     {
+        public int Id { get; set; }
+
         public string Tittle { get; set; }
 
         public string Description { get; set; }
@@ -15,6 +17,6 @@
 
         public DateTime End { get; set; }
 
-        public int TrainingsHours { get; set; }
+        public int TrainingHours { get; set; }
     }
 }

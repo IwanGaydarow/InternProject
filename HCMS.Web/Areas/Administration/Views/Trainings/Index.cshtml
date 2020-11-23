@@ -1,0 +1,109 @@
+﻿@model HCMS.Web.ViewModels.Administration.Trainings.AllTrainingsViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container-fluid">
+
+    <div class="action-conteiner"></div>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Evaluations list</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Training Tittle</th>
+                            <th>Training Description</th>
+                            <th>Training Start Date</th>
+                            <th>Training End Date</th>
+                            <th>Training Hours</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Training Tittle</th>
+                            <th>Training Description</th>
+                            <th>Training Start Date</th>
+                            <th>Training End Date</th>
+                            <th>Training Hours</th>
+                            <th>Actions</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @if (this.Model.Trainings.Any())
+                        {
+                            foreach (var training in this.Model.Trainings)
+                            {
+                                <tr class="@training.Id">
+                                    <td>@training.Tittle</td>
+                                    <td>@training.Description</td>
+                                    <td>@training.Start.ToString("D")</td>
+                                    <td>@training.End.ToString("D")</td>
+                                    <td>@training.TrainingsHours</td>
+                                    <td id="@training.Id">
+                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Edit Training"
+                                           asp-area="Administration" asp-controller="Evaluations" asp-action="Edit" asp-route-evalId="@training.Id">
+                                            <i class="fas fa-edit mt-0"></i>
+                                        </a>
+                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Delete Training" onclick=DeleteDepartment(@training.Id)>
+                                            <i class="fas fa-trash-alt mt-0"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr><td>No Employee</td></tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+
+@section Scripts{
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });
+    </script>
+
+    <!-- tooltip function-->
+    <script>
+        // init tooltip
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+
+        // remove tooltip from clicked button
+        $('[data-toggle="tooltip"]').click(function () {
+            $('.tooltip').fadeOut('fast', function () {
+                $('.tooltip').remove();
+            });
+        });
+    </script>
+
+    <script>
+        function DeleteDepartment(data) {
+            let trToDelete = data.toString();
+
+            $.get("/Administration/Trainings/Delete?trainingId=" + data, function (response, status) {
+                if (status === 'success') {
+                    $('.' + trToDelete).remove();
+                }
+            });
+        }
+    </script>
+}
+
