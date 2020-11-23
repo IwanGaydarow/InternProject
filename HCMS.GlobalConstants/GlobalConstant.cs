@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace HCMS.GlobalConstants
+﻿namespace HCMS.GlobalConstants
 {
     public static class GlobalConstant
     {
@@ -18,6 +16,8 @@ namespace HCMS.GlobalConstants
 
         public const string StringLenghtValidation = "The {0} must be at least {2} and at max {1} characters long.";
 
+        public const string NumberRangeErrorMessage = "The {0} must be at least {2} and at max {1}.";
+
         public const string ConfirmPasswordNotMatch = "The password and confirmation password do not match.";
 
         public const string NotValidEmail = "This is not a valid Email adress.";
@@ -27,6 +27,8 @@ namespace HCMS.GlobalConstants
         public const string DepartmentExistErrorMsg = "Department with that name alredy exist.";
 
         public const string MinStringValidation = "The {0} must be at least {1} characters long.";
+
+        public const string MaxStringValidation = "The {0} must be at max {1} characters long.";
 
         public const string NumberValidation = "The number must be positive value.";
     }

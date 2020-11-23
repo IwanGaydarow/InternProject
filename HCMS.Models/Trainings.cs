@@ -11,11 +11,23 @@
         }
 
         public int Id { get; set; }
+
         public string Tittle { get; set; }
+
         public string Description { get; set; }
+
+        public DateTime Start { get; set; }
+
+        public DateTime End { get; set; }
+
+        public int TrainingHours { get; set; }
+
         public DateTime CreatedOn { get; set; }
+
         public DateTime? ModifiedOn { get; set; }
+
         public bool IsDeleted { get; set; }
+
         public DateTime? DeletedOn { get; set; }
 
         public virtual ICollection<TrainingsUsers> TrainingsUsers { get; set; }

@@ -3,6 +3,7 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    
     using HCMS.Data.Models;
 
     public partial class ApplicationDbContext : IdentityDbContext<AppUser, IdentityRole, string>
@@ -392,6 +393,18 @@
                     .IsRequired()
                     .HasColumnName("tittle")
                     .HasMaxLength(80);
+
+                entity.Property(e => e.Start)
+                .HasColumnName("start")
+                .IsRequired();
+
+                entity.Property(e => e.End)
+                .HasColumnName("end")
+                .IsRequired();
+
+                entity.Property(e => e.TrainingHours)
+                .HasColumnName("training_hours")
+                .IsRequired();
             });
 
             modelBuilder.Entity<TrainingsUsers>(entity =>

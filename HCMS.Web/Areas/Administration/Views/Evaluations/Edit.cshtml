@@ -27,17 +27,17 @@
                                 <select asp-for="Year" asp-items="years" class="form-control">
                                     <option value="">Select year</option>
                                 </select>
-                                <span asp-validation-for="Year"></span>
+                                <span asp-validation-for="Year" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="Value"></label>
                                 <input asp-for="Value" class="form-control" />
-                                <span asp-validation-for="Value"></span>
+                                <span asp-validation-for="Value" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="Notes"></label>
                                 <input asp-for="Notes" class="form-control" />
-                                <span asp-validation-for="Notes"></span>
+                                <span asp-validation-for="Notes" class="text-danger"></span>
                             </div>
                             <button type="submit" class="btn btn-outline-primary">Submit</button>
                             <button type="button" class="btn btn-danger mb-2 back-btn ml-1">Back</button>
@@ -56,7 +56,7 @@
 
     <script>
         $('.back-btn').on("click", function () {
-            $('.edit-form')[0].remove();
+            window.history.back();
         });
     </script>
 }

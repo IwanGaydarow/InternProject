@@ -14,17 +14,18 @@ namespace HCMS.Web
 
     using HCMS.Data;
     using HCMS.Data.Models;
+    using HCMS.Data.Common;
     using HCMS.Data.Seeding;
+    using HCMS.Services.Data;
     using HCMS.Web.ViewModels;
     using HCMS.Data.Repository;
     using HCMS.Services.Mapping;
     using HCMS.Service.Messaging;
     using HCMS.Services.Data.Projects;
+    using HCMS.Services.Data.Trainings;
+    using HCMS.Services.Data.Employees;
     using HCMS.Data.Common.Repositories;
     using HCMS.Services.Data.Departments;
-    using HCMS.Services.Data.Employees;
-    using HCMS.Services.Data;
-    using HCMS.Data.Common;
 
     public class Startup
     {
@@ -70,12 +71,13 @@ namespace HCMS.Web
                 serviceProvider => new SendGridEmailSender(this.Configuration["SendGrid:ApiKey"]));
 
 
-            services.AddTransient<IDepartmentService, DepartmentService>();
+            services.AddTransient<ICityService, CityService>();
             services.AddTransient<IProjectService, ProjectService>();
             services.AddTransient<IEmployeService, EmployeService>();
-            services.AddTransient<ICityService, CityService>();
             services.AddTransient<ICountryService, CountryService>();
             services.AddTransient<IEvaluationService, EvaluationService>();
+            services.AddTransient<ITrainingService, TrainingService>();
+            services.AddTransient<IDepartmentService, DepartmentService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

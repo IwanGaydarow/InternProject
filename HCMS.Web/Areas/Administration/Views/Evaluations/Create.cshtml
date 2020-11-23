@@ -34,24 +34,24 @@
                                 <select asp-for="EmployeeId" asp-items="employees" class="form-control">
                                     <option value="">Select Employee</option>
                                 </select>
-                                <span asp-validation-for="EmployeeId"></span>
+                                <span asp-validation-for="EmployeeId" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="Year" for="formGroupExampleInput2"></label>
                                 <select asp-for="Year" asp-items="years" class="form-control">
                                     <option value="">Select year</option>
                                 </select>
-                                <span asp-validation-for="Year"></span>
+                                <span asp-validation-for="Year" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="Value"></label>
                                 <input asp-for="Value" class="form-control" />
-                                <span asp-validation-for="Value"></span>
+                                <span asp-validation-for="Value" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="Notes"></label>
                                 <input asp-for="Notes" class="form-control" />
-                                <span asp-validation-for="Notes"></span>
+                                <span asp-validation-for="Notes" class="text-danger"></span>
                             </div>
                             <button type="submit" class="btn btn-outline-primary">Submit</button>
                             <div asp-validation-summary="All" class="text-danger"></div>
