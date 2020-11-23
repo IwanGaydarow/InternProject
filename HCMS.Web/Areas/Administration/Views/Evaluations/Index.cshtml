@@ -5,7 +5,6 @@
 <div class="container-fluid">
 
     <div class="action-conteiner"></div>
-
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -52,7 +51,8 @@
                                     <td>@evaluation.JobTittle</td>
                                     <td>@evaluation.EmployeeDepartment</td>
                                     <td id="@evaluation.Id">
-                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Edit Evaluation">
+                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Edit Evaluation"
+                                           asp-area="Administration" asp-controller="Evaluations" asp-action="Edit" asp-route-evalId="@evaluation.Id">
                                             <i class="fas fa-edit mt-0"></i>
                                         </a>
                                         <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Delete Evaluation" onclick=DeleteDepartment(@evaluation.Id)>

@@ -9,8 +9,8 @@
     using Microsoft.AspNetCore.Authorization;
 
     using HCMS.Data.Models;
-    using HCMS.GlobalConstants;
     using HCMS.Services.Data;
+    using HCMS.GlobalConstants;
     using HCMS.Services.Data.Employees;
     using HCMS.Services.Data.Departments;
     using HCMS.Web.ViewModels.Administration.Evaluation;
@@ -78,6 +78,7 @@
         /// Return list of last 5 years.
         /// </summary>
         /// <returns></returns>
+        //TODO: this should be in common service.
         private List<int> GetYearsForEval()
         {
             var years = new List<int>();
@@ -97,11 +98,11 @@
             {
                 return this.View(model);
             }
-            var isEvaluated = this.evaluationService.ChekEvalInYear(model.Year);
+            var isEvaluated = this.evaluationService.ChekEvalInYear(model.Year, model.EmployeeId);
 
             if (isEvaluated)
             {
-                this.ModelState.AddModelError(string.Empty, $"Evaluation for {model.Year} alredy exist. If you want to change it, view all Evaluations.");
+                this.ModelState.AddModelError(string.Empty, $"Evaluation for {model.Year} alredy exist. If you want to change it, view all Evaluations and click Edit button.");
 
                 var employee = this.employeService.GetById<EmployeeSelectList>(model.EmployeeId);
                 model.Name = employee.Name;
@@ -113,6 +114,26 @@
             }
 
             await this.evaluationService.CreateAsync(model);
+
+            return this.RedirectToAction("Index");
+        }
+
+        public IActionResult Edit(int evalId)
+        {
+            var model = this.evaluationService.GetById<EditEvalViewModel>(evalId);
+
+            return this.View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditEvalViewModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+            await this.evaluationService.UpdateAsync(model);
 
             return this.RedirectToAction("Index");
         }

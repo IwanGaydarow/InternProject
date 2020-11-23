@@ -1,20 +1,9 @@
-﻿@model HCMS.Web.ViewModels.Administration.Evaluation.CreateEvaluationViewModel
+﻿@model HCMS.Web.ViewModels.Administration.Evaluation.EditEvalViewModel
 @{
-    ViewData["Title"] = "Evaluation";
+    ViewData["Title"] = "Edit Evaluation";
 
-    var employees = new List<SelectListItem>();
-    if (Model.Employees != null)
-    {
-        foreach (var emp in Model.Employees)
-        {
-            employees.Add(new SelectListItem { Text = emp.Name, Value = emp.Id });
-        }
-    }
-    else
-    {
-        employees.Add(new SelectListItem { Text = Model.Name, Value = Model.EmployeeId });
-    }
-    var years = Model.Years.Select(x => new SelectListItem(x.ToString(), x.ToString()));
+    var years = new List<SelectListItem>();
+    years.Add(new SelectListItem { Text = Model.Year.ToString(), Value = Model.Year.ToString() });
 }
 
 <div class="container">
@@ -26,15 +15,12 @@
                 <div class="col-lg-12">
                     <div class="p-5">
                         <div class="text-center">
-                            <h1 class="h4 text-gray-900 mb-4">Evaluate Employee</h1>
+                            <h1 class="h4 text-gray-900 mb-4">Edit Evaluation</h1>
                         </div>
-                        <form method="post" asp-area="Administration" asp-controller="Evaluations" asp-action="Create">
+                        <form method="post" asp-area="Administration" asp-controller="Evaluations" asp-action="Edit">
                             <div class="form-group">
-                                <label asp-for="EmployeeId"></label>
-                                <select asp-for="EmployeeId" asp-items="employees" class="form-control">
-                                    <option value="">Select Employee</option>
-                                </select>
-                                <span asp-validation-for="EmployeeId"></span>
+                                <input disabled asp-for="EmployeeName" />
+                                <input hidden asp-for="Id" value="@Model.Id" />
                             </div>
                             <div class="form-group">
                                 <label asp-for="Year" for="formGroupExampleInput2"></label>
@@ -54,6 +40,7 @@
                                 <span asp-validation-for="Notes"></span>
                             </div>
                             <button type="submit" class="btn btn-outline-primary">Submit</button>
+                            <button type="button" class="btn btn-danger mb-2 back-btn ml-1">Back</button>
                             <div asp-validation-summary="All" class="text-danger"></div>
                         </form>
                     </div>

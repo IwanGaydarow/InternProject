@@ -4,10 +4,11 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Collections.Generic;
-    
+
     using Microsoft.EntityFrameworkCore;
-    
+
     using HCMS.Data.Models;
+    using HCMS.Services.Mapping;
     using HCMS.Data.Common.Repositories;
     using HCMS.Web.ViewModels.Administration.Evaluation;
 
@@ -20,9 +21,10 @@
             this.evaluationRepository = evaluationRepository;
         }
 
-        public bool ChekEvalInYear(int year)
+        public bool ChekEvalInYear(int year, string employeeId)
         {
             return this.evaluationRepository.All()
+                            .Where(x => x.UserId == employeeId)
                             .Any(x => x.EvaluationYear == year);
         }
 
@@ -68,12 +70,37 @@
                     Id = x.Id,
                     EmployeeName = x.User.Name,
                     Percentage = x.Value,
-                    EvalYear = x.CreatedOn.Year,
+                    EvalYear = x.EvaluationYear,
                     Notes = x.Notes,
                     EmployeeEmail = x.User.Email,
                     JobTittle = x.User.JobTittle,
                     EmployeeDepartment = x.User.Department.Tittle
                 }).ToList();
+        }
+
+        public T GetById<T>(int evalId)
+        {
+            return this.evaluationRepository.All()
+                .Where(x => x.Id == evalId)
+                .Include(x => x.User)
+                .To<T>().FirstOrDefault();
+        }
+
+        public async Task UpdateAsync(EditEvalViewModel model)
+        {
+            var evalToEdit = await this.evaluationRepository.GetByIdAsync(model.Id);
+            if (evalToEdit == null)
+            {
+                throw new NullReferenceException("Eval for edit is not found");
+            }
+
+            evalToEdit.Notes = model.Notes;
+            evalToEdit.Value = model.Value;
+            evalToEdit.EvaluationYear = model.Year;
+            evalToEdit.ModifiedOn = DateTime.UtcNow;
+
+            this.evaluationRepository.Update(evalToEdit);
+            await this.evaluationRepository.SaveChangesAsync();
         }
     }
 }

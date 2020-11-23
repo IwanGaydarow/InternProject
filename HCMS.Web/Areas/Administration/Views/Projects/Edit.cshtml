@@ -46,10 +46,13 @@
     </div>
 </div>
 
-<partial name="_ValidationScriptsPartial" />
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
 
-<script>
+    <script>
         $('.back-btn').on("click", function () {
             window.history.back();
         });
-</script>
+    </script>
+
+}
