@@ -1,7 +1,7 @@
 ﻿namespace HCMS.Web.Areas.Administration.Controllers
 {
     using System.Threading.Tasks;
-    
+
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Authorization;
@@ -11,6 +11,9 @@
     using HCMS.Services.Data.Trainings;
     using HCMS.Services.Data.Departments;
     using HCMS.Web.ViewModels.Administration.Trainings;
+    using HCMS.Services.Data.Employees;
+    using HCMS.Web.ViewModels.Administration.Evaluation;
+    using System.Collections.Generic;
 
     [Authorize(Roles = GlobalConstant.SystemAdministratorRole)]
     [Area("Administration")]
@@ -19,13 +22,15 @@
         private readonly ITrainingService trainingService;
         private readonly UserManager<AppUser> userManager;
         private readonly IDepartmentService departmentService;
+        private readonly IEmployeService employeService;
 
         public TrainingsController(ITrainingService trainingService, UserManager<AppUser> userManager,
-            IDepartmentService departmentService)
+            IDepartmentService departmentService, IEmployeService employeService)
         {
             this.trainingService = trainingService;
             this.userManager = userManager;
             this.departmentService = departmentService;
+            this.employeService = employeService;
         }
 
         public async Task<IActionResult> Index()
@@ -76,7 +81,48 @@
         [HttpPost]
         public async Task<IActionResult> Edit(EditTrainingViewModel model, int trainingId)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
             await this.trainingService.EditAsync(model, trainingId);
+
+            return this.RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> AddEmployee(int trainingId)
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+            var companyId = this.departmentService.GetCompanyIdByDepartmentId(user.DepartmentId);
+            var users = this.employeService.GetAllEmployees<EmployeeSelectList>(companyId);
+
+            var model = new EmployeeToTaskViewModel { Employees = users, TrainingId = trainingId };
+
+            return this.PartialView("_AddEmployeePartial", model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddEmployee(EmployeeToTaskViewModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                if (model.EmployeeId == null)
+                {
+                    return await this.AddEmployee(model.TrainingId);
+                }
+
+                //TODO: Make employeeService method that return only emp isnt asign to this training.
+                var employees = new List<EmployeeSelectList>();
+                var employee = this.employeService
+                                            .GetById<EmployeeSelectList>(model.EmployeeId);
+                employees.Add(employee);
+                model.Employees = employees;
+
+                return this.PartialView("_AddEmployeePartial", model);
+            }
+
+            await this.trainingService.AddEmployeeToTraining(model.EmployeeId, model.TrainingId);
 
             return this.RedirectToAction("Index");
         }

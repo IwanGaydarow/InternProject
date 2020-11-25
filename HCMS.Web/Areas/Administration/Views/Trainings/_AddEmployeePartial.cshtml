@@ -1,0 +1,19 @@
+﻿@model HCMS.Web.ViewModels.Administration.Trainings.EmployeeToTaskViewModel
+@{
+    ViewData["Title"] = "_EmpTrainingsPartial";
+    var employees = Model.Employees.Select(x => new SelectListItem(x.Name, x.Id, x.Id == Model.EmployeeId));
+}
+
+
+<form class="form-inline edit-form border border-success p-4" method="post" asp-area="Administration" asp-controller="Trainings" asp-action="AddEmployee">
+    <input hidden asp-for="TrainingId" />
+    <div class="modal-body">
+        <select class="form-control ml-3" asp-for="EmployeeId" asp-items="employees">
+            <option value="">Select Employee</option>
+        </select>
+        <span asp-validation-for="EmployeeId" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary ml-3">Submit</button>
+</form>
+
+<partial name="_ValidationScriptsPartial" />

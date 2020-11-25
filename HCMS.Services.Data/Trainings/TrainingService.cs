@@ -13,10 +13,26 @@
     public class TrainingService : ITrainingService
     {
         private readonly IRepository<Trainings> trainingsRepository;
+        private readonly IRepository<TrainingsUsers> trainingsUsersRepository;
 
-        public TrainingService(IRepository<Trainings> trainingsRepository)
+        public TrainingService(IRepository<Trainings> trainingsRepository,
+            IRepository<TrainingsUsers> trainingsUsersRepository)
         {
             this.trainingsRepository = trainingsRepository;
+            this.trainingsUsersRepository = trainingsUsersRepository;
+        }
+
+        public async Task AddEmployeeToTraining(string userId, int trainingId)
+        {
+            var trainingUser = new TrainingsUsers
+            {
+                UserId = userId,
+                TrainingId = trainingId,
+                CreatedOn = DateTime.UtcNow
+            };
+
+            await this.trainingsUsersRepository.AddAsync(trainingUser);
+            await this.trainingsUsersRepository.SaveChangesAsync();
         }
 
         public async Task CreateAsync(CreateTrainingViewModel model)

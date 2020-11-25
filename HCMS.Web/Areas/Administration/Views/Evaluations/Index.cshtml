@@ -55,6 +55,10 @@
                                            asp-area="Administration" asp-controller="Evaluations" asp-action="Edit" asp-route-evalId="@evaluation.Id">
                                             <i class="fas fa-edit mt-0"></i>
                                         </a>
+                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Edit Evaluation"
+                                           asp-area="Administration" asp-controller="Evaluations" asp-action="Edit" asp-route-evalId="@evaluation.Id">
+                                            <i class="fas fa-tasks mt-0"></i>
+                                        </a>
                                         <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Delete Evaluation" onclick=DeleteDepartment(@evaluation.Id)>
                                             <i class="fas fa-trash-alt mt-0"></i>
                                         </a>
@@ -71,7 +75,6 @@
             </div>
         </div>
     </div>
-
 </div>
 <!-- /.container-fluid -->
 

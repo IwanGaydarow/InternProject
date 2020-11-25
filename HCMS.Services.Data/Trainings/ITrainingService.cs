@@ -11,6 +11,8 @@
 
         Task EditAsync(EditTrainingViewModel model, int trainingId);
 
+        Task AddEmployeeToTraining(string userId, int trainingId);
+
         IEnumerable<T> GetAll<T>(int companyId);
 
         T GetById<T>(int trainingId);
