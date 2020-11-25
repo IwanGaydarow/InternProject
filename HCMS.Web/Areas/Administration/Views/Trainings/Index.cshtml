@@ -44,10 +44,10 @@
                                     <td>@training.Description</td>
                                     <td>@training.Start.ToString("D")</td>
                                     <td>@training.End.ToString("D")</td>
-                                    <td>@training.TrainingsHours</td>
+                                    <td>@training.TrainingHours</td>
                                     <td id="@training.Id">
                                         <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Edit Training"
-                                           asp-area="Administration" asp-controller="Evaluations" asp-action="Edit" asp-route-evalId="@training.Id">
+                                           asp-area="Administration" asp-controller="Trainings" asp-action="Edit" asp-route-trainingId="@training.Id">
                                             <i class="fas fa-edit mt-0"></i>
                                         </a>
                                         <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Delete Training" onclick=DeleteDepartment(@training.Id)>

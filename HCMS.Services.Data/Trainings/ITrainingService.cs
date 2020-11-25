@@ -9,7 +9,11 @@
     {
         Task CreateAsync(CreateTrainingViewModel model);
 
+        Task EditAsync(EditTrainingViewModel model, int trainingId);
+
         IEnumerable<T> GetAll<T>(int companyId);
+
+        T GetById<T>(int trainingId);
 
         Task DeleteAsync(int id);
     }

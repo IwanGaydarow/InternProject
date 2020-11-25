@@ -16,29 +16,29 @@
                         </div>
                         <form method="post" asp-area="Administration" asp-controller="Trainings" asp-action="Create">
                             <div class="form-group">
-                                <label asp-for="Tittle"></label>
-                                <input asp-for="Tittle" class="form-control" />
-                                <span asp-validation-for="Tittle" class="text-danger"></span>
+                                <label asp-for="TrainingInfo.Tittle"></label>
+                                <input asp-for="TrainingInfo.Tittle" class="form-control" />
+                                <span asp-validation-for="TrainingInfo.Tittle" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="Description"></label>
-                                <input asp-for="Description" class="form-control" />
-                                <span asp-validation-for="Description" class="text-danger"></span>
+                                <label asp-for="TrainingInfo.Description"></label>
+                                <input asp-for="TrainingInfo.Description" class="form-control" />
+                                <span asp-validation-for="TrainingInfo.Description" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="Start"></label>
-                                <input asp-for="Start" class="form-control" />
-                                <span asp-validation-for="Start" class="text-danger"></span>
+                                <label asp-for="TrainingInfo.Start"></label>
+                                <input asp-for="TrainingInfo.Start" class="form-control" />
+                                <span asp-validation-for="TrainingInfo.Start" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="End"></label>
-                                <input asp-for="End" class="form-control" />
-                                <span asp-validation-for="End" class="text-danger"></span>
+                                <label asp-for="TrainingInfo.End"></label>
+                                <input asp-for="TrainingInfo.End" class="form-control" />
+                                <span asp-validation-for="TrainingInfo.End" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="TrainingHours"></label>
-                                <input asp-for="TrainingHours" class="form-control" />
-                                <span asp-validation-for="TrainingHours" class="text-danger"></span>
+                                <label asp-for="TrainingInfo.TrainingHours"></label>
+                                <input asp-for="TrainingInfo.TrainingHours" class="form-control" />
+                                <span asp-validation-for="TrainingInfo.TrainingHours" class="text-danger"></span>
                             </div>
                             <button type="submit" class="btn btn-outline-primary">Submit</button>
                             <div asp-validation-summary="All" class="text-danger"></div>

@@ -60,6 +60,27 @@
             return this.RedirectToAction("Index");
         }
 
+        public IActionResult Edit(int trainingId)
+        {
+            var trainingToEdit = this.trainingService.GetById<TrainingViewModel>(trainingId);
+            if (trainingToEdit == null)
+            {
+                return this.NotFound();
+            }
+
+            this.ViewData["trainingId"] = trainingId;
+
+            return this.View(trainingToEdit);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditTrainingViewModel model, int trainingId)
+        {
+            await this.trainingService.EditAsync(model, trainingId);
+
+            return this.RedirectToAction("Index");
+        }
+
         public async Task<IActionResult> Delete(int trainingId)
         {
             await this.trainingService.DeleteAsync(trainingId);

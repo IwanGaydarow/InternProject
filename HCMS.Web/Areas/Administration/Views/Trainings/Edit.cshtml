@@ -1,0 +1,63 @@
+﻿@model HCMS.Web.ViewModels.Administration.Trainings.TrainingViewModel
+@{
+    ViewData["Title"] = "Edit";
+
+    var trainingId = (int)this.ViewData["trainingId"];
+}
+
+    <div class="container">
+
+        <div class="card o-hidden border-0 shadow-lg my-3 col-lg-10 mx-auto">
+            <div class="card-body p-0">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Edit Training</h1>
+                            </div>
+                            <form method="post" asp-area="Administration" asp-controller="Trainings" asp-action="Edit" asp-route-trainingId="@trainingId">
+                                <div class="form-group">
+                                    <label asp-for="Tittle"></label>
+                                    <input asp-for="Tittle" class="form-control" />
+                                    <span asp-validation-for="Tittle" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Description"></label>
+                                    <input asp-for="Description" class="form-control" />
+                                    <span asp-validation-for="Description" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Start"></label>
+                                    <input asp-for="Start" class="form-control" />
+                                    <span asp-validation-for="Start" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="End"></label>
+                                    <input asp-for="End" class="form-control" />
+                                    <span asp-validation-for="End" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="TrainingHours"></label>
+                                    <input asp-for="TrainingHours" class="form-control" />
+                                    <span asp-validation-for="TrainingHours" class="text-danger"></span>
+                                </div>
+                                <button type="submit" class="btn btn-outline-primary">Submit</button>
+                                <button type="button" class="btn btn-danger mb-2 back-btn ml-1">Back</button>
+                                <div asp-validation-summary="All" class="text-danger"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        $('.back-btn').on("click", function () {
+            window.history.back();
+        });
+    </script>
+}
