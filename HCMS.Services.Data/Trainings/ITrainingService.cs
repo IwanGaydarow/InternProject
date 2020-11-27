@@ -18,5 +18,7 @@
         T GetById<T>(int trainingId);
 
         Task DeleteAsync(int id);
+
+        int GetCount(int companyId);
     }
 }

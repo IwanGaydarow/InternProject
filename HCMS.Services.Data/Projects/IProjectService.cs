@@ -20,5 +20,11 @@
         int GetProjectDepartmentId(int projectId);
 
         Task DeleteAsync(int projectId);
+
+        int GetCount(int companyId);
+
+        int GetCountOfFinished(int companyId);
+
+        int GetCountOfProcessing(int companyId);
     }
 }

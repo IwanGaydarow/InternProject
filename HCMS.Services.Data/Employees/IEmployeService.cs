@@ -9,14 +9,18 @@
     {
         IEnumerable<T> GetAllEmployees<T>(int companyId);
 
+        int GetCOunt(int companyId);
+
         T GetById<T>(string id);
 
         Task DeleteAsync(string employeeId);
 
-        T Employeedetails<T>(string id);
+        T EmployeeDetails<T>(string id);
 
         IEnumerable<T> EmployeesNotAssignToTask<T>(int companyId, int trainingId);
 
         Task UpdateAsync(DetailViewModel model);
+
+        decimal EmployeesSalary(int companyId);
     }
 }

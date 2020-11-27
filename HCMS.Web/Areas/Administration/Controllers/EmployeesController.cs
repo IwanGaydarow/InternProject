@@ -138,7 +138,7 @@
 
         public IActionResult Details(string employeeId, string role)
         {
-            var model = this.employeService.Employeedetails<DetailViewModel>(employeeId);
+            var model = this.employeService.EmployeeDetails<DetailViewModel>(employeeId);
             model.Role = role;
             model.Id = employeeId;
             model.EmailForm = new EmailFormViewModel();

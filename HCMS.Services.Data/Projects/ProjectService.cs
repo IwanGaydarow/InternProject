@@ -112,5 +112,28 @@
             this.projectRepository.Update(projectToDelete);
             await this.projectRepository.SaveChangesAsync();
         }
+
+        public int GetCount(int companyId)
+        {
+            return this.projectRepository.All()
+                .Where(x => x.Department.CompanyId == companyId)
+                .Count();
+        }
+
+        public int GetCountOfFinished(int companyId)
+        {
+            return this.projectRepository.All()
+                .Where(x => x.Department.CompanyId == companyId
+                        && x.Status == true)
+                .Count();
+        }
+
+        public int GetCountOfProcessing(int companyId)
+        {
+            return this.projectRepository.All()
+                .Where(x => x.Department.CompanyId == companyId
+                        && x.Status == false)
+                .Count();
+        }
     }
 }

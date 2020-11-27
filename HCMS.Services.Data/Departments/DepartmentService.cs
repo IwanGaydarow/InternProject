@@ -111,5 +111,12 @@ namespace HCMS.Services.Data.Departments
 
             return departments.To<T>().ToList();
         }
+
+        public int GetCount(int companyId)
+        {
+            return this.departmentRepository.All()
+                .Where(x => x.CompanyId == companyId)
+                .Count();
+        }
     }
 }

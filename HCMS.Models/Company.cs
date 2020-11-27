@@ -16,6 +16,7 @@
         [Required]
         public string Name { get; set; }
 
+        [Required]
         [MaxLength(256)]
         public string Email { get; set; }
 

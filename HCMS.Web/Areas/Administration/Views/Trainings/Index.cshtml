@@ -50,7 +50,7 @@
                                            asp-area="Administration" asp-controller="Trainings" asp-action="Edit" asp-route-trainingId="@training.Id">
                                             <i class="fas fa-edit mt-0"></i>
                                         </a>
-                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="modal" data-target="#userTaskModal" onclick="LoadModel('@training.Id')">
+                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="modal" data-target="#userTaskModal" title="Add employee to training" onclick="LoadModel('@training.Id')">
                                             <i class="fas fa-tasks mt-0"></i>
                                         </a>
                                         <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Delete Training" onclick=DeleteDepartment(@training.Id)>

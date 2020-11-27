@@ -23,5 +23,7 @@ namespace HCMS.Services.Data.Departments
         Task Update(int departmentId, string tittle);
 
         IEnumerable<T> GetDepartmentsForSelectList<T>(int? departmentId);
+
+        int GetCount(int companyId);
     }
 }

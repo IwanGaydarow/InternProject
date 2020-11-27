@@ -121,5 +121,12 @@
                 .Where(x => x.Id == trainingId)
                 .To<T>().FirstOrDefault();
         }
+
+        public int GetCount(int companyId)
+        {
+            return this.trainingsRepository.All()
+                .Where(x => x.CompanyId == companyId)
+                .Count();
+        }
     }
 }
