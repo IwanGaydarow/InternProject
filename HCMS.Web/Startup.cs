@@ -26,6 +26,7 @@ namespace HCMS.Web
     using HCMS.Services.Data.Employees;
     using HCMS.Data.Common.Repositories;
     using HCMS.Services.Data.Departments;
+    using HCMS.Services.Data.Salary;
 
     public class Startup
     {
@@ -72,11 +73,12 @@ namespace HCMS.Web
 
 
             services.AddTransient<ICityService, CityService>();
+            services.AddTransient<ISalaryService, SalaryService>();
             services.AddTransient<IProjectService, ProjectService>();
             services.AddTransient<IEmployeService, EmployeService>();
             services.AddTransient<ICountryService, CountryService>();
-            services.AddTransient<IEvaluationService, EvaluationService>();
             services.AddTransient<ITrainingService, TrainingService>();
+            services.AddTransient<IEvaluationService, EvaluationService>();
             services.AddTransient<IDepartmentService, DepartmentService>();
         }
 

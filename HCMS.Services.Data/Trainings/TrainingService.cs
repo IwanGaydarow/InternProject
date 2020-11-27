@@ -64,8 +64,29 @@
             training.IsDeleted = true;
             training.DeletedOn = DateTime.UtcNow;
 
+            await this.DeteleAsyncTrainingsTasks(id);
+
             this.trainingsRepository.Update(training);
             await this.trainingsRepository.SaveChangesAsync();
+        }
+
+        public async Task DeteleAsyncTrainingsTasks(int trainingId)
+        {
+            var trainings = this.trainingsUsersRepository.All()
+                .Where(x => x.TrainingId == trainingId)
+                .ToList();
+
+            if (trainings.Count > 0)
+            {
+                foreach (var training in trainings)
+                {
+                    training.IsDeleted = true;
+                    training.DeletedOn = DateTime.UtcNow;
+
+                    this.trainingsUsersRepository.Update(training);
+                    await this.trainingsUsersRepository.SaveChangesAsync();
+                }
+            }
         }
 
         public async Task EditAsync(EditTrainingViewModel model, int trainingId)

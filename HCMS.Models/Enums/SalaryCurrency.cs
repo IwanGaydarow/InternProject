@@ -2,9 +2,9 @@
 {
     public enum SalaryCurrency
     {
-        USD = 0,
-        EUR = 1,
-        BGH = 2,
-        GBP = 3,
+        USD = 1,
+        EUR = 2,
+        BGH = 3,
+        GBP = 4,
     }
 }

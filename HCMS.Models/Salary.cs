@@ -11,7 +11,7 @@
 
         public SalaryPeriodicity Periodicity { get; set; }
 
-        public DateTime EffectiveTo { get; set; }
+        public DateTime? EffectiveTo { get; set; }
 
         public SalaryCurrency Currency { get; set; }
 
