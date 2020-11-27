@@ -1,14 +1,15 @@
-﻿@model HCMS.Web.ViewModels.Administration.Evaluation.AllEvalsViewModel
+﻿@model HCMS.Web.ViewModels.Administration.Salary.AllSalaries
 @{
     ViewData["Title"] = "Index";
 }
+
 <div class="container-fluid">
 
     <div class="action-conteiner"></div>
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Evaluations list</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Employee Salary list</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -16,46 +17,43 @@
                     <thead>
                         <tr>
                             <th>Employee Name</th>
-                            <th>Employee evaluation percentage</th>
-                            <th>Employee evaluation note</th>
-                            <th>Employees evaluation year</th>
-                            <th>Employee Email</th>
                             <th>Employee Job Tittle</th>
-                            <th>Employee Department</th>
+                            <th>Department</th>
+                            <th>Basic Salary</th>
+                            <th>Periodicity</th>
+                            <th>Currency</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>Employee Name</th>
-                            <th>Employee evaluation percentage</th>
-                            <th>Employee evaluation note</th>
-                            <th>Employees evaluation year</th>
-                            <th>Employee Email</th>
                             <th>Employee Job Tittle</th>
-                            <th>Employee Department</th>
+                            <th>Department</th>
+                            <th>Basic Salary</th>
+                            <th>Periodicity</th>
+                            <th>Currency</th>
                             <th>Actions</th>
                         </tr>
                     </tfoot>
                     <tbody>
-                        @if (this.Model.Evaluations.Any())
+                        @if (this.Model.Salaries.Any())
                         {
-                            foreach (var evaluation in this.Model.Evaluations)
+                            foreach (var salary in this.Model.Salaries)
                             {
-                                <tr class="@evaluation.Id">
-                                    <td>@evaluation.EmployeeName</td>
-                                    <td>@evaluation.Percentage %</td>
-                                    <td>@evaluation.Notes</td>
-                                    <td>@evaluation.EvalYear</td>
-                                    <td>@evaluation.EmployeeEmail</td>
-                                    <td>@evaluation.JobTittle</td>
-                                    <td>@evaluation.EmployeeDepartment</td>
-                                    <td id="@evaluation.Id">
-                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Edit Evaluation"
-                                           asp-area="Administration" asp-controller="Evaluations" asp-action="Edit" asp-route-evalId="@evaluation.Id">
+                                <tr class="@salary.Id">
+                                    <td>@salary.EmployeeName</td>
+                                    <td>@salary.JobTittle</td>
+                                    <td>@salary.Department</td>
+                                    <td>@salary.BasicSalary</td>
+                                    <td>@salary.Periodicity</td>
+                                    <td>@salary.Currency</td>
+                                    <td id="@salary.Id">
+                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Edit Salary"
+                                           asp-area="Administration" asp-controller="Salary" asp-action="Create" asp-route-employeeId="@salary.UserId">
                                             <i class="fas fa-edit mt-0"></i>
                                         </a>
-                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Delete Evaluation" onclick=DeleteEval(@evaluation.Id)>
+                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Delete Evaluation" onclick=DeleteSalary(@salary.Id)>
                                             <i class="fas fa-trash-alt mt-0"></i>
                                         </a>
                                     </td>
@@ -64,7 +62,7 @@
                         }
                         else
                         {
-                            <tr><td>No Employee</td></tr>
+                            <tr><td>No Salaries</td></tr>
                         }
                     </tbody>
                 </table>
@@ -99,10 +97,10 @@
     </script>
 
     <script>
-        function DeleteEval(data) {
+        function DeleteSalary(data) {
             let trToDelete = data.toString();
 
-            $.get("/Administration/Evaluations/Delete?evaluationId=" + data, function (response, status) {
+            $.get("/Administration/Salary/Delete?salaryId=" + data, function (response, status) {
                 if (status === 'success') {
                     $('.' + trToDelete).remove();
                 }
@@ -110,5 +108,4 @@
         }
     </script>
 }
-
 

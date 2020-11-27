@@ -6,8 +6,8 @@
     using HCMS.GlobalConstants;
     using HCMS.Services.Mapping;
     using HCMS.Data.Models.Enums;
+    
     using AutoMapper;
-    using System.ComponentModel.DataAnnotations.Schema;
 
     public class CreateSalaryViewModel :IMapFrom<Salary>, IHaveCustomMappings
     {

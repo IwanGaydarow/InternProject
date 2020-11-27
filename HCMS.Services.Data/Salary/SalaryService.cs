@@ -8,6 +8,7 @@
     using HCMS.Services.Mapping;
     using HCMS.Data.Common.Repositories;
     using HCMS.Web.ViewModels.Administration.Salary;
+    using System.Collections.Generic;
 
     public class SalaryService : ISalaryService
     {
@@ -58,6 +59,25 @@
                  .Where(x => x.UserId == employeeId
                         && x.EffectiveTo == null)
                  .To<T>().First();
+        }
+
+        public IEnumerable<T> GetSalaries<T>(int companyId)
+        {
+            return this.salaryRepository.All()
+                .Where(x => x.User.Department.CompanyId == companyId
+                       && x.EffectiveTo == null)
+                .To<T>().ToList();
+        }
+
+        public async Task DeleteAsync(int salaryId)
+        {
+            var salary = await this.salaryRepository.GetByIdAsync(salaryId);
+
+            salary.IsDeleted = true;
+            salary.DeletedOn = DateTime.UtcNow;
+
+            this.salaryRepository.Update(salary);
+            await this.salaryRepository.SaveChangesAsync();
         }
     }
 }

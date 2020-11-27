@@ -5,24 +5,39 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
 
+    using HCMS.Data.Models;
     using HCMS.GlobalConstants;
-    using HCMS.Web.ViewModels.Administration.Salary;
     using HCMS.Services.Data.Salary;
+    using Microsoft.AspNetCore.Identity;
+    using HCMS.Services.Data.Departments;
+    using HCMS.Web.ViewModels.Administration.Salary;
 
     [Authorize(Roles = GlobalConstant.SystemAdministratorRole)]
     [Area("Administration")]
     public class SalaryController : Controller
     {
+        private readonly UserManager<AppUser> userManager;
         private readonly ISalaryService salaryService;
+        private readonly IDepartmentService departmentService;
 
-        public SalaryController(ISalaryService salaryService)
+        public SalaryController(UserManager<AppUser> userManager, ISalaryService salaryService,
+            IDepartmentService departmentService)
         {
+            this.userManager = userManager;
             this.salaryService = salaryService;
+            this.departmentService = departmentService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var user = await this.userManager.GetUserAsync(this.User);
+            var companyId = this.departmentService.GetCompanyIdByDepartmentId(user.DepartmentId);
+
+            var salaries = this.salaryService.GetSalaries<SalaryEmployeeViewModel>(companyId);
+
+            var model = new AllSalaries { Salaries = salaries };
+            
+            return this.View(model);
         }
 
         public IActionResult Create(string employeeId)
@@ -58,7 +73,14 @@
                 await this.salaryService.CreateAsync(model);
             }
 
-            return this.RedirectToAction("Index", "Employees", new { area = "Administration" });
+            return this.RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> Delete(int salaryId)
+        {
+            await this.salaryService.DeleteAsync(salaryId);
+
+            return this.Ok();
         }
     }
 }
