@@ -95,7 +95,7 @@
         {
             var user = await this.userManager.GetUserAsync(this.User);
             var companyId = this.departmentService.GetCompanyIdByDepartmentId(user.DepartmentId);
-            var users = this.employeService.GetAllEmployees<EmployeeSelectList>(companyId);
+            var users = this.employeService.EmployeesNotAssignToTask<EmployeeSelectList>(companyId, trainingId);
 
             var model = new EmployeeToTaskViewModel { Employees = users, TrainingId = trainingId };
 
@@ -112,7 +112,6 @@
                     return await this.AddEmployee(model.TrainingId);
                 }
 
-                //TODO: Make employeeService method that return only emp isnt asign to this training.
                 var employees = new List<EmployeeSelectList>();
                 var employee = this.employeService
                                             .GetById<EmployeeSelectList>(model.EmployeeId);

@@ -52,6 +52,14 @@
                 .To<T>().ToList();
         }
 
+        public IEnumerable<T> EmployeesNotAssignToTask<T>(int companyId, int trainingId)
+        {
+            return this.employeeRepository.All()
+                .Where(x => x.Department.CompanyId == companyId &&
+                        x.TrainingsUsers.All(y => y.TrainingId != trainingId))
+                .To<T>().ToList();
+        }
+
         public T GetById<T>(string id)
         {
             return this.employeeRepository.All()

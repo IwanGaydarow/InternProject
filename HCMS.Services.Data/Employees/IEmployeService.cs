@@ -15,6 +15,8 @@
 
         T Employeedetails<T>(string id);
 
+        IEnumerable<T> EmployeesNotAssignToTask<T>(int companyId, int trainingId);
+
         Task UpdateAsync(DetailViewModel model);
     }
 }

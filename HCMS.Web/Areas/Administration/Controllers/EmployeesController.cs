@@ -67,7 +67,7 @@
         [HttpPost]
         public async Task<IActionResult> Create(CreateViewModel model)
         {
-            if (!this.ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
                 var cityId = await this.PrepareCityAndCountry(model.City, model.CountryName);
 
@@ -77,6 +77,7 @@
                     Email = model.Email,
                     Name = model.FullName,
                     Address = model.Address,
+                    DepartmentId = model.DepartmentId,
                     Gender = model.Gender.ToLower(),
                     JobTittle = model.JobTittle,
                     CityId = cityId,
@@ -87,7 +88,7 @@
                 var result = await this.userManager.CreateAsync(employee, model.Password);
                 if (result.Succeeded)
                 {
-                    await this.userManager.AddToRoleAsync(employee, GlobalConstant.SystemAdministratorRole);
+                    await this.userManager.AddToRoleAsync(employee, GlobalConstant.SystemEmployeeRole);
 
                     return this.RedirectToAction("Index");
                 }
