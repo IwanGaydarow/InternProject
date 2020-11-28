@@ -102,7 +102,7 @@
 
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User created a new account with password.");
+                    await this._userManager.AddToRoleAsync(user, GlobalConstant.SystemAdministratorRole);
 
                     return RedirectToPage("Login");
                 }

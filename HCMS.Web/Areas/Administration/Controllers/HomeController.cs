@@ -51,7 +51,6 @@
             var processingProject = this.projectService.GetCountOfProcessing(companyId);
             var trainingsCount = this.trainingService.GetCount(companyId);
             var companyModel = this.companyService.GetInfo<CompanyViewModel>(companyId);
-            var total = this.employeService.EmployeesSalary(companyId);
 
 
             var model = new HomePageViewModel
@@ -62,8 +61,7 @@
                 CountOfFinishProject = finishedProject,
                 CountOfProcessingProject = processingProject,
                 CountOfTrainings = trainingsCount,
-                Company = companyModel,
-                TotalsSalaryAllEmployeeCurentSalary = total
+                Company = companyModel
             };
 
             return this.View(model);

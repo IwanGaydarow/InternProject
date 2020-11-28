@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using HCMS.Data.Common.Repositories;
 using HCMS.Data.Models;
 using HCMS.Services.Mapping;
+using HCMS.Web.ViewModels.Administration.Departments;
 using Microsoft.EntityFrameworkCore;
 
 namespace HCMS.Services.Data.Departments
@@ -12,10 +13,13 @@ namespace HCMS.Services.Data.Departments
     public class DepartmentService : IDepartmentService
     {
         private readonly IRepository<Department> departmentRepository;
+        private readonly IRepository<AppUser> employeeRepository;
 
-        public DepartmentService(IRepository<Department> departmentRepository)
+        public DepartmentService(IRepository<Department> departmentRepository,
+            IRepository<AppUser> employeeRepository)
         {
             this.departmentRepository = departmentRepository;
+            this.employeeRepository = employeeRepository;
         }
 
         public async Task CreateAsync(string tittle, int companyId, string menager = null)
@@ -46,12 +50,22 @@ namespace HCMS.Services.Data.Departments
             await this.departmentRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<T> GetAllDepartments<T>(int companyId)
+        public IEnumerable<DepartmentViewModel> GetAllDepartments(int companyId)
         {
-            return this.departmentRepository.All()
+            var result = this.departmentRepository.All()
+                .Include(x => x.DepartmentManagerNavigation)
                 .Include(x => x.Company)
                 .Where(x => x.CompanyId == companyId)
-                .To<T>().ToList();
+                .Select(x => new DepartmentViewModel
+                {
+                    Id = x.Id,
+                    Tittle = x.Tittle,
+                    ManagerName = x.DepartmentManagerNavigation.Name,
+                    CompanyName = x.Company.Name,
+                    Employees = x.Employess.Count()
+                });
+
+               return result.ToList();
         }
 
         public T GetDepartmentById<T>(int departmentId)
@@ -117,6 +131,16 @@ namespace HCMS.Services.Data.Departments
             return this.departmentRepository.All()
                 .Where(x => x.CompanyId == companyId)
                 .Count();
+        }
+
+        public async Task AddManagerAsync(string userId, int departmentId)
+        {
+            var department = await this.departmentRepository.GetByIdAsync(departmentId);
+
+            department.DepartmentManager = userId;
+
+            this.departmentRepository.Update(department);
+            await this.departmentRepository.SaveChangesAsync();
         }
     }
 }

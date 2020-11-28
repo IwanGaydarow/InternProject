@@ -15,7 +15,5 @@
         public int CountOfProcessingProject { get; set; }
 
         public int CountOfTrainings { get; set; }
-
-        public decimal TotalsSalaryAllEmployeeCurentSalary { get; set; }
     }
 }

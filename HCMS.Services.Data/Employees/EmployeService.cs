@@ -87,13 +87,6 @@
             await this.employeeRepository.SaveChangesAsync();
         }
 
-        public decimal EmployeesSalary(int companyId)
-        {
-            return this.employeeRepository.All()
-                .Where(x => x.Department.CompanyId == companyId)
-                .Sum(x => x.Salary.Where(s => s.EffectiveTo == null).Sum(s => s.Salary1));
-        }
-
         public int GetCOunt(int companyId)
         {
             return this.employeeRepository.All()

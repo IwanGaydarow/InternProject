@@ -4,7 +4,8 @@
     using System.Threading.Tasks;
     
     using HCMS.Web.ViewModels.Administration.Employees;
-    
+    using HCMS.Web.ViewModels.Administration.Home;
+
     public interface IEmployeService
     {
         IEnumerable<T> GetAllEmployees<T>(int companyId);
@@ -20,7 +21,5 @@
         IEnumerable<T> EmployeesNotAssignToTask<T>(int companyId, int trainingId);
 
         Task UpdateAsync(DetailViewModel model);
-
-        decimal EmployeesSalary(int companyId);
     }
 }
