@@ -15,6 +15,16 @@
         employees.Add(new SelectListItem { Text = Model.Name, Value = Model.EmployeeId });
     }
     var years = Model.Years.Select(x => new SelectListItem(x.ToString(), x.ToString()));
+
+    var url = "";
+    if (this.User.IsInRole(HCMS.GlobalConstants.GlobalConstant.SystemAdministratorRole))
+    {
+        url = "/Administration/Evaluations/Create";
+    }
+    else
+    {
+        url = "/Manager/Evaluations/Create";
+    }
 }
 
 <div class="container">
@@ -28,7 +38,7 @@
                         <div class="text-center">
                             <h1 class="h4 text-gray-900 mb-4">Evaluate Employee</h1>
                         </div>
-                        <form method="post" asp-area="Administration" asp-controller="Evaluations" asp-action="Create">
+                        <form method="post" href="@url">
                             <div class="form-group">
                                 <label asp-for="EmployeeId"></label>
                                 <select asp-for="EmployeeId" asp-items="employees" class="form-control">

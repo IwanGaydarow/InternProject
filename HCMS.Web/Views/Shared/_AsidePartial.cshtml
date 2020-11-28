@@ -30,116 +30,14 @@
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
 
-        <!-- Nav Item - Dashboard -->
-        <li class="nav-item active">
-            <a class="nav-link" asp-area="Administration" asp-controller="Home" asp-action="Index">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Dashboard</span>
-            </a>
-        </li>
-
-        <!-- Nav Item - Profil -->
-        <li class="nav-item active">
-            <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>My Profile</span>
-            </a>
-        </li>
-
-        <!-- Divider -->
-        <hr class="sidebar-divider">
-
-        <!-- Heading -->
-        <div class="sidebar-heading">
-            System
-        </div>
-
-        <!-- Nav Item - Departments Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-               aria-expanded="true" aria-controls="collapseTwo">
-                <i class="fas fa-fw fa-cog"></i>
-                <span>Departments</span>
-            </a>
-            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Actions:</h6>
-                    <a class="collapse-item" asp-area="Administration" asp-controller="Departments" asp-action="Index">View All</a>
-                    <a class="collapse-item" asp-area="Administration" asp-controller="Departments" asp-action="Create">Add Department</a>
-                </div>
-            </div>
-        </li>
-
-        <!-- Nav Item - Project Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProjects"
-               aria-expanded="true" aria-controls="collapseProjects">
-                <i class="fas fa-fw fa-wrench"></i>
-                <span>Projects</span>
-            </a>
-            <div id="collapseProjects" class="collapse" aria-labelledby="headingProjects"
-                 data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Actions:</h6>
-                    <a class="collapse-item" asp-area="Administration" asp-controller="Projects" asp-action="Index">View All</a>
-                    <a class="collapse-item" asp-area="Administration" asp-controller="Projects" asp-action="Create">Add Project</a>
-                </div>
-            </div>
-        </li>
-
-        <!-- Nav Item - Training Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTrainings"
-               aria-expanded="true" aria-controls="collapseTrainings">
-                <i class="fas fa-fw fa-wrench"></i>
-                <span>Trainings</span>
-            </a>
-            <div id="collapseTrainings" class="collapse" aria-labelledby="headingTrainings"
-                 data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Actions:</h6>
-                    <a class="collapse-item" asp-area="Administration" asp-controller="Trainings" asp-action="Index">View All</a>
-                    <a class="collapse-item" asp-area="Administration" asp-controller="Trainings" asp-action="Create">Create</a>
-                </div>
-            </div>
-        </li>
-
-        <!-- Divider -->
-        <hr class="sidebar-divider">
-
-        <!-- Heading -->
-        <div class="sidebar-heading">
-            Employees
-        </div>
-
-        <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-               aria-expanded="true" aria-controls="collapsePages">
-                <i class="fas fa-fw fa-folder"></i>
-                <span>Employees</span>
-            </a>
-            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Employees Actions:</h6>
-                    <a class="collapse-item" asp-area="Administration" asp-controller="Employees" asp-action="Index">View All</a>
-                    <a class="collapse-item" asp-area="Administration" asp-controller="Employees" asp-action="Create">Create</a>
-                    <div class="collapse-divider"></div>
-                    <h6 class="collapse-header">Others:</h6>
-                    <a class="collapse-item" asp-area="Administration" asp-controller="Vacations" asp-action="Index">Vacations</a>
-                    <a class="collapse-item" asp-area="Administration" asp-controller="Evaluations" asp-action="Index">Evaluations</a>
-                    <a class="collapse-item" asp-area="Administration" asp-controller="Evaluations" asp-action="Create">Create Evaluation</a>
-                </div>
-            </div>
-        </li>
-
-        <!-- Nav Item - Charts -->
-        <li class="nav-item">
-            <a class="nav-link" asp-area="Administration" asp-controller="Salary" asp-action="Index">
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>Employees Salary</span>
-            </a>
-        </li>
+       @if (this.User.IsInRole(GlobalConstant.SystemAdministratorRole))
+       {
+           <partial name="_AdministratorNavPartial" />
+       }
+       else if (this.User.IsInRole(GlobalConstant.SystemManagerRole))
+       {
+           <partial name="_ManagerNavPartial" />
+       }
 
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">

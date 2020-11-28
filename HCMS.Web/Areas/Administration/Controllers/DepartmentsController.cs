@@ -29,7 +29,6 @@
             this.employeService = employeService;
         }
 
-
         public async Task<IActionResult> Index()
         {
             var user = await this.userManager.GetUserAsync(this.User);

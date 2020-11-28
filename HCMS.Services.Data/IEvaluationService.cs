@@ -14,6 +14,8 @@
         Task UpdateAsync(EditEvalViewModel model);
 
         IEnumerable<EvalsViewModel> GetAll(int companyId);
+
+        IEnumerable<EvalsViewModel> GetAllForManager(int companyId, int departmentId);
         
         T GetById<T>(int evalId);
 

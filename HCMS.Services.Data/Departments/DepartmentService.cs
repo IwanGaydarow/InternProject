@@ -1,25 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using HCMS.Data.Common.Repositories;
-using HCMS.Data.Models;
-using HCMS.Services.Mapping;
-using HCMS.Web.ViewModels.Administration.Departments;
-using Microsoft.EntityFrameworkCore;
-
-namespace HCMS.Services.Data.Departments
+﻿namespace HCMS.Services.Data.Departments
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Collections.Generic;
+    
+    using HCMS.Data.Models;
+    using HCMS.Services.Mapping;
+    using HCMS.Data.Common.Repositories;
+    using HCMS.Web.ViewModels.Administration.Departments;
+    
+    using Microsoft.EntityFrameworkCore;
+
     public class DepartmentService : IDepartmentService
     {
         private readonly IRepository<Department> departmentRepository;
-        private readonly IRepository<AppUser> employeeRepository;
 
-        public DepartmentService(IRepository<Department> departmentRepository,
-            IRepository<AppUser> employeeRepository)
+        public DepartmentService(IRepository<Department> departmentRepository)
         {
             this.departmentRepository = departmentRepository;
-            this.employeeRepository = employeeRepository;
         }
 
         public async Task CreateAsync(string tittle, int companyId, string menager = null)
@@ -141,6 +140,13 @@ namespace HCMS.Services.Data.Departments
 
             this.departmentRepository.Update(department);
             await this.departmentRepository.SaveChangesAsync();
+        }
+
+        public T GetDepartmentForManager<T>(string managerId)
+        {
+            return this.departmentRepository.All()
+                .Where(x => x.DepartmentManager == managerId)
+                .To<T>().First();
         }
     }
 }

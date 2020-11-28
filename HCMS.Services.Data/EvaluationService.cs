@@ -78,6 +78,26 @@
                 }).ToList();
         }
 
+        public IEnumerable<EvalsViewModel> GetAllForManager(int companyId, int departmentId)
+        {
+            return this.evaluationRepository.All()
+                .Where(x => x.User.Department.CompanyId == companyId
+                        && x.User.DepartmentId == departmentId)
+                .Include(x => x.User)
+                .Include(x => x.User.Department)
+                .Select(x => new EvalsViewModel
+                {
+                    Id = x.Id,
+                    EmployeeName = x.User.Name,
+                    Percentage = x.Value,
+                    EvalYear = x.EvaluationYear,
+                    Notes = x.Notes,
+                    EmployeeEmail = x.User.Email,
+                    JobTittle = x.User.JobTittle,
+                    EmployeeDepartment = x.User.Department.Tittle
+                }).ToList();
+        }
+
         public T GetById<T>(int evalId)
         {
             return this.evaluationRepository.All()

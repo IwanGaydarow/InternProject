@@ -1830,6 +1830,7 @@
     <ProjectReference Include="..\HCMS.Data\HCMS.Data.csproj" />
     <ProjectReference Include="..\HCMS.GlobalConstants\HCMS.GlobalConstants.csproj" />
     <ProjectReference Include="..\HCMS.Models\HCMS.Data.Models.csproj" />
+    <ProjectReference Include="..\HCMS.Service.Common\HCMS.Service.Common.csproj" />
     <ProjectReference Include="..\HCMS.Service.Messaging\HCMS.Service.Messaging.csproj" />
     <ProjectReference Include="..\HCMS.Services.Data\HCMS.Services.Data.csproj" />
     <ProjectReference Include="..\HCMS.Services.Mapping\HCMS.Services.Mapping.csproj" />

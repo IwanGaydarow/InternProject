@@ -44,16 +44,19 @@
                                     <td>@department.Employees</td>
                                     <td>@department.CompanyName</td>
                                     <td id="@department.Id">
-                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Edit Department" onclick="LoadEditForm(@department.Id)">
-                                            <i class="fas fa-edit mt-0"></i>
-                                        </a>
-                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Add Manager"
-                                           asp-area="Administration" asp-controller="Departments" asp-action="AddManager" asp-route-departmentId="@department.Id">
-                                            <i class="fas fa-user-cog mt-0"></i>
-                                        </a>
-                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Delete Department" onclick=DeleteDepartment(@department.Id)>
-                                            <i class="fas fa-trash-alt mt-0"></i>
-                                        </a>
+                                        @if (this.User.IsInRole(HCMS.GlobalConstants.GlobalConstant.SystemAdministratorRole))
+                                        {
+                                            <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Edit Department" onclick="LoadEditForm(@department.Id)">
+                                                <i class="fas fa-edit mt-0"></i>
+                                            </a>
+                                            <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Add Manager"
+                                               asp-area="Administration" asp-controller="Departments" asp-action="AddManager" asp-route-departmentId="@department.Id">
+                                                <i class="fas fa-user-cog mt-0"></i>
+                                            </a>
+                                            <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Delete Department" onclick=DeleteDepartment(@department.Id)>
+                                                <i class="fas fa-trash-alt mt-0"></i>
+                                            </a>
+                                        }
                                     </td>
                                 </tr>
                             }

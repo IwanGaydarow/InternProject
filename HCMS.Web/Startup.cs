@@ -28,6 +28,7 @@ namespace HCMS.Web
     using HCMS.Services.Data.Departments;
     using HCMS.Services.Data.Salary;
     using HCMS.Services.Data.Company;
+    using HCMS.Service.Common;
 
     public class Startup
     {
@@ -72,7 +73,7 @@ namespace HCMS.Web
             services.AddTransient<IEmailSender>(
                 serviceProvider => new SendGridEmailSender(this.Configuration["SendGrid:ApiKey"]));
 
-
+            //Data services
             services.AddTransient<ICityService, CityService>();
             services.AddTransient<ISalaryService, SalaryService>();
             services.AddTransient<ICompanyService, CompanyService>();
@@ -82,6 +83,9 @@ namespace HCMS.Web
             services.AddTransient<ITrainingService, TrainingService>();
             services.AddTransient<IEvaluationService, EvaluationService>();
             services.AddTransient<IDepartmentService, DepartmentService>();
+
+            //Common Services
+            services.AddTransient<IYearsForEval, YearsForEval>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

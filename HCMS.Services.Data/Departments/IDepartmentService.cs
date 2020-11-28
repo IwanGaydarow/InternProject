@@ -1,10 +1,11 @@
-﻿using HCMS.Data.Models;
-using HCMS.Web.ViewModels.Administration.Departments;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace HCMS.Services.Data.Departments
+﻿namespace HCMS.Services.Data.Departments
 {
+    using System.Threading.Tasks;
+    using System.Collections.Generic;
+
+    using HCMS.Data.Models;
+    using HCMS.Web.ViewModels.Administration.Departments;
+
     public interface IDepartmentService
     {
         IEnumerable<DepartmentViewModel> GetAllDepartments(int companyId);
@@ -18,6 +19,8 @@ namespace HCMS.Services.Data.Departments
         Department GetByIdWithCompany(int departmentId);
 
         int GetCompanyIdByDepartmentId(int? departmentId);
+
+        T GetDepartmentForManager<T>(string managerId);
 
         bool CheckIfDepartmentExist(string tittle);
 
