@@ -97,6 +97,7 @@
             }
 
             await this.departmentService.AddManagerAsync(model.UserId, model.DepartmentId);
+            await this.employeService.ChangeDepartmentAsync(model.UserId, model.DepartmentId);
 
             return this.RedirectToAction("Index");
         }

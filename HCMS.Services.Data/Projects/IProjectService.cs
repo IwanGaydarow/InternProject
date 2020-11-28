@@ -9,6 +9,8 @@
     {
         IEnumerable<T> GetAllProjects<T>(int companyId);
 
+        IEnumerable<T> GetAllProjectsByDepartment<T>(int companyId, int departmentId);
+
         Project GetProjectById(int projectId);
 
         Task CreateAsync(string tittle, string description, int estWorkH, int departmentId);

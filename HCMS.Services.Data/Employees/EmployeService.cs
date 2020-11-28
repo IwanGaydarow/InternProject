@@ -101,5 +101,14 @@
                 .Where(x => x.Department.CompanyId == companyId)
                 .Count();
         }
+
+        public async Task ChangeDepartmentAsync(string userId, int departmentId)
+        {
+            var user = await this.employeeRepository.GetByIdAsync(userId);
+            user.DepartmentId = departmentId;
+
+            this.employeeRepository.Update(user);
+            await this.employeeRepository.SaveChangesAsync();
+        }
     }
 }

@@ -42,22 +42,25 @@
                                     <td>@project.Tittle</td>
                                     <td>@project.EstimatedWorkHours</td>
                                     <td>@project.Department</td>
-                                    @{ 
+                                    @{
                                         string output = project.Status == true ? "Finished" : "Processing";
                                         string color = output == "Finished" ? "green" : "red";
                                     }
                                     <td id="@project.Id" style="color: @color">@output</td>
                                     <td class="btns">
-                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Edit Project"
-                                           asp-area="Administration" asp-controller="Projects" asp-action="Edit" asp-route-projectId="@project.Id">
-                                            <i class="fas fa-edit mt-0"></i>
-                                        </a>
-                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Change status of Project" onclick="ChangeStatus(@project.Id)">
-                                            <i class="fas fa-thermometer-empty" mt-0"></i>
-                                        </a>
-                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Delete project" onclick="DeleteProject(@project.Id)">
-                                            <i class="fas fa-trash-alt mt-0"></i>
-                                        </a>
+                                        @if (this.User.IsInRole(HCMS.GlobalConstants.GlobalConstant.SystemAdministratorRole))
+                                        {
+                                            <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Edit Project"
+                                               asp-area="Administration" asp-controller="Projects" asp-action="Edit" asp-route-projectId="@project.Id">
+                                                <i class="fas fa-edit mt-0"></i>
+                                            </a>
+                                            <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Change status of Project" onclick="ChangeStatus(@project.Id)">
+                                                <i class="fas fa-thermometer-empty" mt-0"></i>
+                                            </a>
+                                            <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Delete project" onclick="DeleteProject(@project.Id)">
+                                                <i class="fas fa-trash-alt mt-0"></i>
+                                            </a>
+                                        }
                                     </td>
                                 </tr>
                             }

@@ -135,5 +135,14 @@
                         && x.Status == false)
                 .Count();
         }
+
+        public IEnumerable<T> GetAllProjectsByDepartment<T>(int companyId, int departmentId)
+        {
+            return this.projectRepository.All()
+                .Include(x => x.Department)
+                .Where(x => x.Department.CompanyId == companyId
+                        && x.DepartmentId == departmentId)
+                .To<T>().ToList();
+        }
     }
 }
