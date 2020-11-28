@@ -20,6 +20,8 @@
 
         IEnumerable<T> EmployeesNotAssignToTask<T>(int companyId, int trainingId);
 
+        IEnumerable<T> EmployeesNotAssignToTaskManager<T>(int companyId, int trainingId, int departmentId);
+
         Task UpdateAsync(DetailViewModel model);
     }
 }

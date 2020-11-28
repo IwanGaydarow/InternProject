@@ -1,6 +1,16 @@
 ﻿@model HCMS.Web.ViewModels.Administration.Trainings.AllTrainingsViewModel
 @{
     ViewData["Title"] = "Index";
+
+    var role = "";
+    if (this.User.IsInRole(HCMS.GlobalConstants.GlobalConstant.SystemAdministratorRole))
+    {
+        role = "Administration";
+    }
+    else
+    {
+        role = "Manager";
+    }
 }
 
 <div class="container-fluid">
@@ -46,15 +56,18 @@
                                     <td>@training.End.ToString("D")</td>
                                     <td>@training.TrainingHours</td>
                                     <td id="@training.Id">
-                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Edit Training"
-                                           asp-area="Administration" asp-controller="Trainings" asp-action="Edit" asp-route-trainingId="@training.Id">
-                                            <i class="fas fa-edit mt-0"></i>
-                                        </a>
-                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="modal" data-target="#userTaskModal" title="Add employee to training" onclick="LoadModel('@training.Id')">
+                                        @if (this.User.IsInRole(HCMS.GlobalConstants.GlobalConstant.SystemAdministratorRole))
+                                        {
+                                            <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Edit Training"
+                                               asp-area="Administration" asp-controller="Trainings" asp-action="Edit" asp-route-trainingId="@training.Id">
+                                                <i class="fas fa-edit mt-0"></i>
+                                            </a>
+                                            <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Delete Training" onclick=DeleteDepartment(@training.Id)>
+                                                <i class="fas fa-trash-alt mt-0"></i>
+                                            </a>
+                                        }
+                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="modal" data-target="#trainings" title="Add employee to training" onclick="LoadModel('@training.Id', '@role')">
                                             <i class="fas fa-tasks mt-0"></i>
-                                        </a>
-                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Delete Training" onclick=DeleteDepartment(@training.Id)>
-                                            <i class="fas fa-trash-alt mt-0"></i>
                                         </a>
                                     </td>
                                 </tr>
@@ -70,7 +83,7 @@
         </div>
     </div>
     <!---------------------------------------------------->
-    <div class="modal fade" id="userTaskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="trainings" tabindex="-1" role="dialog" aria-labelledby="trainings"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -80,7 +93,7 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body trainings">
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
@@ -127,12 +140,12 @@
         }
     </script>
 
-<script>
-    function LoadModel(data) {
-        $.get("/Administration/Trainings/AddEmployee?trainingId=" + data, function (response) {
-            $('.modal-body').html(response);
-        });
-    }
-</script>
+    <script>
+        function LoadModel(data, role) {
+            $.get("/" + role + "/Trainings/AddEmployee?trainingId=" + data, function (response) {
+                $('.trainings').html(response);
+            });
+        }
+    </script>
 }
 
