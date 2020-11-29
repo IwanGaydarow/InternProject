@@ -30,6 +30,7 @@ namespace HCMS.Web
     using HCMS.Services.Data.Company;
     using HCMS.Service.Common;
     using HCMS.Services.Data.Tasks;
+    using HCMS.Services.Data.Vocations;
 
     public class Startup
     {
@@ -83,6 +84,7 @@ namespace HCMS.Web
             services.AddTransient<IEmployeService, EmployeService>();
             services.AddTransient<ICountryService, CountryService>();
             services.AddTransient<ITrainingService, TrainingService>();
+            services.AddTransient<IVacationsService, VacationsService>();
             services.AddTransient<IEvaluationService, EvaluationService>();
             services.AddTransient<IDepartmentService, DepartmentService>();
 

@@ -1,0 +1,100 @@
+﻿@model HCMS.Web.ViewModels.Vocations.AllVacationsViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container-fluid">
+
+    <div class="action-conteiner"></div>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Vocations list</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Vocation Tittle</th>
+                            <th>Vocation Start Date</th>
+                            <th>Vocation End Date</th>
+                            <th>Vocation Status</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Vocation Tittle</th>
+                            <th>Vocation Start Date</th>
+                            <th>Vocation End Date</th>
+                            <th>Vocation Status</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @if (this.Model.Vocations.Any())
+                        {
+                            foreach (var vocation in this.Model.Vocations)
+                            {
+                                <tr>
+                                    <td>@vocation.Tittle</td>
+                                    <td>@vocation.FromDate.ToString("D")</td>
+                                    <td>@vocation.ToDate.ToString("D")</td>
+                                    @{
+                                        var output = "";
+                                        var color = "";
+                                        if (vocation.Status == null)
+                                        {
+                                            output = "Waiting";
+                                            color = "goldenrod";
+                                        }
+                                        else if (vocation.Status == true)
+                                        {
+                                            output = "Accept";
+                                            color = "green";
+                                        }
+                                        else
+                                        {
+                                            output = "Рejected";
+                                            color = "red";
+                                        }
+                                    }
+                                    <td style="color: @color">@output</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr><td>No Employee</td></tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });
+    </script>
+
+    <!-- tooltip function-->
+    <script>
+        //init tooltip
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+
+        // remove tooltip from clicked button
+        $('[data-toggle="tooltip"]').click(function () {
+            $('.tooltip').fadeOut('fast', function () {
+                $('.tooltip').remove();
+            });
+        });
+    </script>
+}

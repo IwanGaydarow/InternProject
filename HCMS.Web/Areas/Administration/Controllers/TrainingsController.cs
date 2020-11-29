@@ -1,6 +1,7 @@
 ﻿namespace HCMS.Web.Areas.Administration.Controllers
 {
     using System.Threading.Tasks;
+    using System.Collections.Generic;
 
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Identity;
@@ -8,12 +9,11 @@
 
     using HCMS.Data.Models;
     using HCMS.GlobalConstants;
+    using HCMS.Services.Data.Employees;
     using HCMS.Services.Data.Trainings;
     using HCMS.Services.Data.Departments;
     using HCMS.Web.ViewModels.Administration.Trainings;
-    using HCMS.Services.Data.Employees;
     using HCMS.Web.ViewModels.Administration.Evaluation;
-    using System.Collections.Generic;
 
     [Authorize(Roles = GlobalConstant.SystemAdministratorRole)]
     [Area("Administration")]
