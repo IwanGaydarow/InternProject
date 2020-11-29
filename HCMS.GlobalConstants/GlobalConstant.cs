@@ -16,7 +16,7 @@
 
         public const string StringLenghtValidation = "The {0} must be at least {2} and at max {1} characters long.";
 
-        public const string NumberRangeErrorMessage = "The {0} must be at least {2} and at max {1}.";
+        public const string NumberRangeErrorMessage = "The {0} must be at least {1} and at max {2}.";
 
         public const string ConfirmPasswordNotMatch = "The password and confirmation password do not match.";
 

@@ -29,6 +29,7 @@ namespace HCMS.Web
     using HCMS.Services.Data.Salary;
     using HCMS.Services.Data.Company;
     using HCMS.Service.Common;
+    using HCMS.Services.Data.Tasks;
 
     public class Startup
     {
@@ -75,6 +76,7 @@ namespace HCMS.Web
 
             //Data services
             services.AddTransient<ICityService, CityService>();
+            services.AddTransient<ITasksService, TasksService>();
             services.AddTransient<ISalaryService, SalaryService>();
             services.AddTransient<ICompanyService, CompanyService>();
             services.AddTransient<IProjectService, ProjectService>();

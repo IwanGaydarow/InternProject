@@ -21,13 +21,13 @@
             this.projectRepository = projectRepository;
         }
 
-        public async Task<int> ChangeStatus(int projectId)
+        public async Task<int> ChangeStatusAsync(int projectId)
         {
             var project = await this.projectRepository.GetByIdAsync(projectId);
 
             if (project == null)
             {
-                throw new NullReferenceException(nameof(project));
+                throw new NullReferenceException($"Project with id={projectId} for changing status is not found.");
             }
 
             if (project.Status)
@@ -143,6 +143,13 @@
                 .Where(x => x.Department.CompanyId == companyId
                         && x.DepartmentId == departmentId)
                 .To<T>().ToList();
+        }
+
+        public T GetProjectById<T>(int projectId)
+        {
+            return this.projectRepository.All()
+                .Where(x => x.Id == projectId)
+                .To<T>().FirstOrDefault();
         }
     }
 }

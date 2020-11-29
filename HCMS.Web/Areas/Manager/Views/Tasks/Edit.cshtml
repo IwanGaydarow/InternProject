@@ -1,0 +1,54 @@
+﻿@model HCMS.Web.ViewModels.Manager.Tasks.EditTaskViewModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container">
+
+    <div class="card o-hidden border-0 shadow-lg my-3 col-lg-10 mx-auto">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">Create Task</h1>
+                        </div>
+                        <form method="post" asp-area="Manager" asp-controller="Tasks" asp-action="Edit">
+                            <input hidden asp-for="Id" value="@Model.Id" />
+                            <div class="form-group">
+                                    <label asp-for="Tittle"></label>
+                                    <input asp-for="Tittle" class="form-control form-control-user" />
+                                    <span asp-validation-for="Tittle" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Description"></label>
+                                    <input asp-for="Description" class="form-control form-control-user" />
+                                    <span asp-validation-for="Description" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="EstWorkHours"></label>
+                                    <input asp-for="EstWorkHours" class="form-control form-control-user" />
+                                    <span asp-validation-for="EstWorkHours" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <input type="checkbox" asp-for="Status" value="@Model.Status" class="form-check-input row-cols-xl-4" />
+                                    <label asp-for="Status" class="text-warning">Check button for finished task, uncheck for procesing.</label>
+                                </div>
+                                <div asp-validation-summary="All" class="text-danger"></div>
+                                <div class="form-group row">
+                                    <button type="submit" class="btn btn-primary btn-user btn-group mt-5 mx-auto"> Edit Task</button>
+                                </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+

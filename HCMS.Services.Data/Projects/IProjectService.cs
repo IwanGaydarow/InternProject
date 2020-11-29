@@ -13,11 +13,13 @@
 
         Project GetProjectById(int projectId);
 
+        T GetProjectById<T>(int projectId);
+
         Task CreateAsync(string tittle, string description, int estWorkH, int departmentId);
 
         Task UpdateAsync(UpdateViewModel model);
 
-        Task<int> ChangeStatus(int projectId);
+        Task<int> ChangeStatusAsync(int projectId);
 
         int GetProjectDepartmentId(int projectId);
 

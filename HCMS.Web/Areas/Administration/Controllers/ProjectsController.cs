@@ -108,7 +108,7 @@
 
         public async Task<int> Status(int projectId)
         {
-            var result = await this.projectsService.ChangeStatus(projectId);
+            var result = await this.projectsService.ChangeStatusAsync(projectId);
 
             return result;
         }

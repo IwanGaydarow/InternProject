@@ -1,0 +1,130 @@
+﻿@model HCMS.Web.ViewModels.Manager.Tasks.ProjectTasksViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container-fluid">
+
+    <div class="action-conteiner"></div>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Tasks list</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Task Tittle</th>
+                            <th>Task Description</th>
+                            <th>Task EstimatedWorkHours</th>
+                            <th>Task Status</th>
+                            <th>Project</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Task Tittle</th>
+                            <th>Task Description</th>
+                            <th>Task EstimatedWorkHours</th>
+                            <th>Task Status</th>
+                            <th>Project</th>
+                            <th>Actions</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @if (this.Model.Tasks.Any())
+                        {
+                            foreach (var task in this.Model.Tasks)
+                            {
+                                <tr class="@task.Id">
+                                    <td>@task.Tittle</td>
+                                    <td>@task.Description</td>
+                                    <td>@task.EstWorkHours</td>
+                                    @{
+                                        string output = task.Status == true ? "Finished" : "Processing";
+                                        string color = output == "Finished" ? "green" : "red";
+                                    }
+                                    <td id="@task.Id" style="color: @color">@output</td>
+                                    <td>@task.ProjectTittle</td>
+                                    <td id="@task.Id">
+                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Edit Task"
+                                           asp-area="Manager" asp-controller="Tasks" asp-action="Edit" asp-route-taskId="@task.Id">
+                                            <i class="fas fa-edit mt-0"></i>
+                                        </a>
+                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Change status of Task" onclick="ChangeStatus(@task.Id)">
+                                            <i class="fas fa-thermometer-empty" mt-0"></i>
+                                        </a>
+                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Delete Task" onclick=DeleteTask(@task.Id)>
+                                            <i class="fas fa-trash-alt mt-0"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr><td>No Salaries</td></tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });
+    </script>
+
+    <!-- tooltip function-->
+    <script>
+        //init tooltip
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+
+        // remove tooltip from clicked button
+        $('[data-toggle="tooltip"]').click(function () {
+            $('.tooltip').fadeOut('fast', function () {
+                $('.tooltip').remove();
+            });
+        });
+    </script>
+
+    <!-- Change task status-->
+    <script>
+        function ChangeStatus(data) {
+            let tdToChange = data.toString();
+            $.get("/Manager/Tasks/Status?taskId=" + data,
+                function (response) {
+                    if (response > 0) {
+                        $('#' + tdToChange).text("Finished");
+                        $('#' + tdToChange).css('color', 'green');
+                    }
+                    else {
+                        alert("You can`t change an alrady done project.");
+                    }
+                });
+        }
+    </script>
+
+    <script>
+        function DeleteTask(data) {
+            let trToDelete = data.toString();
+            $.get("/Manager/Tasks/Delete?taskId=" + data, function (response, status) {
+                if (status === 'success') {
+                    $('.' + trToDelete).remove();
+                }
+            });
+        }
+    </script>
+}
+

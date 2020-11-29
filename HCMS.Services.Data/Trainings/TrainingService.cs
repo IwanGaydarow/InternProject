@@ -70,7 +70,7 @@
             await this.trainingsRepository.SaveChangesAsync();
         }
 
-        public async Task DeteleAsyncTrainingsTasks(int trainingId)
+        private async Task DeteleAsyncTrainingsTasks(int trainingId)
         {
             var trainings = this.trainingsUsersRepository.All()
                 .Where(x => x.TrainingId == trainingId)
