@@ -46,15 +46,15 @@
             var user = await this.userManager.GetUserAsync(this.User);
             var companyId = this.departmentService.GetCompanyIdByDepartmentId(user.DepartmentId);
 
-            var users = this.employeService.EmployeesNotAssignToTaskManager<EmployeeSelectList>(companyId, trainingId, user.DepartmentId.Value);
+            var users = this.employeService.EmployeesNotAssignToTrainingManager<EmployeeSelectList>(companyId, trainingId, user.DepartmentId.Value);
 
-            var model = new EmployeeToTaskViewModel { Employees = users, TrainingId = trainingId };
+            var model = new EmployeeToTrainingViewModel { Employees = users, TrainingId = trainingId };
 
             return this.PartialView("/Areas/Administration/Views/Trainings/_AddEmployeePartial.cshtml", model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddEmployee(EmployeeToTaskViewModel model)
+        public async Task<IActionResult> AddEmployee(EmployeeToTrainingViewModel model)
         {
             if (!this.ModelState.IsValid)
             {

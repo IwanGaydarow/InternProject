@@ -5,7 +5,7 @@
     
     using HCMS.Web.ViewModels.Administration.Evaluation;
 
-    public class EmployeeToTaskViewModel
+    public class EmployeeToTrainingViewModel
     {
         [Required]
         public int TrainingId { get; set; }

@@ -19,6 +19,7 @@
                             <th>Task Tittle</th>
                             <th>Task Description</th>
                             <th>Task EstimatedWorkHours</th>
+                            <th>Assigned Employee</th>
                             <th>Task Status</th>
                             <th>Project</th>
                             <th>Actions</th>
@@ -29,6 +30,7 @@
                             <th>Task Tittle</th>
                             <th>Task Description</th>
                             <th>Task EstimatedWorkHours</th>
+                            <th>Assigned Employee</th>
                             <th>Task Status</th>
                             <th>Project</th>
                             <th>Actions</th>
@@ -43,6 +45,10 @@
                                     <td>@task.Tittle</td>
                                     <td>@task.Description</td>
                                     <td>@task.EstWorkHours</td>
+                                    @{ 
+                                        var assigned = task.AssignedEmployee != null ? task.AssignedEmployee : "No One is Assigned";
+                                    }
+                                    <td>@assigned</td>
                                     @{
                                         string output = task.Status == true ? "Finished" : "Processing";
                                         string color = output == "Finished" ? "green" : "red";
@@ -53,6 +59,9 @@
                                         <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Edit Task"
                                            asp-area="Manager" asp-controller="Tasks" asp-action="Edit" asp-route-taskId="@task.Id">
                                             <i class="fas fa-edit mt-0"></i>
+                                        </a>
+                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="modal" data-target="#task" title="Add employee to task" onclick="LoadModel(@task.Id)">
+                                            <i class="fas fa-plus mt-0"></i>
                                         </a>
                                         <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Change status of Task" onclick="ChangeStatus(@task.Id)">
                                             <i class="fas fa-thermometer-empty" mt-0"></i>
@@ -70,6 +79,27 @@
                         }
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+
+
+    <!---------------------------------------------------->
+    <div class="modal fade" id="task" tabindex="-1" role="dialog" aria-labelledby="task"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add employee to this task!</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body task">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                </div>
             </div>
         </div>
     </div>
@@ -123,6 +153,14 @@
                 if (status === 'success') {
                     $('.' + trToDelete).remove();
                 }
+            });
+        }
+    </script>
+
+    <script>
+        function LoadModel(data) {
+            $.get("/Manager/Tasks/AddEmployee?taskId=" + data, function (response) {
+                $('.task').html(response);
             });
         }
     </script>

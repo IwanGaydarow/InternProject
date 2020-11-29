@@ -4,9 +4,9 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Collections.Generic;
-   
+
     using Microsoft.EntityFrameworkCore;
-    
+
     using HCMS.Data.Models;
     using HCMS.Services.Mapping;
     using HCMS.Data.Common.Repositories;
@@ -52,7 +52,7 @@
                 .To<T>().ToList();
         }
 
-        public IEnumerable<T> EmployeesNotAssignToTask<T>(int companyId, int trainingId)
+        public IEnumerable<T> EmployeesNotAssignToTraining<T>(int companyId, int trainingId)
         {
             return this.employeeRepository.All()
                 .Where(x => x.Department.CompanyId == companyId &&
@@ -60,7 +60,7 @@
                 .To<T>().ToList();
         }
 
-        public IEnumerable<T> EmployeesNotAssignToTaskManager<T>(int companyId, int trainingId, int departmentId)
+        public IEnumerable<T> EmployeesNotAssignToTrainingManager<T>(int companyId, int trainingId, int departmentId)
         {
             return this.employeeRepository.All()
                 .Where(x => x.Department.CompanyId == companyId && x.DepartmentId == departmentId
@@ -109,6 +109,13 @@
 
             this.employeeRepository.Update(user);
             await this.employeeRepository.SaveChangesAsync();
+        }
+
+        public IEnumerable<T> EmployeesOfDepartment<T>(int companyId, int departmentId)
+        {
+            return this.employeeRepository.All()
+                .Where(x => x.Department.CompanyId == companyId && x.DepartmentId == departmentId)
+                .To<T>().ToList();
         }
     }
 }

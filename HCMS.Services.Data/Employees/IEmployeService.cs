@@ -18,9 +18,11 @@
 
         T EmployeeDetails<T>(string id);
 
-        IEnumerable<T> EmployeesNotAssignToTask<T>(int companyId, int trainingId);
+        IEnumerable<T> EmployeesOfDepartment<T>(int companyId, int departmentId);
 
-        IEnumerable<T> EmployeesNotAssignToTaskManager<T>(int companyId, int trainingId, int departmentId);
+        IEnumerable<T> EmployeesNotAssignToTraining<T>(int companyId, int trainingId);
+
+        IEnumerable<T> EmployeesNotAssignToTrainingManager<T>(int companyId, int trainingId, int departmentId);
 
         Task UpdateAsync(DetailViewModel model);
 

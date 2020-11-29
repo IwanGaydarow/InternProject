@@ -4,6 +4,7 @@
     
     using HCMS.Data.Models;
     using HCMS.Services.Mapping;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class TasksViewModel : IMapFrom<ProjectTasks>, IHaveCustomMappings
     {
@@ -14,6 +15,9 @@
         public string Description { get; set; }
 
         public int EstWorkHours { get; set; }
+
+        [NotMapped]
+        public string AssignedEmployee { get; set; }
 
         public bool Status { get; set; }
 

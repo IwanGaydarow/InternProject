@@ -10,6 +10,8 @@
     {
         Task CreateAsync(CreateTaskViewModel model);
 
+        Task AddEmployeeToTask(int taskId, string userId);
+
         IEnumerable<T> GetAllTasks<T>(int companyId);
 
         ProjectTasks GetById(int taskId);
@@ -19,5 +21,7 @@
         Task UpdateAsync(EditTaskViewModel model);
 
         Task<int> ChangeStatusAsync(int taskId);
+
+        string GetUserAssingToTask(int taskId);
     }
 }

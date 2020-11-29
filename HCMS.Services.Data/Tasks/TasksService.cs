@@ -121,5 +121,27 @@ namespace HCMS.Services.Data.Tasks
             this.tasksRepository.Update(task);
             await this.tasksRepository.SaveChangesAsync();
         }
+
+        public async Task AddEmployeeToTask(int taskId, string userId)
+        {
+            var usersTask = new UsersTasks
+            {
+                ProjectTaskId = taskId,
+                UserId = userId,
+                CreatedOn = DateTime.UtcNow,
+                IsDeleted = false
+            };
+
+            await this.userTasksRepository.AddAsync(usersTask);
+            await this.userTasksRepository.SaveChangesAsync();
+        }
+
+        public string GetUserAssingToTask(int taskId)
+        {
+            return this.userTasksRepository.All()
+                .Where(x => x.ProjectTaskId == taskId)
+                .Select(x => x.User.Name)
+                .FirstOrDefault();
+        }
     }
 }

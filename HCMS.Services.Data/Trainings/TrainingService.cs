@@ -28,7 +28,8 @@
             {
                 UserId = userId,
                 TrainingId = trainingId,
-                CreatedOn = DateTime.UtcNow
+                CreatedOn = DateTime.UtcNow,
+                IsDeleted = false
             };
 
             await this.trainingsUsersRepository.AddAsync(trainingUser);

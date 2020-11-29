@@ -1,12 +1,12 @@
-﻿@model HCMS.Web.ViewModels.Administration.Trainings.EmployeeToTrainingViewModel
+﻿@model HCMS.Web.ViewModels.Manager.Tasks.EmployeeToTaskViewModel
 @{
     ViewData["Title"] = "_EmpTrainingsPartial";
     var employees = Model.Employees.Select(x => new SelectListItem(x.Name, x.Id, x.Id == Model.EmployeeId));
 }
 
 
-<form class="form-inline edit-form border border-success p-4" method="post" asp-area="Administration" asp-controller="Trainings" asp-action="AddEmployee">
-    <input hidden asp-for="TrainingId" />
+<form class="form-inline edit-form border border-success p-4" method="post" asp-area="Manager" asp-controller="Tasks" asp-action="AddEmployee">
+    <input hidden asp-for="TaskId" />
     <div class="modal-body">
         <select class="form-control ml-3" asp-for="EmployeeId" asp-items="employees">
             <option value="">Select Employee</option>
