@@ -45,7 +45,7 @@
             var evals = this.evaluationService.GetAll(companyId);
 
             var model = new AllEvalsViewModel { Evaluations = evals };
-            return View();
+            return View(model);
         }
 
         public async Task<IActionResult> Create(string employeeId = null)

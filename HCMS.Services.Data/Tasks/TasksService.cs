@@ -75,11 +75,11 @@ namespace HCMS.Services.Data.Tasks
             }
         }
 
-        public IEnumerable<T> GetAllTasks<T>(int companyId)
+        public IEnumerable<T> GetAllTasks<T>(int companyId, int departmentId)
         {
             return this.tasksRepository.All()
                 .Include(x => x.Project)
-                .Where(x => x.Project.Department.CompanyId == companyId)
+                .Where(x => x.Project.Department.CompanyId == companyId && x.Project.DepartmentId == departmentId)
                 .To<T>().ToList();
         }
 
@@ -142,6 +142,13 @@ namespace HCMS.Services.Data.Tasks
                 .Where(x => x.ProjectTaskId == taskId)
                 .Select(x => x.User.Name)
                 .FirstOrDefault();
+        }
+
+        public int CountOfUnfinishedTaskByDepartment(int departmentId)
+        {
+            return this.tasksRepository.All()
+                .Where(x => x.Project.DepartmentId == departmentId && x.Status == false)
+                .Count();
         }
     }
 }

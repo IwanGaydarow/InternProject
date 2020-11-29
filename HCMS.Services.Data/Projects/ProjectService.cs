@@ -151,5 +151,12 @@
                 .Where(x => x.Id == projectId)
                 .To<T>().FirstOrDefault();
         }
+
+        public int GetCountByDepartment(int departmentId)
+        {
+            return this.projectRepository.All()
+                .Where(x => x.DepartmentId == departmentId && x.Status == false)
+                .ToList().Count();
+        }
     }
 }

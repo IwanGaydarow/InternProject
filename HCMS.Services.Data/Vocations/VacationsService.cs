@@ -75,5 +75,34 @@ namespace HCMS.Services.Data.Vocations
                 .Where(x => x.UserId == userId)
                 .To<T>().ToList();
         }
+
+        public int GetCountOfUnproccessedByDepartment(int departmentId)
+        {
+            return this.vocationsRepository.All()
+                .Where(x => x.User.DepartmentId == departmentId && x.Status == null)
+                .ToList().Count();
+                
+        }
+
+        public int GetPersonalCount(string userId)
+        {
+            return this.vocationsRepository.All()
+                .Where(x => x.UserId == userId)
+                .Count();
+        }
+
+        public int GetPersonalCountOfAccepted(string userId)
+        {
+            return this.vocationsRepository.All()
+                .Where(x => x.UserId == userId && x.Status == true)
+                .Count();
+        }
+
+        public int GetPersonalCountOfReject(string userId)
+        {
+            return this.vocationsRepository.All()
+                .Where(x => x.UserId == userId && x.Status == false)
+                .Count();
+        }
     }
 }

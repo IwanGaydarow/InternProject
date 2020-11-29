@@ -20,7 +20,7 @@
         {
             if (!this.ModelState.IsValid)
             {
-                return this.View("DetailEditView", model);
+                return this.NotFound();
             }
 
             await this.emailSender.SendEmailAsync(

@@ -12,7 +12,7 @@
 
         Task AddEmployeeToTask(int taskId, string userId);
 
-        IEnumerable<T> GetAllTasks<T>(int companyId);
+        IEnumerable<T> GetAllTasks<T>(int companyId, int departmentId);
 
         ProjectTasks GetById(int taskId);
 
@@ -23,5 +23,7 @@
         Task<int> ChangeStatusAsync(int taskId);
 
         string GetUserAssingToTask(int taskId);
+
+        int CountOfUnfinishedTaskByDepartment(int departmentId);
     }
 }

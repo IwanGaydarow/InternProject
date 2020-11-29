@@ -41,7 +41,7 @@
             var user = await this.userManager.GetUserAsync(this.User);
             var companyId = this.departmentService.GetCompanyIdByDepartmentId(user.DepartmentId);
 
-            var tasks = this.tasksService.GetAllTasks<TasksViewModel>(companyId);
+            var tasks = this.tasksService.GetAllTasks<TasksViewModel>(companyId, user.DepartmentId.Value);
 
             foreach (var task in tasks)
             {

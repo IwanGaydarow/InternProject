@@ -27,5 +27,7 @@
         Task UpdateAsync(DetailViewModel model);
 
         Task ChangeDepartmentAsync(string userId, int departmentId);
+
+        int GetEmployeeCountOfDepartment(int departmentId);
     }
 }

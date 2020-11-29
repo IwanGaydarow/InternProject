@@ -117,5 +117,12 @@
                 .Where(x => x.Department.CompanyId == companyId && x.DepartmentId == departmentId)
                 .To<T>().ToList();
         }
+
+        public int GetEmployeeCountOfDepartment(int departmentId)
+        {
+            return this.employeeRepository.All()
+                .Where(x => x.DepartmentId == departmentId)
+                .ToList().Count();
+        }
     }
 }

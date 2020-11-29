@@ -14,5 +14,13 @@
         Task CreateAsync(CreateVacationViewModel model);
 
         Task ChangeStatusAsync(int vacationId, int status);
+
+        int GetCountOfUnproccessedByDepartment(int departmentId);
+
+        int GetPersonalCount(string userId);
+
+        int GetPersonalCountOfReject(string userId);
+
+        int GetPersonalCountOfAccepted(string userId);
     }
 }

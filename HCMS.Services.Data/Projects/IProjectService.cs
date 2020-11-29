@@ -30,5 +30,7 @@
         int GetCountOfFinished(int companyId);
 
         int GetCountOfProcessing(int companyId);
+
+        int GetCountByDepartment(int departmentId);
     }
 }
