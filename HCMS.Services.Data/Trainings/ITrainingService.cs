@@ -15,6 +15,8 @@
 
         IEnumerable<T> GetAll<T>(int companyId);
 
+        IEnumerable<T> GetAllAssignedToEmployee<T>(string userId);
+
         T GetById<T>(int trainingId);
 
         Task DeleteAsync(int id);

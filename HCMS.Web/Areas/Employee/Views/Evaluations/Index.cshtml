@@ -1,0 +1,64 @@
+﻿@model HCMS.Web.ViewModels.Employee.AllEmployeeEvalsViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container-fluid">
+
+    <div class="action-conteiner"></div>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Evaluations list</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Evaluation percentage</th>
+                            <th>Evaluation note</th>
+                            <th>Evaluation year</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Evaluation percentage</th>
+                            <th>Evaluation note</th>
+                            <th>Evaluation year</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @if (this.Model.Evals.Any())
+                        {
+                            foreach (var evaluation in this.Model.Evals)
+                            {
+                                <tr>
+                                    <td>@evaluation.Value %</td>
+                                    <td>@evaluation.Notes</td>
+                                    <td>@evaluation.EvaluationYear</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr><td>No Employee</td></tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.container-fluid -->
+
+@section Scripts{
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });
+    </script>
+}
+

@@ -11,6 +11,7 @@
     using HCMS.Services.Mapping;
     using HCMS.Data.Common.Repositories;
     using HCMS.Web.ViewModels.Administration.Evaluation;
+    using HCMS.Web.ViewModels.Employee;
 
     public class EvaluationService : IEvaluationService
     {
@@ -76,6 +77,13 @@
                     JobTittle = x.User.JobTittle,
                     EmployeeDepartment = x.User.Department.Tittle
                 }).ToList();
+        }
+
+        public IEnumerable<T> GetAllByUserId<T>(string id)
+        {
+            return this.evaluationRepository.All()
+                .Where(x => x.UserId == id)
+                .To<T>().ToList();
         }
 
         public IEnumerable<EvalsViewModel> GetAllForManager(int companyId, int departmentId)

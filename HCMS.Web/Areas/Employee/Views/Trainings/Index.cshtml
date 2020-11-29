@@ -1,0 +1,67 @@
+﻿@model HCMS.Web.ViewModels.Employee.AllEmployeeTrainingsViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container-fluid">
+
+    <div class="action-conteiner"></div>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Training list</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Training Tittle</th>
+                            <th>Training Description</th>
+                            <th>Training Start Date</th>
+                            <th>Training End Date</th>
+                            <th>Training Hours</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Training Tittle</th>
+                            <th>Training Description</th>
+                            <th>Training Start Date</th>
+                            <th>Training End Date</th>
+                            <th>Training Hours</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @if (this.Model.Trainings.Any())
+                        {
+                            foreach (var training in this.Model.Trainings)
+                            {
+                                <tr>
+                                    <td>@training.Tittle</td>
+                                    <td>@training.Description</td>
+                                    <td>@training.Start.ToString("D")</td>
+                                    <td>@training.End.ToString("D")</td>
+                                    <td>@training.TrainingHours</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr><td>No Trainings</td></tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts{
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                $('#dataTable').DataTable();
+            });
+        </script>
+    }

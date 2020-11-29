@@ -9,6 +9,7 @@
     using HCMS.Services.Mapping;
     using HCMS.Data.Common.Repositories;
     using HCMS.Web.ViewModels.Administration.Trainings;
+    using Microsoft.EntityFrameworkCore;
 
     public class TrainingService : ITrainingService
     {
@@ -128,6 +129,14 @@
             return this.trainingsRepository.All()
                 .Where(x => x.CompanyId == companyId)
                 .Count();
+        }
+
+        public IEnumerable<T> GetAllAssignedToEmployee<T>(string userId)
+        {
+            return this.trainingsUsersRepository.All()
+                .Where(x => x.UserId == userId)
+                .Include(x => x.Training)
+                .To<T>().ToList();
         }
     }
 }

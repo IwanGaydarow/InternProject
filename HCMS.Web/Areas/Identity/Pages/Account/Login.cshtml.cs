@@ -93,6 +93,10 @@
                     {
                         returnUrl = "~/Manager/Home/Index";
                     }
+                    else if (roles.Contains(GlobalConstant.SystemEmployeeRole))
+                    {
+                        returnUrl = "~/Employee/Home/Index";
+                    }
 
                     return LocalRedirect(returnUrl);
                 }

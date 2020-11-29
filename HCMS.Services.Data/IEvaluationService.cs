@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     
     using HCMS.Web.ViewModels.Administration.Evaluation;
+    using HCMS.Web.ViewModels.Employee;
 
     public interface IEvaluationService
     {
@@ -14,6 +15,8 @@
         Task UpdateAsync(EditEvalViewModel model);
 
         IEnumerable<EvalsViewModel> GetAll(int companyId);
+
+        IEnumerable<T> GetAllByUserId<T>(string id);
 
         IEnumerable<EvalsViewModel> GetAllForManager(int companyId, int departmentId);
         
