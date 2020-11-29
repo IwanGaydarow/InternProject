@@ -45,7 +45,7 @@
                                     <td>@task.Tittle</td>
                                     <td>@task.Description</td>
                                     <td>@task.EstWorkHours</td>
-                                    @{ 
+                                    @{
                                         var assigned = task.AssignedEmployee != null ? task.AssignedEmployee : "No One is Assigned";
                                     }
                                     <td>@assigned</td>
@@ -56,17 +56,17 @@
                                     <td id="@task.Id" style="color: @color">@output</td>
                                     <td>@task.ProjectTittle</td>
                                     <td id="@task.Id">
-                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Edit Task"
+                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Edit Task" data-placement="left"
                                            asp-area="Manager" asp-controller="Tasks" asp-action="Edit" asp-route-taskId="@task.Id">
                                             <i class="fas fa-edit mt-0"></i>
                                         </a>
-                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="modal" data-target="#task" title="Add employee to task" onclick="LoadModel(@task.Id)">
+                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="modal" data-target="#task" title="Add employee to task" data-placement="left" onclick="LoadModel(@task.Id)">
                                             <i class="fas fa-plus mt-0"></i>
                                         </a>
-                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Change status of Task" onclick="ChangeStatus(@task.Id)">
+                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Change Task Status" data-placement="left" onclick="ChangeStatus(@task.Id)">
                                             <i class="fas fa-thermometer-empty" mt-0"></i>
                                         </a>
-                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Delete Task" onclick=DeleteTask(@task.Id)>
+                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="tooltip" title="Delete Task" data-placement="right" onclick=DeleteTask(@task.Id)>
                                             <i class="fas fa-trash-alt mt-0"></i>
                                         </a>
                                     </td>

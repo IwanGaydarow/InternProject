@@ -1,14 +1,16 @@
 ﻿namespace HCMS.Web.Areas.Manager.Controllers
 {
+    using System;
+    using System.Threading.Tasks;
+    
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Authorization;
+    
     using HCMS.Data.Models;
     using HCMS.GlobalConstants;
     using HCMS.Services.Data.Vocations;
     using HCMS.Web.ViewModels.Vocations;
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.AspNetCore.Mvc;
-    using System;
-    using System.Threading.Tasks;
 
     [Authorize(Roles = GlobalConstant.SystemManagerRole)]
     [Area("Manager")]
@@ -28,10 +30,41 @@
         {
             var user = await this.userManager.GetUserAsync(this.User);
 
-            var vocations = this.vocationService.GetAllForPerson<VacationsViewModel>(user.Id);
+            var vacations = this.vocationService.GetAllForPerson<VacationsViewModel>(user.Id);
 
-            var model = new AllVacationsViewModel { Vocations = vocations };
+            var model = new AllVacationsViewModel { Vacations = vacations };
             return View(model);
+        }
+
+        public async Task<IActionResult> Employee()
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            var vacantions = this.vocationService.GetAllForDepartment<VacationsViewModel>(user.DepartmentId.Value);
+
+            var model = new AllVacationsViewModel { Vacations = vacantions };
+            return this.View(model);
+        }
+
+        public IActionResult ChangeStatus(int vacationId)
+        {
+            var model = new ChangeStatusViewModel { VacationId = vacationId };
+
+            return this.PartialView("_ChangeStatusPartial", model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangeStatus(ChangeStatusViewModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                var returnModel = new ChangeStatusViewModel { VacationId = model.VacationId };
+                return this.PartialView("_ChangeStatusPartial", returnModel);
+            }
+
+            await this.vocationService.ChangeStatusAsync(model.VacationId, model.Status);
+
+            return this.RedirectToAction("Employee");
         }
 
         public async  Task<IActionResult> Create()

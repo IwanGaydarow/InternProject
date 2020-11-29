@@ -4,6 +4,6 @@
 
     public class AllVacationsViewModel
     {
-        public IEnumerable<VacationsViewModel> Vocations { get; set; }
+        public IEnumerable<VacationsViewModel> Vacations { get; set; }
     }
 }

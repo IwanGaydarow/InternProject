@@ -1,0 +1,18 @@
+﻿@using HCMS.Web.ViewModels.Vocations;
+@model HCMS.Web.ViewModels.Vocations.ChangeStatusViewModel 
+@{
+    ViewData["Title"] = "_ChangeStatusPartial";
+}
+
+<form class="form-inline edit-form border border-success p-4" method="post" asp-area="Manager" asp-controller="Vacations" asp-action="ChangeStatus">
+    <input hidden asp-for="VacationId" value="@Model.VacationId" />
+    <div class="modal-body">
+        <select class="form-control ml-3" asp-for="Status" asp-items="Html.GetEnumSelectList<VacationStatus>()">
+        </select>
+        <span asp-validation-for="Status" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary ml-3">Submit</button>
+</form>
+
+<partial name="_ValidationScriptsPartial" />
+

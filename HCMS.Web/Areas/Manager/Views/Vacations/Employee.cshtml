@@ -1,6 +1,6 @@
 ﻿@model HCMS.Web.ViewModels.Vocations.AllVacationsViewModel
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Employee";
 }
 
 <div class="container-fluid">
@@ -9,7 +9,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Vocations list</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Vocations list of employee</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -19,7 +19,9 @@
                             <th>Vocation Tittle</th>
                             <th>Vocation Start Date</th>
                             <th>Vocation End Date</th>
+                            <th>Employee Name</th>
                             <th>Vocation Status</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -27,38 +29,46 @@
                             <th>Vocation Tittle</th>
                             <th>Vocation Start Date</th>
                             <th>Vocation End Date</th>
+                            <th>Employee Name</th>
                             <th>Vocation Status</th>
+                            <th>Actions</th>
                         </tr>
                     </tfoot>
                     <tbody>
                         @if (this.Model.Vacations.Any())
                         {
-                            foreach (var vocation in this.Model.Vacations)
+                            foreach (var vacation in this.Model.Vacations)
                             {
                                 <tr>
-                                    <td>@vocation.Tittle</td>
-                                    <td>@vocation.FromDate.ToString("D")</td>
-                                    <td>@vocation.ToDate.ToString("D")</td>
+                                    <td>@vacation.Tittle</td>
+                                    <td>@vacation.FromDate.ToString("D")</td>
+                                    <td>@vacation.ToDate.ToString("D")</td>
+                                    <td>@vacation.Employee</td>
                                     @{
                                         var output = "";
                                         var color = "";
-                                        if (vocation.Status == null)
+                                        if (vacation.Status == null)
                                         {
                                             output = "Waiting";
                                             color = "goldenrod";
                                         }
-                                        else if (vocation.Status == true)
+                                        else if (vacation.Status == true)
                                         {
                                             output = "Accept";
                                             color = "green";
                                         }
                                         else
                                         {
-                                            output = "Рejected";
+                                            output = "Rejected";
                                             color = "red";
                                         }
                                     }
                                     <td style="color: @color">@output</td>
+                                    <td class="btns">
+                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="modal" data-target="#vacation" title="Change Vacation Status" onclick="LoadModel(@vacation.Id)">
+                                            <i class="fas fa-plus mt-0"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                             }
                         }
@@ -73,6 +83,25 @@
     </div>
 </div>
 
+<!---------------------------------------------------->
+<div class="modal fade" id="vacation" tabindex="-1" role="dialog" aria-labelledby="vacation"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Change vacation status!</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body vacation">
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section Scripts{
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
@@ -97,4 +126,13 @@
             });
         });
     </script>
+
+    <script>
+        function LoadModel(data) {
+            $.get("/Manager/Vacations/ChangeStatus?vacationId=" + data, function (response) {
+                $('.vacation').html(response);
+            });
+        }
+    </script>
 }
+
