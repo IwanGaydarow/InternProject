@@ -1,7 +1,133 @@
-﻿
+﻿@model HCMS.Web.ViewModels.Employee.Home.EmployeeHomePageViewModel
 @{
     ViewData["Title"] = "Index";
+    var emailForm = new EmailFormViewModel { ReturnUrl = Model.EmailForm.ReturnUrl, From = Model.EmailForm.From };
 }
 
-<h1>Index</h1>
-
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Personal info</h1>
+    </div>
+    <!-- Content Row -->
+    <div class="row">
+        <!-- Personal vacation create Count Card -->
+        <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                Vacation created
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.PersonalVacationCreate</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-building fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- personal accepted vacation Count Card -->
+        <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Vacation Accepted
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.PersonalAcceptVacation</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-building fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- personal rejected vacation Count Card -->
+        <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card border-left-danger shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                Vacation Rejected
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.PersonalRejectVacation</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-building fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Personal tasks Count Card -->
+        <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                Count of assigned tasks
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.CountOfTasks</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-building fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Personal finished tasks Count Card -->
+        <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Count of Finished tasks
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.CountOfFinishedTasks</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-building fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Unfinished personal tasks Count Card -->
+        <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card border-left-danger shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                Count of Unfinished Tasks
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.CountOfUnfinishedTasks</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-building fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Quick Email</h1>
+    </div>
+    <!-- Content Row -->
+    <div class="row">
+        <partial name="_EmailFormPartial" model="@emailForm" />
+    </div>
+</div>

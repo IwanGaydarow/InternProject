@@ -1,15 +1,17 @@
-﻿using HCMS.Data.Common.Repositories;
-using HCMS.Data.Models;
-using HCMS.Services.Mapping;
-using HCMS.Web.ViewModels.Manager.Tasks;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace HCMS.Services.Data.Tasks
+﻿namespace HCMS.Services.Data.Tasks
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Collections.Generic;
+   
+    using Microsoft.EntityFrameworkCore;
+    
+    using HCMS.Data.Models;
+    using HCMS.Services.Mapping;
+    using HCMS.Data.Common.Repositories;
+    using HCMS.Web.ViewModels.Manager.Tasks;
+
     public class TasksService : ITasksService
     {
         private readonly IRepository<ProjectTasks> tasksRepository;
@@ -149,6 +151,39 @@ namespace HCMS.Services.Data.Tasks
             return this.tasksRepository.All()
                 .Where(x => x.Project.DepartmentId == departmentId && x.Status == false)
                 .Count();
+        }
+
+        public IEnumerable<T> GetAllTaskByUserId<T>(string id)
+        {
+            return this.userTasksRepository.All()
+                .Where(x => x.UserId == id)
+                .Include(x => x.ProjectTask)
+                .To<T>().ToList();
+        }
+
+        public int CountOfUnfinishedTasksByUserId(string userId)
+        {
+            return this.userTasksRepository.All()
+                .Where(x => x.UserId == userId && x.ProjectTask.Status == false)
+                .Include(x => x.ProjectTask)
+                .ToList().Count();
+
+        }
+
+        public int CountOfTasksByUserId(string userId)
+        {
+            return this.userTasksRepository.All()
+                .Where(x => x.UserId == userId)
+                .Include(x => x.ProjectTask)
+                .ToList().Count();
+        }
+
+        public int CountOfFinishedTasksByUserId(string userId)
+        {
+            return this.userTasksRepository.All()
+                .Where(x => x.UserId == userId && x.ProjectTask.Status == true)
+                .Include(x => x.ProjectTask)
+                .ToList().Count();
         }
     }
 }

@@ -14,6 +14,8 @@
 
         IEnumerable<T> GetAllTasks<T>(int companyId, int departmentId);
 
+        IEnumerable<T> GetAllTaskByUserId<T>(string id);
+
         ProjectTasks GetById(int taskId);
 
         Task DeleteAsync(int taskId);
@@ -25,5 +27,11 @@
         string GetUserAssingToTask(int taskId);
 
         int CountOfUnfinishedTaskByDepartment(int departmentId);
+
+        int CountOfTasksByUserId(string userId);
+
+        int CountOfFinishedTasksByUserId(string userId);
+
+        int CountOfUnfinishedTasksByUserId(string userId);
     }
 }

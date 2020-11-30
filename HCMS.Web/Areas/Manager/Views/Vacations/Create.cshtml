@@ -1,6 +1,18 @@
-﻿@model HCMS.Web.ViewModels.Vocations.CreateVacationViewModel
+﻿@using HCMS.GlobalConstants;
+@model HCMS.Web.ViewModels.Vocations.CreateVacationViewModel
 @{
     ViewData["Title"] = "Create";
+
+    var area = "";
+    if(this.User.IsInRole(GlobalConstant.SystemManagerRole))
+    {
+        area = "Manager";
+    }
+    else if (this.User.IsInRole(GlobalConstant.SystemEmployeeRole))
+    {
+        area = "Employee";
+    }
+
 }
 
 <div class="container">
@@ -14,7 +26,7 @@
                         <div class="text-center">
                             <h1 class="h4 text-gray-900 mb-4">Create Vacation</h1>
                         </div>
-                        <form method="post" asp-area="Manager" asp-controller="Vacations" asp-action="Create">
+                        <form method="post" asp-area=@area asp-controller="Vacations" asp-action="Create">
                             <input hidden asp-for="UserId" value="@Model.UserId" />
                             <div class="form-group">
                                 <label asp-for="Tittle"></label>

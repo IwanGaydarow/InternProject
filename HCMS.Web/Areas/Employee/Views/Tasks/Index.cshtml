@@ -1,0 +1,72 @@
+﻿@model HCMS.Web.ViewModels.Employee.AllEmployeeTasksViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container-fluid">
+
+    <div class="action-conteiner"></div>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Tasks list</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Task Tittle</th>
+                            <th>Task Description</th>
+                            <th>Task EstimatedWorkHours</th>
+                            <th>Task Status</th>
+                            <th>Project</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Task Tittle</th>
+                            <th>Task Description</th>
+                            <th>Task EstimatedWorkHours</th>
+                            <th>Task Status</th>
+                            <th>Project</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @if (this.Model.Tasks.Any())
+                        {
+                            foreach (var task in this.Model.Tasks)
+                            {
+                                <tr>
+                                    <td>@task.Tittle</td>
+                                    <td>@task.Description</td>
+                                    <td>@task.EstimatedWorkHours</td>
+                                    @{
+                                        string output = task.Status == true ? "Finished" : "Processing";
+                                        string color = output == "Finished" ? "green" : "red";
+                                    }
+                                    <td style="color: @color">@output</td>
+                                    <td>@task.Project</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr><td>No Tasks</td></tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });
+    </script>
+}

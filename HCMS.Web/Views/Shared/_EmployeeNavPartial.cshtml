@@ -22,39 +22,18 @@
     System
 </div>
 
-<!-- Nav Item - Departments Collapse Menu -->
-<li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-       aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-fw fa-cog"></i>
-        <span>Departments</span>
-    </a>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Actions:</h6>
-            <a class="collapse-item" asp-area="Manager" asp-controller="Departments" asp-action="Index">View All</a>
-            <a class="collapse-item" asp-area="Manager" asp-controller="Departments" asp-action="MyDepartment">My Department</a>
-        </div>
-    </div>
-</li>
-
 <!-- Nav Item - Project Collapse Menu -->
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProjects"
        aria-expanded="true" aria-controls="collapseProjects">
         <i class="fas fa-fw fa-wrench"></i>
-        <span>Projects</span>
+        <span>Tasks</span>
     </a>
     <div id="collapseProjects" class="collapse" aria-labelledby="headingProjects"
          data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Actions:</h6>
-            <a class="collapse-item" asp-area="Employee" asp-controller="Trainings" asp-action="Index">View all</a>
-        </div>
-        <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Tasks:</h6>
-            <a class="collapse-item" asp-area="Manager" asp-controller="Tasks" asp-action="Index">View All Tasks</a>
-            <a class="collapse-item" asp-area="Manager" asp-controller="Tasks" asp-action="Create">Create Task</a>
+            <a class="collapse-item" asp-area="Employee" asp-controller="Tasks" asp-action="Index">View My Tasks</a>
         </div>
     </div>
 </li>
@@ -93,9 +72,8 @@
     <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <div class="collapse-divider"></div>
-            <a class="collapse-item" asp-area="Manager" asp-controller="Vacations" asp-action="Index">My Vacations</a>
-            <a class="collapse-item" asp-area="Manager" asp-controller="Vacations" asp-action="Employee">Employee Vacations</a>
-            <a class="collapse-item" asp-area="Manager" asp-controller="Vacations" asp-action="Create">Create Vacation</a>
+            <a class="collapse-item" asp-area="Employee" asp-controller="Vacations" asp-action="Index">My Vacations</a>
+            <a class="collapse-item" asp-area="Employee" asp-controller="Vacations" asp-action="Create">Create Vacation</a>
             <a class="collapse-item" asp-area="Employee" asp-controller="Evaluations" asp-action="Index">My Evaluations</a>
         </div>
     </div>
