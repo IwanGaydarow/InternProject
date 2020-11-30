@@ -5,9 +5,8 @@
     ViewData["Title"] = "HCMS Login page";
 }
 
-<div class="conteiner-main">
-    <h1>@ViewData["Title"]</h1>
-    <section class="login-section">
+<div class="conteiner-main mt-lg-5">
+    <section class="login-section col-lg-6 mx-auto">
         <form id="account" method="post">
             <section class="account-form">
                 <h5>Sign in to enter the system</h5>
@@ -16,14 +15,14 @@
                         <div class="account-input">
                             <input asp-for="Input.Email" class="form-control" placeholder="Email" />
                             <i class="fa fa-envelope icon"></i>
-                            <span asp-validation-for="Input.Email" class="account-span-validation"></span>
+                            <span asp-validation-for="Input.Email" class="account-span-validation text-danger"></span>
                         </div>
                     </div>
                     <div class="form-group account-input-group">
                         <div class="account-input">
                             <input asp-for="Input.Password" class="form-control" placeholder="Password" />
                             <i class="fa fa-lock icon"></i>
-                            <span asp-validation-for="Input.Password" class="account-span-validation"></span>
+                            <span asp-validation-for="Input.Password" class="account-span-validation text-danger"></span>
                         </div>
                     </div>
                 </div>
@@ -33,10 +32,10 @@
                             <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
                         </p>
                     </div>
-                    <button type="submit" class="btn btn-primary">Sign in</button>
+                    <button type="submit" class="btn btn-outline-primary btn-block">Sign in</button>
                 </div>
             </section>
-            <div asp-validation-summary="All"></div>
+            <div asp-validation-summary="All" class="text-danger"></div>
         </form>
     </section>
 </div>

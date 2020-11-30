@@ -8,8 +8,8 @@
     using Microsoft.AspNetCore.Authorization;
 
     using HCMS.Data.Models;
-    using HCMS.Services.Data;
     using HCMS.Web.ViewModels;
+    using HCMS.Service.Common;
     using HCMS.GlobalConstants;
     using HCMS.Services.Data.Employees;
     using HCMS.Services.Data.Departments;
@@ -22,19 +22,17 @@
     {
         private readonly UserManager<AppUser> userManager;
         private readonly IEmployeService employeService;
-        private readonly ICityService cityService;
-        private readonly ICountryService countryService;
         private readonly IDepartmentService departmentService;
+        private readonly ICityCountry cityCountryService;
 
         public EmployeesController(UserManager<AppUser> userManager,
-            IEmployeService employeService, ICityService cityService,
-            ICountryService countryService, IDepartmentService departmentService)
+            IEmployeService employeService, IDepartmentService departmentService,
+            ICityCountry cityCountryService)
         {
             this.userManager = userManager;
             this.employeService = employeService;
-            this.cityService = cityService;
-            this.countryService = countryService;
             this.departmentService = departmentService;
+            this.cityCountryService = cityCountryService;
         }
 
         public async Task<IActionResult> Index()
@@ -69,7 +67,7 @@
         {
             if (this.ModelState.IsValid)
             {
-                var cityId = await this.PrepareCityAndCountry(model.City, model.CountryName);
+                var cityId = await this.cityCountryService.PrepareCityAndCountry(model.City, model.CountryName);
 
                 var employee = new AppUser
                 {
@@ -158,32 +156,6 @@
             await this.employeService.UpdateAsync(model);
 
             return this.RedirectToAction("Index");
-        }
-
-        /// <summary>
-        /// Check if country exist. If not create it.Check if city exist in this country. If no create it.
-        /// </summary>
-        /// <param name="cityModel"></param>
-        /// <param name="countryName"></param>
-        /// <returns>Return city id.</returns>
-        /// 
-
-        //TODO: Test!!!!
-        private async Task<int> PrepareCityAndCountry(CreateCityViewModel cityModel, string countryName)
-        {
-            var countryId = this.countryService.CheckCountryExist(countryName);
-            if (countryId == 0)
-            {
-                countryId = await this.countryService.CreateCountryAsync(countryName);
-            }
-
-            var cityId = this.cityService.CheckIfCityExist(cityModel.CityName, countryId);
-            if (cityId == 0)
-            {
-                cityId = await this.cityService.CreateCityAsync(cityModel, countryId);
-            }
-
-            return cityId;
         }
     }
 }

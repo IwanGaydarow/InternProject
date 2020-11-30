@@ -90,6 +90,7 @@ namespace HCMS.Web
 
             //Common Services
             services.AddTransient<IYearsForEval, YearsForEval>();
+            services.AddTransient<ICityCountry, CityCountry>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -10,9 +10,13 @@
     {
         IEnumerable<DepartmentViewModel> GetAllDepartments(int companyId);
 
-        Task CreateAsync(string tittle, int companyId, string menager = null);
+        Task CreateAsync(string tittle, int companyId, int cityId, string menager = null);
+
+        Task<int> CreateAsyncId(string tittle, int companyId, int cityId, string menager = null);
 
         Task Delete(int departmentId);
+
+        int GetIdByName(string name);
 
         T GetDepartmentById<T>(int departmentId);
 
@@ -22,7 +26,7 @@
 
         T GetDepartmentForManager<T>(string managerId);
 
-        bool CheckIfDepartmentExist(string tittle);
+        bool CheckIfDepartmentExist(string tittle, int companyId);
 
         Task Update(int departmentId, string tittle);
 

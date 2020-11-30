@@ -53,18 +53,18 @@
             {
                 return this.View(model);
             }
+            var user = await this.userManager.GetUserAsync(this.User);
 
-            if (this.departmentService.CheckIfDepartmentExist(model.Tittle))
+            var companyId = this.departmentService.GetCompanyIdByDepartmentId(user.DepartmentId);
+
+            if (this.departmentService.CheckIfDepartmentExist(model.Tittle, companyId))
             {
                 this.ModelState.AddModelError(string.Empty, GlobalConstant.DepartmentExistErrorMsg);
 
                 return this.View(model);
             }
 
-            var user = await this.userManager.GetUserAsync(this.User);
-            var companyId = this.departmentService.GetCompanyIdByDepartmentId(user.DepartmentId);
-
-            await this.departmentService.CreateAsync(model.Tittle, companyId);
+            await this.departmentService.CreateAsync(model.Tittle, companyId, user.CityId);
 
             return this.RedirectToAction("Index");
         }

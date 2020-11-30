@@ -21,7 +21,7 @@
             this.departmentRepository = departmentRepository;
         }
 
-        public async Task CreateAsync(string tittle, int companyId, string menager = null)
+        public async Task CreateAsync(string tittle, int companyId, int cityId, string menager = null)
         {
             var department = new Department
             {
@@ -29,7 +29,8 @@
                 CreatedOn = DateTime.UtcNow,
                 IsDeleted = false,
                 DepartmentManager = menager,
-                CompanyId = companyId
+                CompanyId = companyId,
+                CityId = cityId
             };
 
             await this.departmentRepository.AddAsync(department);
@@ -95,9 +96,9 @@
                     .Select(x => x.CompanyId).FirstOrDefault();
         }
 
-        public  bool CheckIfDepartmentExist(string tittle)
+        public  bool CheckIfDepartmentExist(string tittle, int companyId)
         {
-            return this.departmentRepository.AllWithDeleted().Any(x => x.Tittle == tittle);
+            return this.departmentRepository.AllWithDeleted().Any(x => x.Tittle == tittle && x.CompanyId == companyId);
         }
 
         public async Task Update(int departmentId, string tittle)
@@ -147,6 +148,32 @@
             return this.departmentRepository.All()
                 .Where(x => x.DepartmentManager == managerId)
                 .To<T>().First();
+        }
+
+        public int GetIdByName(string name)
+        {
+            return this.departmentRepository.All()
+                 .Where(x => x.Tittle == name)
+                 .Select(x => x.Id)
+                 .First();
+        }
+
+        public async Task<int> CreateAsyncId(string tittle, int companyId, int cityId, string menager = null)
+        {
+            var department = new Department
+            {
+                Tittle = tittle,
+                CreatedOn = DateTime.UtcNow,
+                IsDeleted = false,
+                DepartmentManager = menager,
+                CompanyId = companyId,
+                CityId = cityId
+            };
+
+            await this.departmentRepository.AddAsync(department);
+            await this.departmentRepository.SaveChangesAsync();
+
+            return department.Id;
         }
     }
 }
