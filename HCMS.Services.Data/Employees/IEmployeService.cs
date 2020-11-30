@@ -4,7 +4,6 @@
     using System.Threading.Tasks;
     
     using HCMS.Web.ViewModels.Administration.Employees;
-    using HCMS.Web.ViewModels.Administration.Home;
 
     public interface IEmployeService
     {

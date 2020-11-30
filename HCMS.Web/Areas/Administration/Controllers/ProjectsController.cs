@@ -10,8 +10,8 @@
     using HCMS.GlobalConstants;
     using HCMS.Services.Data.Projects;
     using HCMS.Services.Data.Departments;
-    using HCMS.Web.ViewModels.Administration.Projects;
     using HCMS.Web.ViewModels.Administration;
+    using HCMS.Web.ViewModels.Administration.Projects;
 
     [Authorize(Roles = GlobalConstant.SystemAdministratorRole)]
     [Area("Administration")]

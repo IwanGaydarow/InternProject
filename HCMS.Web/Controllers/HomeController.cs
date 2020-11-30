@@ -4,9 +4,9 @@
 
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
+    using Microsoft.AspNetCore.Authorization;
 
     using HCMS.GlobalConstants;
-    using Microsoft.AspNetCore.Authorization;
     using HCMS.Web.ViewModels;
 
     [Authorize(Roles = GlobalConstant.SystemEmployeeRole)]

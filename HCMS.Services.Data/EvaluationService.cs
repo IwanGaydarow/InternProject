@@ -11,7 +11,6 @@
     using HCMS.Services.Mapping;
     using HCMS.Data.Common.Repositories;
     using HCMS.Web.ViewModels.Administration.Evaluation;
-    using HCMS.Web.ViewModels.Employee;
 
     public class EvaluationService : IEvaluationService
     {

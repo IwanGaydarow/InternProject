@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     
     using HCMS.Web.ViewModels.Administration.Evaluation;
-    using HCMS.Web.ViewModels.Employee;
 
     public interface IEvaluationService
     {

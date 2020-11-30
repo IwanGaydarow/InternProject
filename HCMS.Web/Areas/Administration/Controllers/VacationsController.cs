@@ -1,14 +1,15 @@
 ﻿namespace HCMS.Web.Areas.Administration.Controllers
 {
+    using System.Threading.Tasks;
+    
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Authorization;
 
-    using HCMS.GlobalConstants;
-    using System.Threading.Tasks;
-    using HCMS.Web.ViewModels.Vocations;
-    using HCMS.Services.Data.Vocations;
     using HCMS.Data.Models;
-    using Microsoft.AspNetCore.Identity;
+    using HCMS.GlobalConstants;
+    using HCMS.Services.Data.Vocations;
+    using HCMS.Web.ViewModels.Vocations;
     using HCMS.Services.Data.Departments;
 
     [Authorize(Roles = GlobalConstant.SystemAdministratorRole)]

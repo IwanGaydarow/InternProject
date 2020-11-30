@@ -1,13 +1,14 @@
 ﻿namespace HCMS.Web.Areas.Employee.Controllers
 {
+    using System.Threading.Tasks;
+    
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Authorization;
    
-    using HCMS.GlobalConstants;
-    using Microsoft.AspNetCore.Identity;
     using HCMS.Data.Models;
+    using HCMS.GlobalConstants;
     using HCMS.Services.Data.Tasks;
-    using System.Threading.Tasks;
     using HCMS.Web.ViewModels.Employee;
 
     [Authorize(Roles = GlobalConstant.SystemEmployeeRole)]

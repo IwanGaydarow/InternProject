@@ -3,12 +3,12 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+    using System.Collections.Generic;
 
     using HCMS.Data.Models;
     using HCMS.Services.Mapping;
     using HCMS.Data.Common.Repositories;
     using HCMS.Web.ViewModels.Administration.Salary;
-    using System.Collections.Generic;
 
     public class SalaryService : ISalaryService
     {

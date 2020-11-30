@@ -1,12 +1,13 @@
 ﻿namespace HCMS.Services.Data.Company
 {
-    using System.Linq;
-    using HCMS.Data.Models;
-    using HCMS.Services.Mapping;
-    using HCMS.Data.Common.Repositories;
-    using System.Threading.Tasks;
-    using HCMS.Web.ViewModels;
     using System;
+    using System.Linq;
+    
+    using HCMS.Data.Models;
+    using HCMS.Web.ViewModels;
+    using HCMS.Services.Mapping;
+    using System.Threading.Tasks;
+    using HCMS.Data.Common.Repositories;
 
     public class CompanyService : ICompanyService
     {

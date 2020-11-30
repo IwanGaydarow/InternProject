@@ -3,8 +3,8 @@
     using System.Threading.Tasks;
     using System.Collections.Generic;
     
-    using HCMS.Web.ViewModels.Manager.Tasks;
     using HCMS.Data.Models;
+    using HCMS.Web.ViewModels.Manager.Tasks;
 
     public interface ITasksService
     {

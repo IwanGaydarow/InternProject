@@ -5,11 +5,12 @@
     using System.Threading.Tasks;
     using System.Collections.Generic;
 
+    using Microsoft.EntityFrameworkCore;
+    
     using HCMS.Data.Models;
     using HCMS.Services.Mapping;
     using HCMS.Data.Common.Repositories;
     using HCMS.Web.ViewModels.Administration.Trainings;
-    using Microsoft.EntityFrameworkCore;
 
     public class TrainingService : ITrainingService
     {

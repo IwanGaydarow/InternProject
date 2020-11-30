@@ -1,14 +1,16 @@
 ﻿namespace HCMS.Web.Areas.Manager.Controllers
 {
+    using System.Threading.Tasks;
+    
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Authorization;
+    
     using HCMS.Data.Models;
     using HCMS.GlobalConstants;
-    using HCMS.Services.Data.Departments;
     using HCMS.Services.Data.Projects;
+    using HCMS.Services.Data.Departments;
     using HCMS.Web.ViewModels.Administration.Projects;
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.AspNetCore.Mvc;
-    using System.Threading.Tasks;
 
     [Authorize(Roles = GlobalConstant.SystemManagerRole)]
     [Area("Manager")]

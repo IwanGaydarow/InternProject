@@ -2,8 +2,9 @@
 {
     using System.Threading.Tasks;
     using System.Collections.Generic;
-    using HCMS.Web.ViewModels.Administration.Projects;
+    
     using HCMS.Data.Models;
+    using HCMS.Web.ViewModels.Administration.Projects;
 
     public interface IProjectService
     {

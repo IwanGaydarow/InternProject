@@ -1,9 +1,10 @@
-﻿using HCMS.Web.ViewModels.Administration.Salary;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace HCMS.Services.Data.Salary
+﻿namespace HCMS.Services.Data.Salary
 {
+    using System.Threading.Tasks;
+    using System.Collections.Generic;
+    
+    using HCMS.Web.ViewModels.Administration.Salary;
+
     public interface ISalaryService
     {
         T GetSalary<T>(string employeeId);

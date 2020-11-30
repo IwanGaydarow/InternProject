@@ -6,10 +6,11 @@ namespace HCMS.Services.Data.Vocations
     using System.Threading.Tasks;
     using System.Collections.Generic;
    
+    using Microsoft.EntityFrameworkCore;
+    
     using HCMS.Data.Models;
     using HCMS.Services.Mapping;
     using HCMS.Web.ViewModels.Vocations;
-    using Microsoft.EntityFrameworkCore;
 
     public class VacationsService : IVacationsService
     {

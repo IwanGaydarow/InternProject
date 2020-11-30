@@ -1,7 +1,7 @@
 ﻿namespace HCMS.Services.Data.Vocations
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
+    using System.Collections.Generic;
     
     using HCMS.Web.ViewModels.Vocations;
 
