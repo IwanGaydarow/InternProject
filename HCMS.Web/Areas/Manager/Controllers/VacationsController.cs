@@ -48,7 +48,7 @@
 
         public IActionResult ChangeStatus(int vacationId)
         {
-            var model = new ChangeStatusViewModel { VacationId = vacationId };
+            var model = new ChangeStatusViewModel { VacationId = vacationId, Role = "Manager" };
 
             return this.PartialView("_ChangeStatusPartial", model);
         }

@@ -7,6 +7,8 @@
 
     public interface IVacationsService
     {
+        IEnumerable<T> GetAll<T>(int companyId);
+
         IEnumerable<T> GetAllForPerson<T>(string userId);
 
         IEnumerable<T> GetAllForDepartment<T>(int departmentId);

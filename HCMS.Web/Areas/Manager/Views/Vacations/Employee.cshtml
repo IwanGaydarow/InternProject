@@ -1,6 +1,15 @@
 ﻿@model HCMS.Web.ViewModels.Vocations.AllVacationsViewModel
 @{
     ViewData["Title"] = "Employee";
+    var role = "";
+    if (this.User.IsInRole(HCMS.GlobalConstants.GlobalConstant.SystemAdministratorRole))
+    {
+        role = "Administration";
+    }
+    else
+    {
+        role = "Manager";
+    }
 }
 
 <div class="container-fluid">
@@ -65,7 +74,8 @@
                                     }
                                     <td style="color: @color">@output</td>
                                     <td class="btns">
-                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="modal" data-target="#vacation" title="Change Vacation Status" onclick="LoadModel(@vacation.Id)">
+                                        <a class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="modal" 
+                                           data-target="#vacation" title="Change Vacation Status" onclick="LoadModel(@vacation.Id, '@role')">
                                             <i class="fas fa-plus mt-0"></i>
                                         </a>
                                     </td>
@@ -128,8 +138,8 @@
     </script>
 
     <script>
-        function LoadModel(data) {
-            $.get("/Manager/Vacations/ChangeStatus?vacationId=" + data, function (response) {
+        function LoadModel(data, role) {
+            $.get("/" + role + "/Vacations/ChangeStatus?vacationId=" + data, function (response) {
                 $('.vacation').html(response);
             });
         }

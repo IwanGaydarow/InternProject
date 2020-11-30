@@ -8,5 +8,7 @@ namespace HCMS.Web.ViewModels.Vocations
         public int VacationId { get; set; }
 
         public int Status { get; set; }
+
+        public string Role { get; set; }
     }
 }

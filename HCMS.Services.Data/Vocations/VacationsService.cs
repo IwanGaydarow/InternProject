@@ -61,6 +61,14 @@ namespace HCMS.Services.Data.Vocations
             await this.vocationsRepository.SaveChangesAsync();
         }
 
+        public IEnumerable<T> GetAll<T>(int companyId)
+        {
+            return this.vocationsRepository.All()
+                .Include(x => x.User)
+                .Where(x => x.User.Department.CompanyId == companyId)
+                .To<T>().ToList();
+        }
+
         public IEnumerable<T> GetAllForDepartment<T>(int departmentId)
         {
             return this.vocationsRepository.All()

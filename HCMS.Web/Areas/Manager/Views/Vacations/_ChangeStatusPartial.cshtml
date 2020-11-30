@@ -2,9 +2,10 @@
 @model HCMS.Web.ViewModels.Vocations.ChangeStatusViewModel 
 @{
     ViewData["Title"] = "_ChangeStatusPartial";
+    var role = Model.Role;
 }
 
-<form class="form-inline edit-form border border-success p-4" method="post" asp-area="Manager" asp-controller="Vacations" asp-action="ChangeStatus">
+<form class="form-inline edit-form border border-success p-4" method="post" asp-area=@role asp-controller="Vacations" asp-action="ChangeStatus">
     <input hidden asp-for="VacationId" value="@Model.VacationId" />
     <div class="modal-body">
         <select class="form-control ml-3" asp-for="Status" asp-items="Html.GetEnumSelectList<VacationStatus>()">
