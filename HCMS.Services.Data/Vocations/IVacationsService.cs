@@ -11,7 +11,7 @@
 
         IEnumerable<T> GetAllForPerson<T>(string userId);
 
-        IEnumerable<T> GetAllForDepartment<T>(int departmentId);
+        IEnumerable<T> GetAllForDepartment<T>(int departmentId, string managerId);
 
         Task CreateAsync(CreateVacationViewModel model);
 

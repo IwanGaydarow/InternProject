@@ -70,11 +70,12 @@ namespace HCMS.Services.Data.Vocations
                 .To<T>().ToList();
         }
 
-        public IEnumerable<T> GetAllForDepartment<T>(int departmentId)
+        public IEnumerable<T> GetAllForDepartment<T>(int departmentId, string managerId)
         {
             return this.vocationsRepository.All()
                 .Include(x => x.User)
-                .Where(x => x.User.DepartmentId == departmentId)
+                .Where(x => x.User.DepartmentId == departmentId
+                        && x.UserId != managerId)
                 .To<T>().ToList();
         }
 

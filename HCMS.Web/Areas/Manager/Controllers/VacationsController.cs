@@ -40,7 +40,7 @@
         {
             var user = await this.userManager.GetUserAsync(this.User);
 
-            var vacantions = this.vocationService.GetAllForDepartment<VacationsViewModel>(user.DepartmentId.Value);
+            var vacantions = this.vocationService.GetAllForDepartment<VacationsViewModel>(user.DepartmentId.Value, user.Id);
 
             var model = new AllVacationsViewModel { Vacations = vacantions };
             return this.View(model);
